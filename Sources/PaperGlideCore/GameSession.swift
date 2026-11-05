@@ -7,6 +7,8 @@ public struct GameSnapshot: Equatable {
     public var phase: RunPhase
     public var score: Int
     public var bestScore: Int
+    /// True only after this run ends with a score strictly above the previous best.
+    public var isNewBest: Bool
     public var showCoach: Bool
     public var plane: PlaneState
     public var obstacles: [Obstacle]
@@ -15,6 +17,7 @@ public struct GameSnapshot: Equatable {
         phase: RunPhase,
         score: Int,
         bestScore: Int,
+        isNewBest: Bool = false,
         showCoach: Bool,
         plane: PlaneState,
         obstacles: [Obstacle]
@@ -22,6 +25,7 @@ public struct GameSnapshot: Equatable {
         self.phase = phase
         self.score = score
         self.bestScore = bestScore
+        self.isNewBest = isNewBest
         self.showCoach = showCoach
         self.plane = plane
         self.obstacles = obstacles
@@ -58,6 +62,7 @@ public final class GameSession {
     private var obstacles: [Obstacle]
     private var score: Int
     private var bestScore: Int
+    private var isNewBest: Bool
     private var showCoach: Bool
     private var phase: RunPhase
 
@@ -77,6 +82,7 @@ public final class GameSession {
         obstacles = []
         score = 0
         bestScore = 0
+        isNewBest = false
         showCoach = false
         phase = .playing
         beginRun(seed: seed)
@@ -87,6 +93,7 @@ public final class GameSession {
             phase: phase,
             score: score,
             bestScore: bestScore,
+            isNewBest: isNewBest,
             showCoach: showCoach,
             plane: plane,
             obstacles: obstacles
@@ -166,7 +173,17 @@ public final class GameSession {
         obstacles = layout.obstacles
         score = 0
         phase = .playing
+        isNewBest = false
         pendingTap = false
+    }
+
+    /// Ends the current run at `finalScore` and applies the new-best rule.
+    /// The simulator screenshot test uses this so the death screen is deterministic.
+    /// It goes through the same end-of-run path as a collision.
+    public func endRun(withScore finalScore: Int) {
+        guard phase == .playing else { return }
+        score = max(0, finalScore)
+        die()
     }
 
     private func beginRun(seed: UInt64) {
@@ -175,6 +192,7 @@ public final class GameSession {
         pendingTap = false
         score = 0
         phase = .playing
+        isNewBest = false
         bestScore = storage.loadBestScore()
         showCoach = !storage.loadCoachCompleted()
         plane = PlaneState(
@@ -191,12 +209,13 @@ public final class GameSession {
     private func die() {
         phase = .dead
         pendingTap = false
-        let stored = storage.loadBestScore()
-        if score > stored {
+        let previousBest = storage.loadBestScore()
+        isNewBest = BestScore.isNewRecord(score: score, previousBest: previousBest)
+        if isNewBest {
             storage.saveBestScore(score)
             bestScore = score
         } else {
-            bestScore = stored
+            bestScore = previousBest
         }
     }
 

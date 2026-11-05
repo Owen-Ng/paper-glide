@@ -58,7 +58,7 @@ The plane stays at a fixed horizontal position and points to the right. Window f
 - A tap queues one upward impulse for the next physics slice. Gravity then accelerates the plane down. Upward and downward speed are capped.
 - The score increases by **1** only when the plane's trailing edge (its tail, the left side) passes the obstacle's trailing edge (the right side of that frame). Each window scores once.
 - Overlapping a window frame, or touching the top or bottom of the page, ends the run.
-- The best score updates when a finished run beats the stored best.
+- The best score updates when a finished run beats the stored best. The end screen shows "New best!" only when the score is strictly higher. A tie, a lower score, or a first run that scores 0 does not.
 - "tap to glide" is shown only until the first tap of the first run, then the flag is saved and the hint stays hidden.
 
 ## Architecture

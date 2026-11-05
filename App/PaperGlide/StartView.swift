@@ -30,6 +30,7 @@ struct StartView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                .accessibilityIdentifier("playButton")
                 .padding(.horizontal, 48)
                 .padding(.top, 8)
                 VStack(spacing: 10) {

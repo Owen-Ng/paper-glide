@@ -19,6 +19,7 @@ struct RootView: View {
                 DeathView(
                     score: model.score,
                     bestScore: model.bestScore,
+                    isNewBest: model.isNewBest,
                     onRetry: model.startRun,
                     onHome: model.showHome
                 )

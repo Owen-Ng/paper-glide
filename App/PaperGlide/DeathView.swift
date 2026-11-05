@@ -4,6 +4,7 @@ import SwiftUI
 struct DeathView: View {
     let score: Int
     let bestScore: Int
+    let isNewBest: Bool
     let onRetry: () -> Void
     let onHome: () -> Void
 
@@ -19,10 +20,21 @@ struct DeathView: View {
                 Text("\(score)")
                     .font(.system(size: 64, weight: .semibold, design: .rounded))
                     .foregroundStyle(AppTheme.ink)
+                    .accessibilityIdentifier("deathScore")
                     .accessibilityLabel("Score \(score)")
+                if isNewBest {
+                    Text("New best!")
+                        .font(.system(.title2, design: .rounded).weight(.bold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 6)
+                        .background(AppTheme.coral, in: Capsule())
+                        .accessibilityIdentifier("newBestLabel")
+                }
                 Text("Best \(bestScore)")
                     .font(.system(.title3, design: .rounded))
                     .foregroundStyle(AppTheme.ink.opacity(0.8))
+                    .accessibilityIdentifier("bestScoreLabel")
                     .accessibilityLabel("Best score \(bestScore)")
                 VStack(spacing: 12) {
                     Button(action: onRetry) {
@@ -33,6 +45,7 @@ struct DeathView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
+                    .accessibilityIdentifier("retryButton")
 
                     ShareLink(item: ShareText.message(score: score)) {
                         Text("Share")
@@ -42,6 +55,7 @@ struct DeathView: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.large)
+                    .accessibilityIdentifier("shareButton")
 
                     Button(action: onHome) {
                         Text("Home")

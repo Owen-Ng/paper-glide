@@ -8,6 +8,16 @@ struct PlayView: View {
         ZStack {
             GameCanvas(scene: model.scene)
                 .ignoresSafeArea()
+            if LaunchOptions.scriptedEndScore != nil {
+                Color.clear
+                    .contentShape(Rectangle())
+                    .accessibilityIdentifier("glideTapArea")
+                    .accessibilityLabel("Glide")
+                    .accessibilityAddTraits(.isButton)
+                    .onTapGesture {
+                        model.recordScriptedGlideTap()
+                    }
+            }
             VStack {
                 Text("\(model.score)")
                     .font(.system(size: 44, weight: .semibold, design: .rounded))
@@ -16,6 +26,7 @@ struct PlayView: View {
                     .padding(.vertical, 4)
                     .background(.white.opacity(0.72), in: Capsule())
                     .padding(.top, 12)
+                    .accessibilityIdentifier("scoreLabel")
                     .accessibilityLabel("Score \(model.score)")
                 Spacer()
                 if model.showCoach {
@@ -26,6 +37,7 @@ struct PlayView: View {
                         .padding(.vertical, 10)
                         .background(.white.opacity(0.82), in: Capsule())
                         .padding(.bottom, 36)
+                        .accessibilityIdentifier("coachLabel")
                         .accessibilityLabel("tap to glide")
                 }
             }

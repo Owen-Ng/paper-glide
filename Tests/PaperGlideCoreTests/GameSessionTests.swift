@@ -214,12 +214,14 @@ final class GameSessionTests: XCTestCase {
         }
         XCTAssertEqual(harness.session.snapshot.phase, .dead)
         XCTAssertEqual(harness.session.snapshot.score, 1)
+        XCTAssertTrue(harness.session.snapshot.isNewBest)
         XCTAssertEqual(harness.session.snapshot.bestScore, 1)
         XCTAssertEqual(harness.storage.loadBestScore(), 1)
 
         let relaunch = GameSession(config: harness.session.config, storage: harness.storage, seed: 9)
         XCTAssertEqual(relaunch.snapshot.bestScore, 1)
         XCTAssertEqual(relaunch.snapshot.score, 0)
+        XCTAssertFalse(relaunch.snapshot.isNewBest)
     }
 
     func testLowerScoreDoesNotReplaceTheBest() {
@@ -228,8 +230,70 @@ final class GameSessionTests: XCTestCase {
         harness.session.step(dt: 0.05)
         XCTAssertEqual(harness.session.snapshot.phase, .dead)
         XCTAssertEqual(harness.session.snapshot.score, 0)
+        XCTAssertFalse(harness.session.snapshot.isNewBest)
         XCTAssertEqual(harness.session.snapshot.bestScore, 5)
         XCTAssertEqual(harness.storage.loadBestScore(), 5)
+    }
+
+    func testHigherScoreIsANewBestAndUpdatesTheStore() {
+        let harness = makeHarness(best: 1)
+        harness.session.endRun(withScore: 3)
+        XCTAssertEqual(harness.session.snapshot.phase, .dead)
+        XCTAssertEqual(harness.session.snapshot.score, 3)
+        XCTAssertTrue(harness.session.snapshot.isNewBest)
+        XCTAssertEqual(harness.session.snapshot.bestScore, 3)
+        XCTAssertEqual(harness.storage.loadBestScore(), 3)
+    }
+
+    func testTieIsNotANewBest() {
+        let harness = makeHarness(best: 2)
+        harness.session.endRun(withScore: 2)
+        XCTAssertEqual(harness.session.snapshot.phase, .dead)
+        XCTAssertFalse(harness.session.snapshot.isNewBest)
+        XCTAssertEqual(harness.session.snapshot.bestScore, 2)
+        XCTAssertEqual(harness.storage.loadBestScore(), 2)
+    }
+
+    func testLowerScoreIsNotANewBestAndLeavesTheStoredBest() {
+        let harness = makeHarness(best: 5)
+        harness.session.endRun(withScore: 1)
+        XCTAssertEqual(harness.session.snapshot.phase, .dead)
+        XCTAssertFalse(harness.session.snapshot.isNewBest)
+        XCTAssertEqual(harness.session.snapshot.score, 1)
+        XCTAssertEqual(harness.session.snapshot.bestScore, 5)
+        XCTAssertEqual(harness.storage.loadBestScore(), 5)
+    }
+
+    func testFirstRunScoringZeroIsNotANewBest() {
+        let harness = makeHarness(best: 0)
+        harness.session.endRun(withScore: 0)
+        XCTAssertEqual(harness.session.snapshot.phase, .dead)
+        XCTAssertFalse(harness.session.snapshot.isNewBest)
+        XCTAssertEqual(harness.session.snapshot.bestScore, 0)
+        XCTAssertEqual(harness.storage.loadBestScore(), 0)
+    }
+
+    func testNewBestPersistsWhenTheStoreIsReloaded() {
+        let harness = makeHarness(best: 0)
+        harness.session.endRun(withScore: 4)
+        XCTAssertTrue(harness.session.snapshot.isNewBest)
+        XCTAssertEqual(harness.storage.loadBestScore(), 4)
+
+        let reloaded = GameSession(config: harness.session.config, storage: harness.storage, seed: 8)
+        XCTAssertEqual(reloaded.snapshot.bestScore, 4)
+        XCTAssertEqual(reloaded.snapshot.score, 0)
+        XCTAssertFalse(reloaded.snapshot.isNewBest)
+
+        reloaded.endRun(withScore: 4)
+        XCTAssertFalse(reloaded.snapshot.isNewBest)
+        XCTAssertEqual(reloaded.snapshot.bestScore, 4)
+        XCTAssertEqual(harness.storage.loadBestScore(), 4)
+
+        let later = GameSession(config: harness.session.config, storage: harness.storage, seed: 9)
+        later.endRun(withScore: 2)
+        XCTAssertFalse(later.snapshot.isNewBest)
+        XCTAssertEqual(later.snapshot.bestScore, 4)
+        XCTAssertEqual(harness.storage.loadBestScore(), 4)
     }
 
     func testCoachShowsUntilTheFirstTapAndThenStaysHidden() {

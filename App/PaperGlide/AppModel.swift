@@ -16,6 +16,7 @@ final class AppModel: ObservableObject {
     @Published var screen: Screen = .start
     @Published var score = 0
     @Published var bestScore = 0
+    @Published var isNewBest = false
     @Published var showCoach = false
 
     init(storage: GameStorage) {
@@ -35,18 +36,31 @@ final class AppModel: ObservableObject {
         session.reset(seed: randomSeed())
         score = 0
         bestScore = session.snapshot.bestScore
+        isNewBest = false
         showCoach = session.snapshot.showCoach
         screen = .playing
     }
 
     func showHome() {
         bestScore = storage.loadBestScore()
+        isNewBest = false
         screen = .start
+    }
+
+    /// Screenshot launches only. The first coach tap ends the run at the scripted score.
+    func recordScriptedGlideTap() {
+        let coachWasShowing = session.snapshot.showCoach
+        session.tap()
+        if coachWasShowing, let score = LaunchOptions.scriptedEndScore {
+            session.endRun(withScore: score)
+        }
+        consume(session.snapshot)
     }
 
     func consume(_ snapshot: GameSnapshot) {
         score = snapshot.score
         bestScore = snapshot.bestScore
+        isNewBest = snapshot.isNewBest
         showCoach = snapshot.showCoach
         if snapshot.phase == .dead, screen == .playing {
             screen = .dead

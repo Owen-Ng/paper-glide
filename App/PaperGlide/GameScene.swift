@@ -53,6 +53,13 @@ final class PaperGlideScene: SKScene {
         lastUpdateTime = currentTime
         guard dt > 0 else { return }
 
+        if LaunchOptions.scriptedEndScore != nil {
+            let snapshot = session.snapshot
+            onSnapshot?(snapshot)
+            render(snapshot)
+            return
+        }
+
         session.step(dt: dt)
         let snapshot = session.snapshot
         if snapshot.score > renderedScore {
@@ -70,7 +77,11 @@ final class PaperGlideScene: SKScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard session.snapshot.phase == .playing else { return }
+        let coachWasShowing = session.snapshot.showCoach
         session.tap()
+        if coachWasShowing, let score = LaunchOptions.scriptedEndScore {
+            session.endRun(withScore: score)
+        }
         tones.playTap()
         onSnapshot?(session.snapshot)
     }
