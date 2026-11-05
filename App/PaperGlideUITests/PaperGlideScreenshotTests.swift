@@ -5,9 +5,10 @@ import XCTest
 /// `hook-*` uses `-paperGlideEndScore`. That is a test hook: physics does not run,
 /// and the first tap calls `endRun(withScore:)`.
 ///
-/// `sim-*` uses seed 1 and a guided stride. Each Glide tap is one real upward impulse
-/// plus 0.2s of the real simulation. Coast is the same simulation with no impulse.
-/// The test chooses tap or coast from the live plane height and the upcoming window.
+/// `sim-*` uses seed 1 and a 0.1s guided stride. Each Glide tap is one real upward
+/// impulse plus 0.1s of the real simulation. Coast is the same simulation with no
+/// impulse. The test taps when the plane is below the next opening, the same rule
+/// as GlidePilot. After one real clear it only coasts into a collision.
 /// Nothing in that test forces the score.
 final class PaperGlideScreenshotTests: XCTestCase {
     override func setUpWithError() throws {
@@ -60,7 +61,7 @@ final class PaperGlideScreenshotTests: XCTestCase {
         app.launchArguments = [
             "-paperGlideResetStore",
             "-paperGlideSeed", "1",
-            "-paperGlideGuidedStride", "0.2"
+            "-paperGlideGuidedStride", "0.1"
         ]
         app.launch()
 
@@ -81,7 +82,7 @@ final class PaperGlideScreenshotTests: XCTestCase {
         var savedClear = false
         var frameIndex = 0
 
-        for step in 0..<80 {
+        for step in 0..<160 {
             if app.staticTexts["deathScore"].exists {
                 break
             }
@@ -94,10 +95,10 @@ final class PaperGlideScreenshotTests: XCTestCase {
                 save(String(format: "sim-frame-%02d", frameIndex))
                 frameIndex += 1
             }
-            if before.advice == "tap" {
-                glide.tap()
-            } else {
+            if savedClear || before.advice != "tap" {
                 coast.tap()
+            } else {
+                glide.tap()
             }
             if app.staticTexts["deathScore"].exists {
                 break

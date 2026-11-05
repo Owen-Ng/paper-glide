@@ -34,67 +34,76 @@ set -e
 echo "xcresulttool export attachments status: $export_status"
 
 python3 - "$XCRESULT" "$OUT" <<'PY'
-import pathlib, sys
+import pathlib, re, sys
 xcresult = pathlib.Path(sys.argv[1])
 out = pathlib.Path(sys.argv[2])
 exported = out / "exported"
 png_dir = out / "png"
 png_dir.mkdir(parents=True, exist_ok=True)
 
-def preferred_name(path: pathlib.Path) -> str:
-    if "hook-" in path.name or "sim-" in path.name:
-        return path.name
+def attachment_name(path: pathlib.Path):
+    if path.stem.startswith("hook-") or path.stem.startswith("sim-"):
+        return path.stem
     for parent in path.parents:
-        if "hook-" in parent.name or "sim-" in parent.name:
-            suffix = path.suffix if path.suffix else ".png"
-            base = parent.name
-            return base if base.endswith(suffix) else f"{base}{suffix}"
-    return path.name
+        if parent.stem.startswith("hook-") or parent.stem.startswith("sim-"):
+            return parent.stem
+    return None
 
-def flatten(root: pathlib.Path):
-    copied = []
+blobs = []
+for path in list(xcresult.rglob("database.sqlite3")) + list(xcresult.rglob("*")):
+    if path.is_file() and path.stat().st_size < 80_000_000 and path.suffix.lower() not in {".png"}:
+        try:
+            blobs.append(path.read_bytes().decode("latin1", errors="ignore"))
+        except OSError:
+            pass
+catalog = "\n".join(blobs)
+
+def name_for_uuid(uuid):
+    start = 0
+    while True:
+        index = catalog.find(uuid, start)
+        if index < 0:
+            return None
+        window = catalog[max(0, index - 120):index]
+        match = re.search(r"((?:hook|sim)-[A-Za-z0-9-]+)$", window)
+        if match:
+            return match.group(1)
+        start = index + len(uuid)
+
+named = {}
+unnamed = []
+roots = [exported, xcresult]
+seen = set()
+for root in roots:
     if not root.exists():
-        return copied
+        continue
     for path in root.rglob("*"):
-        if path.is_file() and path.suffix.lower() == ".png":
-            dest = png_dir / preferred_name(path)
-            if dest.exists():
-                dest = png_dir / f"{path.parent.name}-{path.name}"
-            dest.write_bytes(path.read_bytes())
-            copied.append(dest)
-    return copied
-
-found = flatten(exported)
-interesting = [p for p in found if "hook-" in p.name or "sim-" in p.name]
-if not interesting:
-    magic = b"\x89PNG\r\n\x1a\n"
-    end = b"IEND\xaeB`\x82"
-    for path in xcresult.rglob("*"):
-        if not path.is_file() or path.stat().st_size > 30_000_000:
+        if not path.is_file() or path.suffix.lower() != ".png":
             continue
-        data = path.read_bytes()
-        start = 0
-        index = 0
-        while True:
-            begin = data.find(magic, start)
-            if begin < 0:
-                break
-            finish = data.find(end, begin)
-            if finish < 0:
-                break
-            blob = data[begin:finish + len(end)]
-            dest = png_dir / f"carved-{path.name}-{index}.png"
-            dest.write_bytes(blob)
-            index += 1
-            start = finish + len(end)
-    found = list(png_dir.glob("*.png"))
+        if "carved-" in path.name:
+            continue
+        key = path.stat().st_size, path.read_bytes()[:64]
+        label = attachment_name(path) or name_for_uuid(path.stem.upper()) or name_for_uuid(path.stem)
+        if label is None:
+            unnamed.append(path.name)
+            continue
+        if label in named:
+            continue
+        named[label] = path.read_bytes()
+        seen.add(key)
+
+for label, data in sorted(named.items()):
+    filename = label if label.endswith(".png") else f"{label}.png"
+    (png_dir / filename).write_bytes(data)
 
 lines = []
 for path in sorted(png_dir.glob("*.png")):
     lines.append(f"{path.stat().st_size:8d}  {path.name}")
-manifest = png_dir / "MANIFEST.txt"
-manifest.write_text("\n".join(lines) + ("\n" if lines else ""))
+(png_dir / "MANIFEST.txt").write_text("\n".join(lines) + ("\n" if lines else ""))
 print(f"PNG_COUNT={len(lines)}")
+print(f"UNNAMED_SKIPPED={len(unnamed)}")
 print("---- PNG files ----")
 print("\n".join(lines) if lines else "(none)")
+if unnamed:
+    print("skipped unnamed pngs:", ", ".join(unnamed[:12]))
 PY

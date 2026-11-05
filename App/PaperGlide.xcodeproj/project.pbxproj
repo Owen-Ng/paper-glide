@@ -14,6 +14,7 @@
 		E7A100000000000000000027 /* CollisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000022 /* CollisionTests.swift */; };
 		E7A100000000000000000028 /* GameSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000023 /* GameSessionTests.swift */; };
 		E7A100000000000000000029 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000024 /* TestSupport.swift */; };
+		E7A100000000000000000041 /* GlidePilotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000040 /* GlidePilotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		E7A100000000000000000022 /* CollisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/CollisionTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000023 /* GameSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/GameSessionTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000024 /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/TestSupport.swift; sourceTree = "<group>"; };
+		E7A100000000000000000040 /* GlidePilotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/GlidePilotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -112,6 +114,7 @@
 				E7A100000000000000000022 /* CollisionTests.swift */,
 				E7A100000000000000000023 /* GameSessionTests.swift */,
 				E7A100000000000000000024 /* TestSupport.swift */,
+				E7A100000000000000000040 /* GlidePilotTests.swift */,
 			);
 			name = PaperGlideTests;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				E7A100000000000000000027 /* CollisionTests.swift in Sources */,
 				E7A100000000000000000028 /* GameSessionTests.swift in Sources */,
 				E7A100000000000000000029 /* TestSupport.swift in Sources */,
+				E7A100000000000000000041 /* GlidePilotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

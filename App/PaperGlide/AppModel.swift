@@ -64,13 +64,12 @@ final class AppModel: ObservableObject {
 
     /// One real impulse, then `guidedStride` seconds of the real simulation.
     func guidedTap() {
-        session.tap()
-        advanceGuidedStride()
+        advanceGuidedStride(tap: true)
     }
 
     /// `guidedStride` seconds of the real simulation with no impulse, so gravity can pull the plane down.
     func guidedCoast() {
-        advanceGuidedStride()
+        advanceGuidedStride(tap: false)
     }
 
     func consume(_ snapshot: GameSnapshot) {
@@ -84,30 +83,23 @@ final class AppModel: ObservableObject {
         }
     }
 
-    private func advanceGuidedStride() {
+    private func advanceGuidedStride(tap: Bool) {
         guard let stride = LaunchOptions.guidedStride else { return }
-        var remaining = stride
-        while remaining > 1e-9, session.snapshot.phase == .playing {
-            let slice = min(remaining, session.config.maxFrameDelta)
-            session.step(dt: slice)
-            remaining -= slice
-        }
+        GlidePilot.advance(session, stride: stride, tap: tap)
         consume(session.snapshot)
     }
 
     private func refreshFlightReadout(_ snapshot: GameSnapshot) {
         planeY = snapshot.plane.y
-        guidedTargetY = Self.upcomingGapCenter(in: snapshot, fallback: session.config.planeStartY)
-        flightAdvice = planeY < guidedTargetY ? "tap" : "coast"
-    }
-
-    /// Center of the next window that the tail has not yet cleared.
-    private static func upcomingGapCenter(in snapshot: GameSnapshot, fallback: Double) -> Double {
-        let tail = snapshot.plane.trailingX
-        if let window = snapshot.obstacles.first(where: { $0.trailingX > tail - 5 }) {
-            return window.gapCenterY
-        }
-        return fallback
+        guidedTargetY = GlidePilot.upcomingGapCenter(
+            plane: snapshot.plane,
+            obstacles: snapshot.obstacles,
+            fallback: session.config.planeStartY
+        )
+        flightAdvice = GlidePilot.shouldTap(
+            snapshot: snapshot,
+            fallbackTarget: session.config.planeStartY
+        ) ? "tap" : "coast"
     }
 
     private func randomSeed() -> UInt64 {
