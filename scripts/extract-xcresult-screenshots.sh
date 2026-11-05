@@ -23,23 +23,37 @@ head -n 30 "$OUT/export-help.txt" || true
 
 set +e
 rm -rf "$OUT/exported"
-xcrun xcresulttool export attachments --path "$XCRESULT" --output-path "$OUT/exported"
+xcrun xcresulttool export attachments --path "$XCRESULT" --output-path "$OUT/exported" >"$OUT/export.log" 2>&1
 export_status=$?
 if [[ $export_status -ne 0 ]]; then
   rm -rf "$OUT/exported"
-  xcrun xcresulttool export attachments --xcresult-path "$XCRESULT" --output-path "$OUT/exported"
+  xcrun xcresulttool export attachments --xcresult-path "$XCRESULT" --output-path "$OUT/exported" >"$OUT/export.log" 2>&1
   export_status=$?
 fi
 set -e
 echo "xcresulttool export attachments status: $export_status"
+# The tool prints: File: <uuid>.png, suggested name: "hook-01-start_0_<uuid>.png"
+sed -n 's/^File: //p' "$OUT/export.log" | head -n 40 || true
 
-python3 - "$XCRESULT" "$OUT" <<'PY'
+python3 - "$XCRESULT" "$OUT" "$OUT/export.log" <<'PY'
 import pathlib, re, sys
 xcresult = pathlib.Path(sys.argv[1])
 out = pathlib.Path(sys.argv[2])
+export_log = pathlib.Path(sys.argv[3]) if len(sys.argv) > 3 else out / "export.log"
 exported = out / "exported"
 png_dir = out / "png"
 png_dir.mkdir(parents=True, exist_ok=True)
+
+suggested = {}
+if export_log.exists():
+    for line in export_log.read_text(errors="ignore").splitlines():
+        match = re.search(r'File:\s*([^,\s]+\.png),\s*suggested name:\s*"([^"]+)"', line)
+        if not match:
+            continue
+        source_name, raw_name = match.group(1), match.group(2)
+        clean = re.sub(r"_0_[0-9A-Fa-f-]{36}(?=\.png$)", "", raw_name)
+        suggested[source_name] = clean
+        suggested[pathlib.Path(source_name).stem] = clean
 
 def attachment_name(path: pathlib.Path):
     if path.stem.startswith("hook-") or path.stem.startswith("sim-"):
@@ -83,7 +97,15 @@ for root in roots:
         if "carved-" in path.name:
             continue
         key = path.stat().st_size, path.read_bytes()[:64]
-        label = attachment_name(path) or name_for_uuid(path.stem.upper()) or name_for_uuid(path.stem)
+        label = (
+            suggested.get(path.name)
+            or suggested.get(path.stem)
+            or attachment_name(path)
+            or name_for_uuid(path.stem.upper())
+            or name_for_uuid(path.stem)
+        )
+        if isinstance(label, str) and label.endswith(".png"):
+            label = label[:-4]
         if label is None:
             unnamed.append(path.name)
             continue
