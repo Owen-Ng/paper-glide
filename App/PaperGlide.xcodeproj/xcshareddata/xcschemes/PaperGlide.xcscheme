@@ -55,13 +55,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "PAPERGLIDE_SCREENSHOT_DIR"
-            value = "/tmp/paper-glide-screenshots"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <Testables>
          <TestableReference
             skipped = "NO">

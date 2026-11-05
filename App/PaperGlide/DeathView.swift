@@ -47,7 +47,11 @@ struct DeathView: View {
                     .controlSize(.large)
                     .accessibilityIdentifier("retryButton")
 
-                    ShareLink(item: ShareText.message(score: score)) {
+                    ShareLink(
+                        item: ShareText.message(score: score),
+                        subject: Text("Paper Glide"),
+                        message: Text(ShareText.message(score: score))
+                    ) {
                         Text("Share")
                             .font(.system(.title3, design: .rounded).weight(.semibold))
                             .frame(maxWidth: .infinity)
@@ -65,6 +69,7 @@ struct DeathView: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.large)
+                    .accessibilityIdentifier("homeButton")
                 }
                 .padding(.horizontal, 48)
                 .padding(.top, 8)

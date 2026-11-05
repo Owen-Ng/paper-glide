@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-test:
@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Select Xcode
         run: |
@@ -72,9 +75,9 @@ jobs:
             'CODE_SIGN_IDENTITY=-'
 
       - name: Run unit tests and screenshot UI test
+        id: tests
         run: |
           set -euo pipefail
-          mkdir -p /tmp/paper-glide-screenshots
           rm -rf DerivedData/PaperGlide.xcresult
           xcodebuild test \
             -project App/PaperGlide.xcodeproj \
@@ -89,12 +92,29 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             'CODE_SIGN_IDENTITY=-'
 
+      - name: Extract screenshots from the xcresult
+        id: shots
+        if: always()
+        run: |
+          set -euo pipefail
+          chmod +x scripts/extract-xcresult-screenshots.sh
+          scripts/extract-xcresult-screenshots.sh DerivedData/PaperGlide.xcresult /tmp/paper-glide-screenshots
+          echo "---- screenshot files with sizes ----"
+          find /tmp/paper-glide-screenshots/png -type f -exec ls -l {} \;
+          count=$(find /tmp/paper-glide-screenshots/png -name '*.png' -type f | wc -l | tr -d ' ')
+          echo "PNG_COUNT=$count"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [[ "${{ steps.tests.outcome }}" == "success" && "$count" -eq 0 ]]; then
+            echo "Tests passed but no PNG attachments were extracted."
+            exit 1
+          fi
+
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: paper-glide-screenshots
-          path: /tmp/paper-glide-screenshots
+          path: /tmp/paper-glide-screenshots/png
           if-no-files-found: warn
 
       - name: Upload xcresult
@@ -104,3 +124,28 @@ jobs:
           name: paper-glide-xcresult
           path: DerivedData/PaperGlide.xcresult
           if-no-files-found: warn
+
+      - name: Commit screenshots onto the branch
+        if: always() && github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          count=$(find /tmp/paper-glide-screenshots/png -name '*.png' -type f 2>/dev/null | wc -l | tr -d ' ')
+          if [[ "$count" -eq 0 ]]; then
+            echo "No PNGs to commit."
+            exit 0
+          fi
+          sha=$(git rev-parse HEAD)
+          mkdir -p "evidence/$sha"
+          find /tmp/paper-glide-screenshots/png -name '*.png' -type f -exec cp {} "evidence/$sha/" \;
+          if [[ -f /tmp/paper-glide-screenshots/png/MANIFEST.txt ]]; then
+            cp /tmp/paper-glide-screenshots/png/MANIFEST.txt "evidence/$sha/MANIFEST.txt"
+          fi
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add "evidence/$sha"
+          if git diff --cached --quiet; then
+            echo "Screenshots already committed."
+            exit 0
+          fi
+          git commit -m "Add simulator screenshots for ${sha} [skip ci]"
+          git push origin "HEAD:${{ github.head_ref }}"

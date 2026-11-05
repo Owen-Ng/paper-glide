@@ -21,6 +21,7 @@ struct StartView: View {
                 Text("Best score \(bestScore)")
                     .font(.system(.title3, design: .rounded).weight(.medium))
                     .foregroundStyle(AppTheme.ink)
+                    .accessibilityIdentifier("startBestScore")
                     .accessibilityLabel("Best score \(bestScore)")
                 Button(action: onPlay) {
                     Text("Play")

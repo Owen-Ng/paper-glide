@@ -8,14 +8,18 @@ struct PlayView: View {
         ZStack {
             GameCanvas(scene: model.scene)
                 .ignoresSafeArea()
-            if LaunchOptions.scriptedEndScore != nil {
+            if LaunchOptions.scriptedEndScore != nil || LaunchOptions.guidedStride != nil {
                 Color.clear
                     .contentShape(Rectangle())
                     .accessibilityIdentifier("glideTapArea")
                     .accessibilityLabel("Glide")
                     .accessibilityAddTraits(.isButton)
                     .onTapGesture {
-                        model.recordScriptedGlideTap()
+                        if LaunchOptions.scriptedEndScore != nil {
+                            model.recordScriptedGlideTap()
+                        } else {
+                            model.guidedTap()
+                        }
                     }
             }
             VStack {
@@ -42,6 +46,32 @@ struct PlayView: View {
                 }
             }
             .allowsHitTesting(false)
+        }
+        .overlay(alignment: .topLeading) {
+            Text(model.flightAdvice)
+                .font(.system(size: 1))
+                .opacity(0.01)
+                .frame(width: 4, height: 4)
+                .accessibilityIdentifier("flightState")
+                .accessibilityLabel(
+                    String(
+                        format: "advice=%@;y=%.4f;target=%.4f;score=%d",
+                        model.flightAdvice,
+                        model.planeY,
+                        model.guidedTargetY,
+                        model.score
+                    )
+                )
+        }
+        .overlay(alignment: .bottomTrailing) {
+            if LaunchOptions.guidedStride != nil {
+                Button(action: model.guidedCoast) {
+                    Color.clear.frame(width: 44, height: 44)
+                }
+                .accessibilityLabel("Coast")
+                .accessibilityIdentifier("coastButton")
+                .padding(8)
+            }
         }
         .background(Color(uiColor: AppTheme.skyBackground))
     }

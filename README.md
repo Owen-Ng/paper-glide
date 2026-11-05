@@ -49,7 +49,7 @@ xcodebuild test \
   CODE_SIGN_IDENTITY=-
 ```
 
-CI (`.github/workflows/ios.yml`) runs that build and `xcodebuild test` on a macOS runner for pull requests and manual `workflow_dispatch`.
+CI (`.github/workflows/ios.yml`) runs that build and `xcodebuild test` on a macOS runner for pull requests and manual `workflow_dispatch`. Screenshot UI tests attach images to the `.xcresult`. The workflow extracts those PNGs and commits them under `evidence/<commit>/`. See `evidence/README.md` for which files are a test hook and which are the real simulation.
 
 ## How a run works
 
