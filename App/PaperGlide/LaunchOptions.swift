@@ -21,8 +21,8 @@ enum LaunchOptions {
     }
 
     /// When set, the free-running clock is paused. Each Glide tap applies one real
-    /// impulse and then advances the simulation by this many seconds. Coast advances
-    /// the same simulation with no impulse.
+    /// flap and then advances the simulation by this many seconds. Coast advances
+    /// the same simulation with no flap.
     static var guidedStride: Double? {
         guard let raw = stringArgument("-paperGlideGuidedStride"),
               let stride = Double(raw),

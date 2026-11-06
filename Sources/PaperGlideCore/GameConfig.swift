@@ -1,9 +1,15 @@
 /// Tunable rules for a run. Distances are logical points. Time is seconds.
+///
+/// A tap assigns `flapVelocity` instead of adding a hop. `gravity` (points/s²) and
+/// `flapVelocity` (points/s) are the flappybird.gg design-aspect rates — 5 units/s²
+/// and 1.55 units/s on a 2.56-unit visible height — scaled by `worldHeight / 2.56`
+/// and rounded to the nearest point. `maxUpwardSpeed` equals the flap so taps cannot stack.
 public struct GameConfig: Equatable {
     public var worldWidth: Double
     public var worldHeight: Double
     public var gravity: Double
-    public var tapImpulse: Double
+    /// Upward speed a tap assigns, in points per second.
+    public var flapVelocity: Double
     public var maxUpwardSpeed: Double
     public var maxDownwardSpeed: Double
     public var planeX: Double
@@ -24,9 +30,9 @@ public struct GameConfig: Equatable {
     public init(
         worldWidth: Double = 390,
         worldHeight: Double = 760,
-        gravity: Double = 1600,
-        tapImpulse: Double = 490,
-        maxUpwardSpeed: Double = 580,
+        gravity: Double = 1484,
+        flapVelocity: Double = 460,
+        maxUpwardSpeed: Double = 460,
         maxDownwardSpeed: Double = 720,
         planeX: Double = 108,
         planeWidth: Double = 46,
@@ -46,7 +52,7 @@ public struct GameConfig: Equatable {
         self.worldWidth = worldWidth
         self.worldHeight = worldHeight
         self.gravity = gravity
-        self.tapImpulse = tapImpulse
+        self.flapVelocity = flapVelocity
         self.maxUpwardSpeed = maxUpwardSpeed
         self.maxDownwardSpeed = maxDownwardSpeed
         self.planeX = planeX
