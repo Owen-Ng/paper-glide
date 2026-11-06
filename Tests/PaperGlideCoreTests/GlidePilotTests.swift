@@ -2,11 +2,11 @@ import PaperGlideCore
 import XCTest
 
 final class GlidePilotTests: XCTestCase {
-    /// The UI test's old 0.2s stride bangs the impulse too coarsely and dies under the
-    /// first window. Decisions every 0.1s, tapping when the plane is below the next
-    /// opening, clear several gaps with the shipped constants and stay alive.
+    /// Decisions every 0.1s, tapping when the plane is below the next opening, clear
+    /// several gaps with the shipped flap-velocity constants. The old 0.2s UI stride
+    /// was too coarse for the previous impulse; it is not a reason to change this feel.
     func testShippedConstantsClearSeveralGaps() {
-        for seed in [UInt64(1), 7] {
+        for seed in [UInt64(1), 2, 3, 7, 11, 42, 99, 12_345] {
             let session = GameSession(config: .standard, storage: InMemoryGameStorage(), seed: seed)
             var actions = 0
             while session.snapshot.phase == .playing, session.snapshot.score < 3, actions < 250 {

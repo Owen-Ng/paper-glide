@@ -1,18 +1,20 @@
-/// One explicit Euler step. A tap adds an upward impulse, then gravity accelerates downward.
+/// One explicit Euler step in a y-up world.
+/// A flap assigns `flapVelocity` (it does not add to the current speed), then gravity
+/// accelerates downward. Upward speed is limited before gravity; downward speed after.
 public enum FlightPhysics {
     public static func integrate(
         y: Double,
         velocityY: Double,
         dt: Double,
         gravity: Double,
-        applyImpulse: Bool,
-        impulse: Double,
+        applyFlap: Bool,
+        flapVelocity: Double,
         maxUpwardSpeed: Double,
         maxDownwardSpeed: Double
     ) -> (y: Double, velocityY: Double) {
         var vy = velocityY
-        if applyImpulse {
-            vy += impulse
+        if applyFlap {
+            vy = flapVelocity
         }
         if vy > maxUpwardSpeed {
             vy = maxUpwardSpeed

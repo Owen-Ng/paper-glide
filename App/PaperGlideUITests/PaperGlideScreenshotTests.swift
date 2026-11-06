@@ -5,9 +5,9 @@ import XCTest
 /// `hook-*` uses `-paperGlideEndScore`. That is a test hook: physics does not run,
 /// and the first tap calls `endRun(withScore:)`.
 ///
-/// `sim-*` uses seed 1 and a 0.1s guided stride. Each Glide tap is one real upward
-/// impulse plus 0.1s of the real simulation. Coast is the same simulation with no
-/// impulse. The test taps when the plane is below the next opening, the same rule
+/// `sim-*` uses seed 1 and a 0.1s guided stride. Each Glide tap is one real flap
+/// plus 0.1s of the real simulation. Coast is the same simulation with no flap.
+/// The test taps when the plane is below the next opening, the same rule
 /// as GlidePilot. After one real clear it only coasts into a collision.
 /// Nothing in that test forces the score.
 final class PaperGlideScreenshotTests: XCTestCase {

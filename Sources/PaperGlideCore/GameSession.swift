@@ -48,7 +48,7 @@ public struct RunLayout: Equatable {
 /// Paper Glide simulation.
 ///
 /// The plane stays at `config.planeX` and points toward +x. Building windows scroll
-/// toward -x. A tap adds one upward impulse on the next physics slice; gravity pulls
+/// toward -x. A tap assigns one upward speed on the next physics slice; gravity pulls
 /// down. The run ends when the plane overlaps a window frame or the top or bottom
 /// of the page. Score increases by one when the plane's trailing edge passes an
 /// obstacle's trailing edge, and only once per window.
@@ -104,7 +104,7 @@ public final class GameSession {
         beginRun(seed: seed)
     }
 
-    /// Records the coach as seen on the first tap of the first run, then queues one impulse.
+    /// Records the coach as seen on the first tap of the first run, then queues one flap.
     public func tap() {
         guard phase == .playing else { return }
         if showCoach {
@@ -119,7 +119,7 @@ public final class GameSession {
 
         let frame = min(dt, config.maxFrameDelta)
         var remaining = frame
-        var applyImpulse = pendingTap
+        var applyFlap = pendingTap
         pendingTap = false
         let minimumQuantum = 1.0 / 240.0
 
@@ -131,12 +131,12 @@ public final class GameSession {
                 velocityY: plane.velocityY,
                 dt: h,
                 gravity: config.gravity,
-                applyImpulse: applyImpulse,
-                impulse: config.tapImpulse,
+                applyFlap: applyFlap,
+                flapVelocity: config.flapVelocity,
                 maxUpwardSpeed: config.maxUpwardSpeed,
                 maxDownwardSpeed: config.maxDownwardSpeed
             )
-            applyImpulse = false
+            applyFlap = false
             plane.y = integrated.y
             plane.velocityY = integrated.velocityY
 

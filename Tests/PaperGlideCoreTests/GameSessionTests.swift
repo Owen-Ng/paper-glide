@@ -190,7 +190,7 @@ final class GameSessionTests: XCTestCase {
     }
 
     func testAClearedWindowStillCountsIfThePlaneLaterLeavesThePage() {
-        let harness = makeHarness(config: makeConfig(tapImpulse: 400, maxUpwardSpeed: 400))
+        let harness = makeHarness(config: makeConfig(flapVelocity: 400, maxUpwardSpeed: 400))
         harness.session.applyLayout(
             RunLayout(
                 planeY: 250,
@@ -324,7 +324,7 @@ final class GameSessionTests: XCTestCase {
         XCTAssertTrue(relaunch.snapshot.showCoach)
     }
 
-    func testTwoTapsBeforeAStepAreOneImpulse() {
+    func testTwoTapsBeforeAStepAreOneFlap() {
         let harness = makeHarness()
         harness.session.applyLayout(RunLayout(planeY: 250, velocityY: 0, obstacles: []))
         harness.session.tap()
@@ -332,6 +332,42 @@ final class GameSessionTests: XCTestCase {
         harness.session.step(dt: 0.1)
         XCTAssertEqual(harness.session.snapshot.plane.velocityY, 400, accuracy: 1e-9)
         XCTAssertEqual(harness.session.snapshot.plane.y, 290, accuracy: 1e-9)
+    }
+
+    func testAFlapReplacesDownwardSpeedOnTheNextSlice() {
+        let harness = makeHarness()
+        harness.session.applyLayout(RunLayout(planeY: 250, velocityY: -250, obstacles: []))
+        harness.session.tap()
+        harness.session.step(dt: 0.1)
+        XCTAssertEqual(harness.session.snapshot.plane.velocityY, 400, accuracy: 1e-9)
+        XCTAssertEqual(harness.session.snapshot.plane.y, 290, accuracy: 1e-9)
+    }
+
+    func testStandardGravityStillEndsTheRunAtTheBottomWithoutAPoint() {
+        let session = GameSession(config: .standard, storage: InMemoryGameStorage(), seed: 1)
+        session.applyLayout(RunLayout(planeY: 40, velocityY: 0, obstacles: []))
+        var steps = 0
+        while session.snapshot.phase == .playing, steps < 180 {
+            session.step(dt: 1.0 / 60.0)
+            steps += 1
+        }
+        XCTAssertEqual(session.snapshot.phase, .dead)
+        XCTAssertEqual(session.snapshot.score, 0)
+    }
+
+    func testStandardFlapStillEndsTheRunAtTheTop() {
+        let session = GameSession(config: .standard, storage: InMemoryGameStorage(), seed: 1)
+        session.applyLayout(
+            RunLayout(planeY: session.config.worldHeight - 30, velocityY: 0, obstacles: [])
+        )
+        var steps = 0
+        while session.snapshot.phase == .playing, steps < 40 {
+            session.tap()
+            session.step(dt: 1.0 / 60.0)
+            steps += 1
+        }
+        XCTAssertEqual(session.snapshot.phase, .dead)
+        XCTAssertEqual(session.snapshot.score, 0)
     }
 
     func testNonPositiveDeltaDoesNotAdvanceTheRun() {

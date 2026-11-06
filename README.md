@@ -1,6 +1,6 @@
 # Paper Glide
 
-Offline iOS prototype. A paper plane glides through open windows in scrolling building frames. Tap anywhere for an upward push; gravity does the rest.
+Offline iOS prototype. A paper plane glides through open windows in scrolling building frames. Tap anywhere to set an upward speed; gravity does the rest.
 
 This milestone is local only. There is no account, network client, or backend.
 
@@ -55,7 +55,7 @@ CI (`.github/workflows/ios.yml`) runs that build and `xcodebuild test` on a macO
 
 The plane stays at a fixed horizontal position and points to the right. Window frames scroll left. Coordinates are y-up logical points, defined in `GameConfig`.
 
-- A tap queues one upward impulse for the next physics slice. Gravity then accelerates the plane down. Upward and downward speed are capped.
+- A tap queues one flap for the next physics slice. The flap assigns an upward speed instead of adding to the current speed, then gravity accelerates the plane down. Upward and downward speed are capped.
 - The score increases by **1** only when the plane's trailing edge (its tail, the left side) passes the obstacle's trailing edge (the right side of that frame). Each window scores once.
 - Overlapping a window frame, or touching the top or bottom of the page, ends the run.
 - The best score updates when a finished run beats the stored best. The end screen shows "New best!" only when the score is strictly higher. A tie, a lower score, or a first run that scores 0 does not.

@@ -62,12 +62,12 @@ final class AppModel: ObservableObject {
         consume(session.snapshot)
     }
 
-    /// One real impulse, then `guidedStride` seconds of the real simulation.
+    /// One real flap, then `guidedStride` seconds of the real simulation.
     func guidedTap() {
         advanceGuidedStride(tap: true)
     }
 
-    /// `guidedStride` seconds of the real simulation with no impulse, so gravity can pull the plane down.
+    /// `guidedStride` seconds of the real simulation with no flap, so gravity can pull the plane down.
     func guidedCoast() {
         advanceGuidedStride(tap: false)
     }

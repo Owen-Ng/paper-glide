@@ -22,7 +22,7 @@ public enum GlidePilot {
         return snapshot.plane.y < target
     }
 
-    /// One optional impulse, then `stride` seconds of the real simulation.
+    /// One optional flap, then `stride` seconds of the real simulation.
     /// `step` caps each slice at `maxFrameDelta`, so this loops until the stride is consumed.
     public static func advance(_ session: GameSession, stride: Double, tap: Bool) {
         guard stride.isFinite, stride > 0 else { return }
