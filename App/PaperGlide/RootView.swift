@@ -9,13 +9,14 @@ struct RootView: View {
     }
 
     var body: some View {
-        Group {
+        ZStack {
             switch model.screen {
             case .start:
                 StartView(bestScore: model.bestScore, onPlay: model.startRun)
-            case .playing:
+            case .playing, .dead:
                 PlayView(model: model)
-            case .dead:
+            }
+            if model.screen == .dead {
                 DeathView(
                     score: model.score,
                     bestScore: model.bestScore,

@@ -8,7 +8,8 @@ struct PlayView: View {
         ZStack {
             GameCanvas(scene: model.scene)
                 .ignoresSafeArea()
-            if LaunchOptions.scriptedEndScore != nil || LaunchOptions.guidedStride != nil {
+            if model.screen == .playing,
+               LaunchOptions.scriptedEndScore != nil || LaunchOptions.guidedStride != nil {
                 Color.clear
                     .contentShape(Rectangle())
                     .accessibilityIdentifier("glideTapArea")
@@ -22,30 +23,9 @@ struct PlayView: View {
                         }
                     }
             }
-            VStack {
-                Text("\(model.score)")
-                    .font(.system(size: 44, weight: .semibold, design: .rounded))
-                    .foregroundStyle(AppTheme.ink)
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 4)
-                    .background(.white.opacity(0.72), in: Capsule())
-                    .padding(.top, 12)
-                    .accessibilityIdentifier("scoreLabel")
-                    .accessibilityLabel("Score \(model.score)")
-                Spacer()
-                if model.showCoach {
-                    Text("tap to glide")
-                        .font(.system(.title3, design: .rounded).weight(.medium))
-                        .foregroundStyle(AppTheme.ink.opacity(0.88))
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                        .background(.white.opacity(0.82), in: Capsule())
-                        .padding(.bottom, 36)
-                        .accessibilityIdentifier("coachLabel")
-                        .accessibilityLabel("tap to glide")
-                }
+            if model.screen == .playing {
+                scoreStack
             }
-            .allowsHitTesting(false)
         }
         .overlay(alignment: .topLeading) {
             Text(model.flightAdvice)
@@ -64,7 +44,7 @@ struct PlayView: View {
                 )
         }
         .overlay(alignment: .bottomTrailing) {
-            if LaunchOptions.guidedStride != nil {
+            if model.screen == .playing, LaunchOptions.guidedStride != nil {
                 Button(action: model.guidedCoast) {
                     Color.clear.frame(width: 44, height: 44)
                 }
@@ -74,6 +54,35 @@ struct PlayView: View {
             }
         }
         .background(Color(uiColor: AppTheme.skyBackground))
+    }
+
+    private var scoreStack: some View {
+        VStack {
+            Text("\(model.score)")
+                .font(.system(size: 44, weight: .semibold, design: .rounded))
+                .foregroundStyle(AppTheme.ink)
+                .shadow(color: .white.opacity(0.9), radius: 1.5, y: 0)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 4)
+                .background(.white.opacity(0.84), in: Capsule())
+                .shadow(color: .black.opacity(0.18), radius: 3, y: 1)
+                .padding(.top, 12)
+                .accessibilityIdentifier("scoreLabel")
+                .accessibilityLabel("Score \(model.score)")
+            Spacer()
+            if model.showCoach {
+                Text("tap to glide")
+                    .font(.system(.title3, design: .rounded).weight(.medium))
+                    .foregroundStyle(AppTheme.ink.opacity(0.88))
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 10)
+                    .background(.white.opacity(0.82), in: Capsule())
+                    .padding(.bottom, 36)
+                    .accessibilityIdentifier("coachLabel")
+                    .accessibilityLabel("tap to glide")
+            }
+        }
+        .allowsHitTesting(false)
     }
 }
 

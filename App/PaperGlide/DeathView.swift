@@ -10,8 +10,17 @@ struct DeathView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(colors: [AppTheme.skyTop, AppTheme.skyBottom], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+            LinearGradient(
+                stops: [
+                    .init(color: AppTheme.paper.opacity(0.22), location: 0),
+                    .init(color: AppTheme.paper.opacity(0.34), location: 0.22),
+                    .init(color: AppTheme.paper.opacity(0.90), location: 0.42),
+                    .init(color: AppTheme.paper.opacity(1), location: 1)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
             VStack(spacing: 16) {
                 Text("The glide is over")
                     .font(.system(.largeTitle, design: .rounded).weight(.semibold))
