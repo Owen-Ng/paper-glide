@@ -16,6 +16,7 @@ final class UserDefaultsGameStorage: GameStorage {
     static func clearPersistedProgress(in defaults: UserDefaults = .standard) {
         defaults.removeObject(forKey: bestScoreKey)
         defaults.removeObject(forKey: coachKey)
+        UserDefaultsCloudStore.clear(in: defaults)
     }
 
     func loadBestScore() -> Int {

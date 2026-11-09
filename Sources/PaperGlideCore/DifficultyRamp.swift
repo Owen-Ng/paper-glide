@@ -2,7 +2,7 @@
 ///
 /// From the start-of-run gap and scroll, every fifth point shortens the next
 /// spawned window by 5 and speeds the page up by 4. Twelve steps hold: the
-/// shipped 228 / 148 run reaches 168 / 196 at score 60 and stays there.
+/// shipped 218 / 148 run reaches 168 / 196 at score 60 and stays there.
 /// A base that already sits past a cap is left alone so test layouts can still
 /// request a faster page. Windows that already exist are never rewritten.
 public enum DifficultyRamp {

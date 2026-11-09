@@ -16,6 +16,14 @@
 		E7A100000000000000000029 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000024 /* TestSupport.swift */; };
 		E7A100000000000000000041 /* GlidePilotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000040 /* GlidePilotTests.swift */; };
 		E7A100000000000000000043 /* DifficultyRampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000042 /* DifficultyRampTests.swift */; };
+		E7A100000000000000000070 /* UsernameRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000060 /* UsernameRulesTests.swift */; };
+		E7A100000000000000000071 /* TorontoPeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000061 /* TorontoPeriodTests.swift */; };
+		E7A100000000000000000072 /* RunRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000062 /* RunRulesTests.swift */; };
+		E7A100000000000000000073 /* LeaderboardMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000063 /* LeaderboardMathTests.swift */; };
+		E7A100000000000000000074 /* BoardPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000064 /* BoardPresenterTests.swift */; };
+		E7A100000000000000000075 /* FakeAccountBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000065 /* FakeAccountBackend.swift */; };
+		E7A100000000000000000076 /* AccountSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000066 /* AccountSyncTests.swift */; };
+		E7A100000000000000000077 /* SupabaseHTTPBackendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +54,15 @@
 		E7A100000000000000000024 /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/TestSupport.swift; sourceTree = "<group>"; };
 		E7A100000000000000000040 /* GlidePilotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/GlidePilotTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000042 /* DifficultyRampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/DifficultyRampTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000060 /* UsernameRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/UsernameRulesTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000061 /* TorontoPeriodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/TorontoPeriodTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000062 /* RunRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/RunRulesTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000063 /* LeaderboardMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/LeaderboardMathTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000064 /* BoardPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/BoardPresenterTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000065 /* FakeAccountBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/FakeAccountBackend.swift; sourceTree = "<group>"; };
+		E7A100000000000000000066 /* AccountSyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/AccountSyncTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/SupabaseHTTPBackendTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000080 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Supabase.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -92,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				E7A100000000000000000004 /* PaperGlide */,
+				E7A100000000000000000081 /* Config */,
 				E7A100000000000000000005 /* PaperGlideTests */,
 				E7A100000000000000000031 /* PaperGlideUITests */,
 				E7A100000000000000000003 /* Products */,
@@ -118,8 +136,24 @@
 				E7A100000000000000000024 /* TestSupport.swift */,
 				E7A100000000000000000040 /* GlidePilotTests.swift */,
 				E7A100000000000000000042 /* DifficultyRampTests.swift */,
+				E7A100000000000000000060 /* UsernameRulesTests.swift */,
+				E7A100000000000000000061 /* TorontoPeriodTests.swift */,
+				E7A100000000000000000062 /* RunRulesTests.swift */,
+				E7A100000000000000000063 /* LeaderboardMathTests.swift */,
+				E7A100000000000000000064 /* BoardPresenterTests.swift */,
+				E7A100000000000000000065 /* FakeAccountBackend.swift */,
+				E7A100000000000000000066 /* AccountSyncTests.swift */,
+				E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */,
 			);
 			name = PaperGlideTests;
+			sourceTree = "<group>";
+		};
+		E7A100000000000000000081 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				E7A100000000000000000080 /* Supabase.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +316,14 @@
 				E7A100000000000000000029 /* TestSupport.swift in Sources */,
 				E7A100000000000000000041 /* GlidePilotTests.swift in Sources */,
 				E7A100000000000000000043 /* DifficultyRampTests.swift in Sources */,
+				E7A100000000000000000070 /* UsernameRulesTests.swift in Sources */,
+				E7A100000000000000000071 /* TorontoPeriodTests.swift in Sources */,
+				E7A100000000000000000072 /* RunRulesTests.swift in Sources */,
+				E7A100000000000000000073 /* LeaderboardMathTests.swift in Sources */,
+				E7A100000000000000000074 /* BoardPresenterTests.swift in Sources */,
+				E7A100000000000000000075 /* FakeAccountBackend.swift in Sources */,
+				E7A100000000000000000076 /* AccountSyncTests.swift in Sources */,
+				E7A100000000000000000077 /* SupabaseHTTPBackendTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,8 +445,10 @@
 		};
 		E7A100000000000000000017 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A100000000000000000080 /* Supabase.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Config/Supabase-Info.plist;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -430,8 +474,10 @@
 		};
 		E7A100000000000000000018 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A100000000000000000080 /* Supabase.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Config/Supabase-Info.plist;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

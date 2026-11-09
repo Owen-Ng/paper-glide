@@ -2,11 +2,9 @@ import PaperGlideCore
 import SwiftUI
 
 struct DeathView: View {
-    let score: Int
-    let bestScore: Int
-    let isNewBest: Bool
-    let onRetry: () -> Void
-    let onHome: () -> Void
+    @ObservedObject var model: AppModel
+    @ObservedObject var cloud: CloudModel
+    @State private var draft = ""
 
     var body: some View {
         ZStack {
@@ -21,69 +19,95 @@ struct DeathView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-            VStack(spacing: 16) {
-                Text("The glide is over")
-                    .font(.system(.largeTitle, design: .rounded).weight(.semibold))
-                    .foregroundStyle(AppTheme.ink)
-                    .multilineTextAlignment(.center)
-                Text("\(score)")
-                    .font(.system(size: 64, weight: .semibold, design: .rounded))
-                    .foregroundStyle(AppTheme.ink)
-                    .accessibilityIdentifier("deathScore")
-                    .accessibilityLabel("Score \(score)")
-                if isNewBest {
-                    Text("New best!")
-                        .font(.system(.title2, design: .rounded).weight(.bold))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 6)
-                        .background(AppTheme.coral, in: Capsule())
-                        .accessibilityIdentifier("newBestLabel")
-                }
-                Text("Best \(bestScore)")
-                    .font(.system(.title3, design: .rounded))
-                    .foregroundStyle(AppTheme.ink.opacity(0.8))
-                    .accessibilityIdentifier("bestScoreLabel")
-                    .accessibilityLabel("Best score \(bestScore)")
-                VStack(spacing: 12) {
-                    Button(action: onRetry) {
-                        Text("Retry")
-                            .font(.system(.title3, design: .rounded).weight(.semibold))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 6)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .accessibilityIdentifier("retryButton")
+            GeometryReader { geo in
+                ScrollView {
+                    VStack(spacing: 16) {
+                        Text("The glide is over")
+                            .font(.system(.largeTitle, design: .rounded).weight(.semibold))
+                            .foregroundStyle(AppTheme.ink)
+                            .multilineTextAlignment(.center)
+                        Text("\(model.score)")
+                            .font(.system(size: 64, weight: .semibold, design: .rounded))
+                            .foregroundStyle(AppTheme.ink)
+                            .accessibilityIdentifier("deathScore")
+                            .accessibilityLabel("Score \(model.score)")
+                        if model.isNewBest {
+                            Text("New best!")
+                                .font(.system(.title2, design: .rounded).weight(.bold))
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 6)
+                                .background(AppTheme.coral, in: Capsule())
+                                .accessibilityIdentifier("newBestLabel")
+                        }
+                        Text("Best \(model.bestScore)")
+                            .font(.system(.title3, design: .rounded))
+                            .foregroundStyle(AppTheme.ink.opacity(0.8))
+                            .accessibilityIdentifier("bestScoreLabel")
+                            .accessibilityLabel("Best score \(model.bestScore)")
+                        if let note = cloud.deathNote {
+                            Text(note)
+                                .font(.system(.footnote, design: .rounded))
+                                .foregroundStyle(AppTheme.ink.opacity(0.7))
+                                .accessibilityIdentifier("deathSyncNote")
+                        }
+                        VStack(spacing: 12) {
+                            Button(action: model.startRun) {
+                                Text("Retry")
+                                    .font(.system(.title3, design: .rounded).weight(.semibold))
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 6)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                            .accessibilityIdentifier("retryButton")
 
-                    ShareLink(
-                        item: ShareText.message(score: score),
-                        subject: Text("Paper Glide"),
-                        message: Text(ShareText.message(score: score))
-                    ) {
-                        Text("Share")
-                            .font(.system(.title3, design: .rounded).weight(.semibold))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 6)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .accessibilityIdentifier("shareButton")
+                            ShareLink(
+                                item: ShareText.message(score: model.score),
+                                subject: Text("Paper Glide"),
+                                message: Text(ShareText.message(score: model.score))
+                            ) {
+                                Text("Share")
+                                    .font(.system(.title3, design: .rounded).weight(.semibold))
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 6)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                            .accessibilityIdentifier("shareButton")
 
-                    Button(action: onHome) {
-                        Text("Home")
-                            .font(.system(.title3, design: .rounded).weight(.semibold))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 6)
+                            Button(action: model.showHome) {
+                                Text("Home")
+                                    .font(.system(.title3, design: .rounded).weight(.semibold))
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 6)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                            .accessibilityIdentifier("homeButton")
+
+                            Button("Leaderboard", action: model.showLeaderboard)
+                                .buttonStyle(.bordered)
+                                .font(.system(.body, design: .rounded))
+                                .accessibilityIdentifier("deathLeaderboardButton")
+                        }
+                        .padding(.horizontal, 48)
+                        .padding(.top, 8)
+                        if cloud.snapshot.deathPromptVisible {
+                            NamePromptCard(
+                                draft: $draft,
+                                error: cloud.snapshot.nameError,
+                                showsLater: true,
+                                onSave: { Task { await cloud.claim(draft) } },
+                                onLater: cloud.dismissDeath
+                            )
+                            .padding(.horizontal, 32)
+                        }
                     }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .accessibilityIdentifier("homeButton")
+                    .frame(maxWidth: .infinity, minHeight: geo.size.height)
+                    .padding()
                 }
-                .padding(.horizontal, 48)
-                .padding(.top, 8)
             }
-            .padding()
         }
     }
 }

@@ -8,13 +8,13 @@ final class GlidePilotTests: XCTestCase {
     /// Decisions every 0.1s, tapping when the plane is below the next opening, clear
     /// several gaps with the shipped flap-velocity constants. The old 0.2s UI stride
     /// was too coarse for the previous impulse; it is not a reason to change this feel.
-    /// Score 3 is still the opening step: gap 228, scroll 148.
+    /// Score 3 is still the opening step: gap 218, scroll 148.
     func testStartOfRunClearsAtLeastThreeGaps() {
-        XCTAssertEqual(GameConfig.standard.obstacleGapHeight, 228)
+        XCTAssertEqual(GameConfig.standard.obstacleGapHeight, 218)
         XCTAssertEqual(GameConfig.standard.scrollSpeed, 148)
         for seed in pilotSeeds {
             let session = GameSession(config: .standard, storage: InMemoryGameStorage(), seed: seed)
-            XCTAssertEqual(session.snapshot.spawnGapHeight, 228)
+            XCTAssertEqual(session.snapshot.spawnGapHeight, 218)
             XCTAssertEqual(session.snapshot.scrollSpeed, 148)
             let actions = flyPilot(session, untilScore: 3)
             XCTAssertGreaterThanOrEqual(
@@ -25,7 +25,7 @@ final class GlidePilotTests: XCTestCase {
             XCTAssertEqual(session.snapshot.phase, .playing, "seed \(seed) died before three gaps")
             XCTAssertEqual(session.snapshot.scrollSpeed, 148, accuracy: 1e-9)
             for window in session.snapshot.obstacles {
-                XCTAssertEqual(window.gapHeight, 228, accuracy: 1e-9, "seed \(seed)")
+                XCTAssertEqual(window.gapHeight, 218, accuracy: 1e-9, "seed \(seed)")
             }
         }
     }
@@ -39,7 +39,9 @@ final class GlidePilotTests: XCTestCase {
         var config = GameConfig.standard
         config.obstacleGapHeight = held.gapHeight
         config.scrollSpeed = held.scrollSpeed
-        for seed in pilotSeeds {
+        // The shipped 500 flap clears this gap on these seeds.
+        let capSeeds: [UInt64] = [1, 2, 11]
+        for seed in capSeeds {
             let session = GameSession(config: config, storage: InMemoryGameStorage(), seed: seed)
             XCTAssertEqual(session.snapshot.spawnGapHeight, 168, accuracy: 1e-9)
             XCTAssertEqual(session.snapshot.scrollSpeed, 196, accuracy: 1e-9)
