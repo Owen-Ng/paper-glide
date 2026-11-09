@@ -4,6 +4,10 @@
 /// `flapVelocity` (points/s) are the flappybird.gg design-aspect rates — 5 units/s²
 /// and 1.55 units/s on a 2.56-unit visible height — scaled by `worldHeight / 2.56`
 /// and rounded to the nearest point. `maxUpwardSpeed` equals the flap so taps cannot stack.
+///
+/// `obstacleGapHeight` and `scrollSpeed` are the opening of a run. `DifficultyRamp`
+/// tightens later windows and the live scroll. Gravity, flap, and the speed caps
+/// stay at these values for the whole run.
 public struct GameConfig: Equatable {
     public var worldWidth: Double
     public var worldHeight: Double
@@ -31,15 +35,15 @@ public struct GameConfig: Equatable {
         worldWidth: Double = 390,
         worldHeight: Double = 760,
         gravity: Double = 1484,
-        flapVelocity: Double = 460,
-        maxUpwardSpeed: Double = 460,
+        flapVelocity: Double = 500,
+        maxUpwardSpeed: Double = 500,
         maxDownwardSpeed: Double = 720,
         planeX: Double = 108,
         planeWidth: Double = 46,
         planeHeight: Double = 22,
         planeStartY: Double = 390,
         obstacleWidth: Double = 70,
-        obstacleGapHeight: Double = 228,
+        obstacleGapHeight: Double = 218,
         obstacleSpacing: Double = 300,
         scrollSpeed: Double = 148,
         gapMargin: Double = 78,

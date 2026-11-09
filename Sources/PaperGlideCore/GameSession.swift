@@ -12,6 +12,15 @@ public struct GameSnapshot: Equatable {
     public var showCoach: Bool
     public var plane: PlaneState
     public var obstacles: [Obstacle]
+    /// Seconds simulated while `.playing`. Wall time, the start screen, and a
+    /// finished run do not move it. Each run starts at zero (morning, in the app).
+    public var flightTime: Double
+    public var runID: Int
+    public var runSeed: UInt64
+    /// Live scroll, in points per second. This is the ramp, not `GameConfig.scrollSpeed`.
+    public var scrollSpeed: Double
+    /// Opening used the next time a window is spawned. On-screen windows keep their own.
+    public var spawnGapHeight: Double
 
     public init(
         phase: RunPhase,
@@ -20,7 +29,12 @@ public struct GameSnapshot: Equatable {
         isNewBest: Bool = false,
         showCoach: Bool,
         plane: PlaneState,
-        obstacles: [Obstacle]
+        obstacles: [Obstacle],
+        flightTime: Double = 0,
+        runID: Int = 0,
+        runSeed: UInt64 = 0,
+        scrollSpeed: Double = 0,
+        spawnGapHeight: Double = 0
     ) {
         self.phase = phase
         self.score = score
@@ -29,6 +43,11 @@ public struct GameSnapshot: Equatable {
         self.showCoach = showCoach
         self.plane = plane
         self.obstacles = obstacles
+        self.flightTime = flightTime
+        self.runID = runID
+        self.runSeed = runSeed
+        self.scrollSpeed = scrollSpeed
+        self.spawnGapHeight = spawnGapHeight
     }
 }
 
@@ -52,6 +71,10 @@ public struct RunLayout: Equatable {
 /// down. The run ends when the plane overlaps a window frame or the top or bottom
 /// of the page. Score increases by one when the plane's trailing edge passes an
 /// obstacle's trailing edge, and only once per window.
+///
+/// Every fifth point, the next spawned window uses a shorter opening and the page
+/// scrolls a little faster. Windows already on the page keep the opening they were
+/// born with. `flightTime` advances only while the run is playing.
 public final class GameSession {
     public let config: GameConfig
     private let storage: GameStorage
@@ -65,6 +88,11 @@ public final class GameSession {
     private var isNewBest: Bool
     private var showCoach: Bool
     private var phase: RunPhase
+    private var flightTime = 0.0
+    private var runID = 0
+    private var runSeed: UInt64 = 0
+    private var scrollSpeed = 0.0
+    private var spawnGapHeight = 0.0
 
     public init(config: GameConfig = .standard, storage: GameStorage, seed: UInt64) {
         self.config = config
@@ -96,7 +124,12 @@ public final class GameSession {
             isNewBest: isNewBest,
             showCoach: showCoach,
             plane: plane,
-            obstacles: obstacles
+            obstacles: obstacles,
+            flightTime: flightTime,
+            runID: runID,
+            runSeed: runSeed,
+            scrollSpeed: scrollSpeed,
+            spawnGapHeight: spawnGapHeight
         )
     }
 
@@ -126,6 +159,7 @@ public final class GameSession {
         while remaining > 1e-9 {
             let quantum = max(config.physicsStep, minimumQuantum)
             let h = min(quantum, remaining)
+            flightTime += h
             let integrated = FlightPhysics.integrate(
                 y: plane.y,
                 velocityY: plane.velocityY,
@@ -140,7 +174,7 @@ public final class GameSession {
             plane.y = integrated.y
             plane.velocityY = integrated.velocityY
 
-            let dx = config.scrollSpeed * h
+            let dx = scrollSpeed * h
             for index in obstacles.indices {
                 obstacles[index].left -= dx
             }
@@ -151,6 +185,8 @@ public final class GameSession {
                     score += 1
                 }
             }
+
+            applyDifficulty()
 
             if collided() {
                 die()
@@ -175,6 +211,7 @@ public final class GameSession {
         phase = .playing
         isNewBest = false
         pendingTap = false
+        applyDifficulty()
     }
 
     /// Ends the current run at `finalScore` and applies the new-best rule.
@@ -183,14 +220,18 @@ public final class GameSession {
     public func endRun(withScore finalScore: Int) {
         guard phase == .playing else { return }
         score = max(0, finalScore)
+        applyDifficulty()
         die()
     }
 
     private func beginRun(seed: UInt64) {
         rng = SeededGenerator(seed: seed)
+        runSeed = seed
         nextObstacleID = 1
         pendingTap = false
         score = 0
+        flightTime = 0
+        runID += 1
         phase = .playing
         isNewBest = false
         bestScore = storage.loadBestScore()
@@ -203,7 +244,20 @@ public final class GameSession {
             height: config.planeHeight
         )
         obstacles = []
+        applyDifficulty()
         maintainSpawns()
+    }
+
+    /// Live scroll and the opening for windows spawned from now on.
+    /// Does not touch windows that are already in the list.
+    private func applyDifficulty() {
+        let level = DifficultyRamp.level(
+            score: score,
+            baseGap: config.obstacleGapHeight,
+            baseScroll: config.scrollSpeed
+        )
+        scrollSpeed = level.scrollSpeed
+        spawnGapHeight = level.gapHeight
     }
 
     private func die() {
@@ -247,14 +301,14 @@ public final class GameSession {
             left: left,
             width: config.obstacleWidth,
             gapCenterY: randomGapCenter(),
-            gapHeight: config.obstacleGapHeight
+            gapHeight: spawnGapHeight
         )
         nextObstacleID += 1
         obstacles.append(obstacle)
     }
 
     private func randomGapCenter() -> Double {
-        let half = config.obstacleGapHeight / 2
+        let half = spawnGapHeight / 2
         let low = config.gapMargin + half
         let high = config.worldHeight - config.gapMargin - half
         guard high > low else {

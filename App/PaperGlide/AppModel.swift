@@ -43,6 +43,7 @@ final class AppModel: ObservableObject {
         isNewBest = false
         showCoach = session.snapshot.showCoach
         refreshFlightReadout(session.snapshot)
+        scene.presentCurrentSnapshot()
         screen = .playing
     }
 

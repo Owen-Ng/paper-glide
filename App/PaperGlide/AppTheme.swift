@@ -5,14 +5,14 @@ enum AppTheme {
     static let ink = Color(red: 0.29, green: 0.23, blue: 0.20)
     static let coral = Color(red: 0.84, green: 0.42, blue: 0.36)
     static let paper = Color(red: 0.99, green: 0.97, blue: 0.94)
-    static let skyTop = Color(red: 0.73, green: 0.86, blue: 0.95)
-    static let skyBottom = Color(red: 0.97, green: 0.94, blue: 0.89)
-
-    static let skyBackground = UIColor(red: 0.86, green: 0.92, blue: 0.96, alpha: 1)
-    static let paperBand = UIColor(red: 0.97, green: 0.94, blue: 0.88, alpha: 1)
+    /// Morning top, used until the play scene paints the live wash.
+    static let skyBackground = UIColor(red: 0.74, green: 0.86, blue: 0.93, alpha: 1)
     static let inkUI = UIColor(red: 0.29, green: 0.23, blue: 0.20, alpha: 1)
-    static let planeFill = UIColor(red: 0.99, green: 0.98, blue: 0.96, alpha: 1)
-    static let planeStroke = UIColor(red: 0.55, green: 0.42, blue: 0.34, alpha: 1)
+    static let planeFill = UIColor(red: 0.99, green: 0.975, blue: 0.94, alpha: 1)
+    static let planeStroke = UIColor(red: 0.35, green: 0.33, blue: 0.31, alpha: 1)
+    /// Constant paper rim. The live sky does not recolor window frames.
+    static let paperLip = UIColor(red: 0.99, green: 0.975, blue: 0.935, alpha: 1)
+    static let gapEdge = UIColor(red: 0.33, green: 0.28, blue: 0.24, alpha: 1)
 
     static let facades: [UIColor] = [
         UIColor(red: 0.95, green: 0.76, blue: 0.69, alpha: 1),
