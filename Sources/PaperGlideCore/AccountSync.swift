@@ -30,6 +30,9 @@ public final class AccountSync: @unchecked Sendable {
     private var nameError: String?
     private var lastRunState: RunSyncState?
     private var now: Date
+    /// Waits out a 10s submit gap so the rest of the queue can drain.
+    /// Tests advance their clock here instead of sleeping.
+    public var pause: @Sendable (TimeInterval) async -> Void
 
     public init(
         backend: AccountBackend,
@@ -37,7 +40,11 @@ public final class AccountSync: @unchecked Sendable {
         store: CloudStore,
         configured: Bool,
         now: Date = Date(),
-        makeID: @escaping () -> String = { UUID().uuidString.lowercased() }
+        makeID: @escaping () -> String = { UUID().uuidString.lowercased() },
+        pause: @escaping @Sendable (TimeInterval) async -> Void = { seconds in
+            let nanos = UInt64((seconds * 1_000_000_000).rounded())
+            try? await Task.sleep(nanoseconds: nanos)
+        }
     ) {
         self.backend = backend
         self.sessions = sessions
@@ -45,6 +52,7 @@ public final class AccountSync: @unchecked Sendable {
         self.configured = configured
         self.now = now
         self.makeID = makeID
+        self.pause = pause
         session = sessions.load()
         username = store.loadUsername()
         runs = store.loadRuns()
@@ -258,40 +266,60 @@ public final class AccountSync: @unchecked Sendable {
     }
 
     private func flushUnlocked() async -> AccountSnapshot {
-        let context = withLock { () -> FlushContext? in
-            guard online, configured, username != nil, let session else {
-                lastFlushFailed = username != nil && runs.contains { $0.state == .pending } && !online
-                return nil
+        var waitsWithoutProgress = 0
+        while true {
+            let context = withLock { () -> FlushContext? in
+                guard online, configured, username != nil, let session else {
+                    lastFlushFailed = username != nil && runs.contains { $0.state == .pending } && !online
+                    return nil
+                }
+                let pending = runs.filter { $0.state == .pending }
+                guard !pending.isEmpty else {
+                    lastFlushFailed = false
+                    syncing = false
+                    return nil
+                }
+                syncing = true
+                return FlushContext(token: session.accessToken, pending: pending, clock: now)
             }
-            let pending = runs.filter { $0.state == .pending }
-            guard !pending.isEmpty else {
-                lastFlushFailed = false
-                syncing = false
-                return nil
-            }
-            syncing = true
-            return FlushContext(token: session.accessToken, pending: pending, clock: now)
-        }
-        guard let context else { return withLock { snapshotLocked() } }
+            guard let context else { return withLock { snapshotLocked() } }
 
-        var failed = false
-        for run in context.pending {
-            if RunRules.isOutsidePlayedAtWindow(playedAt: run.playedAt, now: context.clock) {
-                withLock { mark(run.id, .localOnly) }
-                continue
-            }
-            do {
-                let ack = try await submit(run, token: context.token)
-                switch ack {
-                case .stored, .duplicate:
-                    withLock { mark(run.id, .synced) }
-                case .rejected:
-                    withLock { mark(run.id, .rejected) }
-                case .stale:
+            var failed = false
+            var storedAny = false
+            var hitRateLimit = false
+            for run in context.pending {
+                if RunRules.isOutsidePlayedAtWindow(playedAt: run.playedAt, now: context.clock) {
                     withLock { mark(run.id, .localOnly) }
-                case .needsName:
+                    continue
+                }
+                do {
+                    let ack = try await submit(run, token: context.token)
+                    switch ack {
+                    case .stored, .duplicate:
+                        withLock { mark(run.id, .synced) }
+                        storedAny = true
+                    case .rejected:
+                        withLock { mark(run.id, .rejected) }
+                    case .stale:
+                        withLock { mark(run.id, .localOnly) }
+                    case .needsName:
+                        failed = true
+                    case .rateLimited:
+                        hitRateLimit = true
+                        break
+                    }
+                } catch {
                     failed = true
-                case .rateLimited:
+                    break
+                }
+                if hitRateLimit { break }
+            }
+
+            if hitRateLimit {
+                if storedAny {
+                    waitsWithoutProgress = 0
+                }
+                if waitsWithoutProgress >= 1 {
                     return withLock {
                         lastFlushFailed = true
                         syncing = false
@@ -299,20 +327,21 @@ public final class AccountSync: @unchecked Sendable {
                         return snapshotLocked()
                     }
                 }
-            } catch {
-                failed = true
-                break
+                waitsWithoutProgress += 1
+                await pause(RunRules.minSubmitGap)
+                continue
             }
-        }
-        return withLock {
-            syncing = false
-            let stillPending = runs.contains { $0.state == .pending }
-            lastFlushFailed = failed && stillPending
-            if let last = runs.last {
-                lastRunState = last.state
+
+            return withLock {
+                syncing = false
+                let stillPending = runs.contains { $0.state == .pending }
+                lastFlushFailed = failed && stillPending
+                if let last = runs.last {
+                    lastRunState = last.state
+                }
+                persistRunsLocked()
+                return snapshotLocked()
             }
-            persistRunsLocked()
-            return snapshotLocked()
         }
     }
 

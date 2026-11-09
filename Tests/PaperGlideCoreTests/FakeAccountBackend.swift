@@ -89,11 +89,9 @@ final class FakeAccountBackend: AccountBackend {
             return .rateLimited
         }
         if RunRules.isOutsidePlayedAtWindow(playedAt: run.playedAt, now: now) {
-            users[userID]?.lastSubmitAt = now
             return .stale
         }
         if RunRules.exceedsScoreRate(score: run.score, durationSeconds: run.durationSeconds) {
-            users[userID]?.lastSubmitAt = now
             return .rejected
         }
         let today = TorontoPeriod.dayKey(for: now)

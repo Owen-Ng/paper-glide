@@ -11,7 +11,9 @@
 --     0→o 1→i/l 2→z 3→e 4→a 5→s 6/9→g 7→t 8→b
 --   reject when score > duration_seconds/1.5 + 3, duration > 3600, or score > 2500
 --   played_at more than 24 hours ahead or older than 30 days is stale (not stored)
---   about 1 accepted-or-rejected attempt per 10 seconds, 500 stored runs per Toronto day
+--   about 1 stored run per 10 seconds, 500 stored runs per Toronto day
+--   a rejected or stale payload does not consume the 10 second slot
+--   the client retries the rest of the queue after that gap
 --   daily board: played_at's Toronto civil date is still today
 --   weekly board: played_at's Toronto Monday-start week is still this week
 --   a run whose day or week has closed is all-time only (late-run rule)
@@ -270,7 +272,6 @@ begin
     end if;
 
     if played_at > now() + interval '24 hours' or played_at < now() - interval '30 days' then
-        update public.profiles set last_submit_at = now() where id = uid;
         return jsonb_build_object('ok', false, 'error', 'stale');
     end if;
 
@@ -281,7 +282,6 @@ begin
         or score > 2500
         or score::double precision > (duration_seconds / 1.5) + 3
     then
-        update public.profiles set last_submit_at = now() where id = uid;
         return jsonb_build_object('ok', false, 'error', 'rejected');
     end if;
 

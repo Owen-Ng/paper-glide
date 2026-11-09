@@ -25,9 +25,9 @@ struct LeaderboardView: View {
             .padding(.top, 8)
 
             Picker("Board", selection: $cloud.period) {
-                Text("Daily").tag(BoardPeriod.daily)
-                Text("Weekly").tag(BoardPeriod.weekly)
-                Text("All-time").tag(BoardPeriod.allTime)
+                Text("Today").tag(BoardPeriod.daily)
+                Text("This week").tag(BoardPeriod.weekly)
+                Text("All time").tag(BoardPeriod.allTime)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
@@ -108,20 +108,6 @@ struct LeaderboardView: View {
                         .font(.system(.body, design: .rounded))
                         .accessibilityIdentifier(entry.isYou ? "boardYouRow" : "boardRow")
                     }
-                    if let outside = presentation.outsideLine {
-                        HStack {
-                            Text(outside)
-                                .foregroundStyle(AppTheme.ink)
-                            Spacer()
-                            if let score = presentation.outsideScore {
-                                Text("\(score)")
-                                    .foregroundStyle(AppTheme.ink)
-                            }
-                        }
-                        .font(.system(.body, design: .rounded).weight(.semibold))
-                        .accessibilityIdentifier("boardOutsideYou")
-                        .accessibilityLabel(outside)
-                    }
                     if let title = presentation.emptyTitle {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(title)
@@ -153,11 +139,41 @@ struct LeaderboardView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
 
-        if presentation.canPullToRefresh {
-            list.refreshable { await cloud.refreshSelected() }
-        } else {
-            list
+        VStack(spacing: 0) {
+            if presentation.canPullToRefresh {
+                list.refreshable { await cloud.refreshSelected() }
+            } else {
+                list
+            }
+            if let pinned = pinnedYou(presentation) {
+                Divider()
+                HStack {
+                    Text(pinned.line)
+                        .foregroundStyle(AppTheme.ink)
+                    Spacer()
+                    Text("\(pinned.score)")
+                        .foregroundStyle(AppTheme.ink)
+                }
+                .font(.system(.body, design: .rounded).weight(.semibold))
+                .padding(.horizontal, 20)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background(AppTheme.paper)
+                .accessibilityIdentifier(presentation.outsideLine == nil ? "boardYouFooter" : "boardOutsideYou")
+                .accessibilityLabel(pinned.line)
+            }
         }
+    }
+
+    /// The player's rank stays on screen. Outside the top 50 this is "#128 — you".
+    private func pinnedYou(_ presentation: BoardPresentation) -> (line: String, score: Int)? {
+        if let line = presentation.outsideLine, let score = presentation.outsideScore {
+            return (line, score)
+        }
+        if let you = presentation.entries.first(where: \.isYou) {
+            return (BoardCopy.outside(rank: you.rank), you.score)
+        }
+        return nil
     }
 
     private func bannerIdentifier(_ banner: String) -> String {

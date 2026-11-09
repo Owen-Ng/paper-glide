@@ -162,15 +162,48 @@ final class AccountSyncTests: XCTestCase {
         XCTAssertEqual(harness.fake.runs.count, 1)
 
         harness.sync.record(score: 4, durationSeconds: 10, playedAt: now.addingTimeInterval(22))
-        let limited = await harness.sync.flush()
-        XCTAssertEqual(limited.pendingCount, 1)
-        XCTAssertTrue(limited.lastFlushFailed)
-        XCTAssertEqual(harness.fake.runs.count, 1)
+        let drained = await harness.sync.flush()
+        XCTAssertEqual(drained.pendingCount, 0)
+        XCTAssertFalse(drained.lastFlushFailed)
+        XCTAssertEqual(harness.fake.runs.map(\.score), [4, 4])
+    }
 
-        harness.set(now.addingTimeInterval(33))
-        let retried = await harness.sync.retry()
-        XCTAssertEqual(retried.pendingCount, 0)
-        XCTAssertEqual(harness.fake.runs.count, 2)
+    func testClaimDrainsEveryQueuedRunAcrossTheRateGap() async {
+        let harness = SyncHarness()
+        let now = TestTime.iso("2026-11-09T15:00:00Z")
+        harness.set(now)
+        harness.sync.prepare(online: true)
+        _ = await harness.sync.bootstrap()
+        harness.sync.record(score: 1, durationSeconds: 12, playedAt: now)
+        harness.sync.record(score: 2, durationSeconds: 12, playedAt: now)
+        harness.sync.record(score: 9, durationSeconds: 12, playedAt: now)
+        XCTAssertEqual(harness.fake.runs.count, 0)
+
+        let claimed = await harness.sync.claim("pilot")
+        XCTAssertEqual(claimed.username, "pilot")
+        XCTAssertEqual(claimed.pendingCount, 0)
+        XCTAssertEqual(harness.fake.runs.map(\.score), [1, 2, 9])
+        XCTAssertEqual(harness.fake.now.timeIntervalSince(now), 20, accuracy: 0.001)
+
+        let daily = await harness.sync.refresh(.daily)
+        XCTAssertEqual(daily.boards[.daily]?.page.you?.score, 9)
+    }
+
+    func testRejectedRunDoesNotConsumeTheRateSlot() async {
+        let harness = SyncHarness()
+        let now = TestTime.iso("2026-11-09T15:00:00Z")
+        harness.set(now)
+        harness.sync.prepare(online: true)
+        _ = await harness.sync.bootstrap()
+        _ = await harness.sync.claim("pilot")
+
+        harness.sync.record(score: 40, durationSeconds: 1, playedAt: now)
+        harness.sync.record(score: 4, durationSeconds: 12, playedAt: now)
+        let flushed = await harness.sync.flush()
+        XCTAssertEqual(flushed.pendingCount, 0)
+        XCTAssertEqual(harness.fake.runs.map(\.score), [4])
+        XCTAssertEqual(flushed.lastRunState, .synced)
+        XCTAssertEqual(harness.fake.now, now)
     }
 
     func testDailyCapAndReconnect() async {
@@ -248,6 +281,10 @@ private final class SyncHarness {
             now: backend.now,
             makeID: { source.next() }
         )
+        sync.pause = { [self] seconds in
+            backend.now = backend.now.addingTimeInterval(seconds)
+            self.sync.setNow(backend.now)
+        }
     }
 
     func set(_ date: Date) {
