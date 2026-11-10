@@ -406,7 +406,7 @@ private final class AnalyticsURLStub: URLProtocol {
         Self.paths.append(request.url?.path ?? "")
         Self.apiKeys.append(request.value(forHTTPHeaderField: "apikey") ?? "")
         Self.authorizations.append(request.value(forHTTPHeaderField: "Authorization") ?? "")
-        Self.body = String(data: request.httpBody ?? Data(), encoding: .utf8) ?? ""
+        Self.body = String(data: Self.bodyData(request), encoding: .utf8) ?? ""
         let payload: [String: Any] = ["ok": true, "result": "stored"]
         let data = (try? JSONSerialization.data(withJSONObject: payload)) ?? Data()
         let response = HTTPURLResponse(
@@ -418,5 +418,21 @@ private final class AnalyticsURLStub: URLProtocol {
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         client?.urlProtocol(self, didLoad: data)
         client?.urlProtocolDidFinishLoading(self)
+    }
+
+    private static func bodyData(_ request: URLRequest) -> Data {
+        if let body = request.httpBody { return body }
+        guard let stream = request.httpBodyStream else { return Data() }
+        stream.open()
+        defer { stream.close() }
+        var data = Data()
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 1024)
+        defer { buffer.deallocate() }
+        while stream.hasBytesAvailable {
+            let count = stream.read(buffer, maxLength: 1024)
+            if count <= 0 { break }
+            data.append(buffer, count: count)
+        }
+        return data
     }
 }
