@@ -68,6 +68,7 @@ final class AppModel: ObservableObject {
     /// Test hook. The first coach tap ends the run at a chosen score. Physics does not run.
     func recordScriptedGlideTap() {
         let coachWasShowing = session.snapshot.showCoach
+        PlayClicks.recordFlap()
         session.tap()
         if coachWasShowing, let score = LaunchOptions.scriptedEndScore {
             session.endRun(withScore: score)
@@ -77,6 +78,7 @@ final class AppModel: ObservableObject {
 
     /// One real flap, then `guidedStride` seconds of the real simulation.
     func guidedTap() {
+        PlayClicks.recordFlap()
         advanceGuidedStride(tap: true)
     }
 

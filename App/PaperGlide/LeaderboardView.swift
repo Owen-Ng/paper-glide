@@ -6,12 +6,16 @@ struct LeaderboardView: View {
     var localBest: Int
     var onBack: () -> Void
     @State private var draft = ""
+    @State private var pickerWidth: CGFloat = 1
 
     var body: some View {
         let presentation = cloud.presentation(localBest: localBest)
         VStack(spacing: 12) {
             HStack {
-                Button("Back", action: onBack)
+                Button("Back") {
+                    cloud.analytics.record(page: "leaderboard", control: "back")
+                    onBack()
+                }
                     .buttonStyle(.bordered)
                     .accessibilityIdentifier("leaderboardBackButton")
                 Spacer()
@@ -30,8 +34,25 @@ struct LeaderboardView: View {
                 Text("All time").tag(BoardPeriod.allTime)
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal, 16)
             .accessibilityIdentifier("boardPicker")
+            .background(
+                GeometryReader { geo in
+                    Color.clear.preference(
+                        key: ControlFrameKey.self,
+                        value: ["picker": geo.frame(in: .named("board-clicks"))]
+                    )
+                }
+            )
+            .onPreferenceChange(ControlFrameKey.self) { frames in
+                pickerWidth = frames["picker"]?.width ?? pickerWidth
+            }
+            .simultaneousGesture(SpatialTapGesture().onEnded { value in
+                let width = pickerWidth
+                guard width > 0 else { return }
+                let index = min(2, max(0, Int(value.location.x / (width / 3))))
+                cloud.analytics.record(page: "leaderboard", control: ClickMap.leaderboard[index])
+            })
+            .padding(.horizontal, 16)
 
             if let caption = presentation.caption {
                 Text(caption)
@@ -45,6 +66,7 @@ struct LeaderboardView: View {
             board(presentation)
         }
         .background(AppTheme.paper.ignoresSafeArea())
+        .coordinateSpace(name: "board-clicks")
         .onChange(of: cloud.period) { _ in
             Task { await cloud.refreshSelected() }
         }
@@ -57,6 +79,7 @@ struct LeaderboardView: View {
                 Section {
                     ForEach(presentation.banners, id: \.self) { banner in
                         Button(banner) {
+                            cloud.analytics.record(page: "leaderboard", control: "other")
                             Task { await cloud.retry() }
                         }
                         .font(.system(.footnote, design: .rounded))
@@ -107,6 +130,9 @@ struct LeaderboardView: View {
                         }
                         .font(.system(.body, design: .rounded))
                         .accessibilityIdentifier(entry.isYou ? "boardYouRow" : "boardRow")
+                        .simultaneousGesture(TapGesture().onEnded {
+                            cloud.analytics.record(page: "leaderboard", control: "other")
+                        })
                     }
                     if let title = presentation.emptyTitle {
                         VStack(alignment: .leading, spacing: 4) {
@@ -131,6 +157,9 @@ struct LeaderboardView: View {
                         onSave: { Task { await cloud.claim(draft) } },
                         onLater: {}
                     )
+                    .simultaneousGesture(TapGesture().onEnded {
+                        cloud.analytics.record(page: "leaderboard", control: "other")
+                    })
                     .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                     .listRowBackground(Color.clear)
                 }
@@ -138,6 +167,11 @@ struct LeaderboardView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 24).onEnded { _ in
+                cloud.analytics.record(page: "leaderboard", control: "scroll")
+            }
+        )
 
         VStack(spacing: 0) {
             if presentation.canPullToRefresh {

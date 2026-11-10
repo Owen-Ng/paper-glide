@@ -11,6 +11,7 @@ final class CloudModel: ObservableObject {
     @Published private(set) var busy = false
 
     private let sync: AccountSync
+    let analytics: AnalyticsCenter
     private let monitor = NWPathMonitor()
     private var pathOnline = true
     private var started = false
@@ -29,12 +30,16 @@ final class CloudModel: ObservableObject {
         } else {
             backend = IdleAccountBackend()
         }
-        sync = AccountSync(
+        let sync = AccountSync(
             backend: backend,
             sessions: sessions,
             store: store,
             configured: config.isConfigured
         )
+        self.sync = sync
+        analytics = AnalyticsCenter {
+            await sync.accessToken()
+        }
         monitor.pathUpdateHandler = { [weak self] path in
             let online = path.status == .satisfied
             Task { @MainActor in
@@ -63,7 +68,9 @@ final class CloudModel: ObservableObject {
         guard !started else { return }
         started = true
         snapshot = sync.prepare(online: pathOnline)
+        await analytics.boot()
         snapshot = await sync.bootstrap()
+        await analytics.client.flushNow()
         guard snapshot.online else { return }
         busy = true
         for period in BoardPeriod.allCases {

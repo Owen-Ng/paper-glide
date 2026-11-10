@@ -1,9 +1,13 @@
+import PaperGlideCore
 import SwiftUI
 
 struct StartView: View {
     @ObservedObject var model: AppModel
     @ObservedObject var cloud: CloudModel
     @State private var draft = ""
+    @State private var showReport = false
+    @State private var toast: String?
+    @State private var ownedFrames: [String: CGRect] = [:]
 
     var body: some View {
         GeometryReader { geo in
@@ -28,14 +32,19 @@ struct StartView: View {
                             .accessibilityLabel("Best score \(model.bestScore)")
                         if let chip = cloud.chipText {
                             Button(chip) {
+                                cloud.analytics.record(page: "start", control: "other")
                                 Task { await cloud.retry() }
                             }
                             .buttonStyle(.bordered)
                             .font(.system(.footnote, design: .rounded))
                             .disabled(cloud.busy)
                             .accessibilityIdentifier("syncChip")
+                            .controlFrame("chip")
                         }
-                        Button(action: model.startRun) {
+                        Button(action: {
+                            cloud.analytics.record(page: "start", control: "play")
+                            model.startRun()
+                        }) {
                             Text("Play")
                                 .font(.system(.title3, design: .rounded).weight(.semibold))
                                 .frame(maxWidth: .infinity)
@@ -44,13 +53,22 @@ struct StartView: View {
                         .buttonStyle(.borderedProminent)
                         .controlSize(.large)
                         .accessibilityIdentifier("playButton")
+                        .controlFrame("play")
                         .padding(.horizontal, 48)
                         .padding(.top, 8)
                         VStack(spacing: 10) {
-                            Button("Leaderboard", action: model.showLeaderboard)
-                                .accessibilityIdentifier("leaderboardButton")
-                            Button("Report — coming soon") {}
-                                .disabled(true)
+                            Button("Leaderboard") {
+                                cloud.analytics.record(page: "start", control: "leaderboard")
+                                model.showLeaderboard()
+                            }
+                            .accessibilityIdentifier("leaderboardButton")
+                            .controlFrame("leaderboard")
+                            Button("Report a problem") {
+                                cloud.analytics.record(page: "start", control: "report")
+                                showReport = true
+                            }
+                            .accessibilityIdentifier("reportButton")
+                            .controlFrame("report")
                         }
                         .buttonStyle(.bordered)
                         .font(.system(.body, design: .rounded))
@@ -64,10 +82,54 @@ struct StartView: View {
                                 onLater: cloud.dismissLaunch
                             )
                             .padding(.horizontal, 32)
+                            .simultaneousGesture(TapGesture().onEnded {
+                                cloud.analytics.record(page: "start", control: "other")
+                            })
+                            .controlFrame("name")
                         }
                         Spacer(minLength: 12)
                     }
                     .frame(maxWidth: .infinity, minHeight: geo.size.height)
+                }
+                .coordinateSpace(name: "start-clicks")
+                .onPreferenceChange(ControlFrameKey.self) { ownedFrames = $0 }
+                .simultaneousGesture(SpatialTapGesture().onEnded { value in
+                    let point = TapPoint(x: value.location.x, y: value.location.y)
+                    let owned = ownedFrames.values.map { TapRect($0) }
+                    if ClickHit.backgroundControl(at: point, owned: owned) == "other" {
+                        cloud.analytics.record(page: "start", control: "other")
+                    }
+                })
+                if showReport {
+                    ReportSheet(
+                        onClose: { showReport = false },
+                        onSend: { category, text in
+                            await cloud.analytics.sendReport(category: category, text: text)
+                        },
+                        onFinished: { result in
+                            showReport = false
+                            toast = result == .sent ? ReportCopy.thanks : ReportCopy.saved
+                        }
+                    )
+                }
+                if let toast {
+                    VStack {
+                        Spacer()
+                        Text(toast)
+                            .font(.system(.body, design: .rounded))
+                            .foregroundStyle(AppTheme.ink)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(AppTheme.paper, in: Capsule())
+                            .shadow(color: .black.opacity(0.12), radius: 8, y: 3)
+                            .padding(.bottom, 28)
+                            .accessibilityIdentifier("reportToast")
+                    }
+                    .allowsHitTesting(false)
+                    .task(id: toast) {
+                        try? await Task.sleep(nanoseconds: 2_500_000_000)
+                        self.toast = nil
+                    }
                 }
             }
         }
@@ -174,6 +236,33 @@ struct PaperPlaneGlyph: Shape {
         path.addLine(to: CGPoint(x: rect.width * 0.06, y: rect.height * 0.84))
         path.closeSubpath()
         return path
+    }
+}
+
+struct ControlFrameKey: PreferenceKey {
+    static var defaultValue: [String: CGRect] = [:]
+
+    static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
+        value.merge(nextValue(), uniquingKeysWith: { $1 })
+    }
+}
+
+extension View {
+    func controlFrame(_ name: String) -> some View {
+        background(
+            GeometryReader { geo in
+                Color.clear.preference(
+                    key: ControlFrameKey.self,
+                    value: [name: geo.frame(in: .named("start-clicks"))]
+                )
+            }
+        )
+    }
+}
+
+extension TapRect {
+    init(_ rect: CGRect) {
+        self.init(x: rect.origin.x, y: rect.origin.y, width: rect.size.width, height: rect.size.height)
     }
 }
 

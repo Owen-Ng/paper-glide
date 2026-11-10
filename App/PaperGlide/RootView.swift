@@ -4,6 +4,7 @@ import SwiftUI
 struct RootView: View {
     @StateObject private var model: AppModel
     @ObservedObject var cloud: CloudModel
+    @Environment(\.scenePhase) private var scenePhase
 
     init(storage: GameStorage, cloud: CloudModel) {
         _model = StateObject(wrappedValue: AppModel(storage: storage))
@@ -32,6 +33,13 @@ struct RootView: View {
                 Task { await cloud.record(score: score, duration: duration, isNewBest: isNewBest) }
             }
             await cloud.start()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .background {
+                cloud.analytics.enteredBackground()
+            } else if phase == .active {
+                cloud.analytics.enteredForeground()
+            }
         }
     }
 }

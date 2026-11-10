@@ -85,7 +85,7 @@ Free-tier notes, checked against the current Supabase pricing page: 500 MB datab
 
 ## Architecture
 
-`PaperGlideCore` is a Swift package with no SpriteKit, SwiftUI, or UIKit. It owns the physics step, scoring, collision, window spawning, the best-score and coach storage protocol, the share message, username rules, Toronto period keys, score validation, and the sync client. `swift test` builds only this package and runs the client against `FakeAccountBackend`.
+`PaperGlideCore` is a Swift package with no SpriteKit, SwiftUI, or UIKit. It owns the physics step, scoring, collision, window spawning, the best-score and coach storage protocol, the share message, username rules, Toronto period keys, score validation, the sync client, and the analytics queue. `swift test` builds only this package and runs the client against fake backends.
 
 The app target under `App/PaperGlide` is SwiftUI for the start, play, and end screens, and SpriteKit for drawing. `UserDefaultsGameStorage` adapts the storage protocol. Taps, score, and the end of a run play short tones synthesized with `AVAudioEngine` (no audio files, no third-party audio).
 
@@ -101,12 +101,40 @@ The local package path from the Xcode project is the repo root.
 
 ## Screens
 
-- **Start:** best score, Play, Leaderboard, and a disabled Report button labelled coming soon. The first launch offers a name. "later" dismisses it. A sync chip shows while a finished run is still waiting.
+- **Start:** best score, Play, Leaderboard, and Report a problem. The first launch offers a name. "later" dismisses it. A sync chip shows while a finished run is still waiting. Report a problem opens a paper card on the start sky.
 - **Play:** score, and the coach hint until the first tap ever.
 - **End:** score, best, Retry, Share, Home, and a secondary Leaderboard. Share opens the system share sheet with text that includes the score and "Paper Glide". A new local best can offer the name once per launch if it was skipped or the device was offline.
 - **Leaderboard:** Daily, Weekly, and All-time. Back returns to the screen that opened it.
 
 Daily boards reset at 00:00 America/Toronto. Weekly boards reset Monday at 00:00 America/Toronto. A run whose Toronto day or week has already closed when it syncs counts only toward all-time.
+
+## Dashboard
+
+The owner dashboard is a static site in `dashboard/`. It talks to Supabase with the anon key and magic-link sign-in. Queries go through SQL functions that check `analytics_admins`.
+
+```sh
+cd dashboard
+cp config.example.js config.js
+# set supabaseUrl and supabaseAnonKey
+python3 -m http.server 8787
+```
+
+Open `http://localhost:8787`. The default view is Last 7 days, grouped by Day. Range and grouping are stored in the URL. `config.js` is gitignored. Do not put the service-role key in it.
+
+`node --test dashboard/test/logic.test.mjs` checks Toronto bucketing, the default range, and the on-screen copy. `scripts/test-analytics-sql.sh` applies both migrations to a throwaway local database and checks the allowlist, rollups, empty ranges, and 90-day cleanup. It does not connect to the hosted project.
+
+## Supabase analytics setup
+
+After the accounts migration, run `supabase/migrations/20261110160000_analytics.sql` in the SQL editor. Then:
+
+1. Insert the viewer address: `insert into public.analytics_admins (email) values ('you@example.com');`
+2. In Authentication → URL configuration, set Site URL to the dashboard origin and add that origin to the redirect allow list so the magic link can return.
+3. Enable the `pg_cron` extension. The migration schedules `analytics-raw-cleanup` daily. If the extension was off, the migration prints the `cron.schedule` statement to run after enabling it.
+4. Create a Cloudflare Pages project, set the production root to `dashboard/`, and add the same origin in the Supabase redirect allow list. No build command is required.
+
+The migration does not change `profiles`, `runs`, or their functions. Raw events and crash diagnostics older than 90 days are deleted. Daily rollups and player reports stay.
+
+A personal test week (30 accounts, 4 sessions a day, clicks stored as totals per control) is about 1.0 MB of tuples, about 0.2% of the 500 MB free-tier database before indexes. Ninety days of raw rows at that rate stays on the order of 15–30 MB.
 
 ## Out of scope
 
@@ -115,8 +143,7 @@ Deferred to later milestones:
 - Game Center, Sign in with Apple, App Attest
 - account recovery or renames
 - share beyond the existing system share sheet
-- a dashboard, friends, or push
-- the report form
-- telemetry
+- friends or push
+- replying to reports from the dashboard
 
-No third-party SDKs are included. Visuals are drawn shapes. Nothing here is a copy of another game's name, art, or audio.
+No third-party analytics or crash SDKs are included. Visuals are drawn shapes. Nothing here is a copy of another game's name, art, or audio.

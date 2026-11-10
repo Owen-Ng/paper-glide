@@ -31,4 +31,40 @@ final class PaperGlideAccountsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["playButton"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.staticTexts["boardOffline"].exists)
     }
+
+    func testReportSheetOpensAndSavesOffline() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-paperGlideResetStore"]
+        app.launch()
+
+        let report = app.buttons["reportButton"]
+        XCTAssertTrue(report.waitForExistence(timeout: 15))
+        XCTAssertTrue(report.isEnabled)
+        XCTAssertEqual(report.label, "Report a problem")
+        if !report.isHittable {
+            app.swipeUp()
+        }
+        report.tap()
+
+        let title = app.staticTexts["reportTitle"]
+        XCTAssertTrue(title.waitForExistence(timeout: 5))
+        XCTAssertEqual(title.label, "Report a problem")
+        XCTAssertEqual(app.staticTexts["reportLine"].label, "tell us what went wrong. we'll read every one.")
+        XCTAssertEqual(
+            app.staticTexts["reportSmallPrint"].label,
+            "we'll include your app version and device model. no other info."
+        )
+        let send = app.buttons["reportSend"]
+        XCTAssertTrue(send.exists)
+        XCTAssertFalse(send.isEnabled)
+
+        app.buttons["reportCategory-Something looks wrong"].tap()
+        XCTAssertTrue(send.isEnabled)
+        send.tap()
+
+        let toast = app.staticTexts["reportToast"]
+        XCTAssertTrue(toast.waitForExistence(timeout: 8))
+        XCTAssertEqual(toast.label, "saved. we'll send it when you're back online")
+        XCTAssertTrue(app.buttons["playButton"].waitForExistence(timeout: 5))
+    }
 }
