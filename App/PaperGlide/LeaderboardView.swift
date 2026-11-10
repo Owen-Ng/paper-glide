@@ -7,7 +7,9 @@ struct LeaderboardView: View {
     var onBack: () -> Void
     @State private var draft = ""
     @State private var pickerWidth: CGFloat = 1
+    #if DEBUG
     @State private var scrollClicks = 0
+    #endif
 
     var body: some View {
         let presentation = cloud.presentation(localBest: localBest)
@@ -170,10 +172,13 @@ struct LeaderboardView: View {
         .scrollContentBackground(.hidden)
         .simultaneousGesture(
             DragGesture(minimumDistance: 24).onEnded { _ in
+                #if DEBUG
                 scrollClicks += 1
+                #endif
                 cloud.analytics.record(page: "leaderboard", control: "scroll")
             }
         )
+        #if DEBUG
         .overlay(alignment: .bottomLeading) {
             Text("scroll=\(scrollClicks)")
                 .font(.system(size: 1))
@@ -182,6 +187,7 @@ struct LeaderboardView: View {
                 .accessibilityIdentifier("leaderboardScrollCount")
                 .accessibilityLabel("scroll=\(scrollClicks)")
         }
+        #endif
 
         VStack(spacing: 0) {
             if presentation.canPullToRefresh {
