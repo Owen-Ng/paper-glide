@@ -517,6 +517,17 @@ begin
                       and r.day between start_day and end_day
                 )
             end as amount,
+            case
+                when metric = 'crashes' then (
+                    select coalesce(sum(r.value), 0)
+                    from public.analytics_daily_rollups r
+                    where r.kind = 'sessions'
+                      and r.day >= b.bucket_start
+                      and r.day < b.bucket_end
+                      and r.day between start_day and end_day
+                )
+                else null
+            end as session_amount,
             (today >= b.bucket_start and today < b.bucket_end) as so_far
         from buckets b
     )
@@ -524,6 +535,12 @@ begin
         jsonb_build_object(
             'start', bucket_start,
             'count', amount,
+            'sessions', session_amount,
+            'crash_free', case
+                when metric <> 'crashes' then null
+                when coalesce(session_amount, 0) = 0 then null
+                else round((100.0 * greatest(session_amount - amount, 0)) / session_amount)
+            end,
             'so_far', so_far
         )
         order by bucket_start
@@ -535,7 +552,9 @@ begin
 end;
 $$;
 
-create or replace function public.analytics_clicks(start_day date, end_day date)
+drop function if exists public.analytics_clicks(date, date);
+
+create or replace function public.analytics_clicks(start_day date, end_day date, group_by text default 'day')
 returns jsonb
 language plpgsql
 stable
@@ -543,12 +562,13 @@ security definer
 set search_path = public
 as $$
 declare
+    grouping text := coalesce(nullif(group_by, ''), 'day');
     payload jsonb;
 begin
     if not public.analytics_is_admin() then
         return jsonb_build_object('ok', false, 'error', 'forbidden');
     end if;
-    if start_day is null or end_day is null then
+    if start_day is null or end_day is null or grouping not in ('day', 'week', 'month') then
         return jsonb_build_object('ok', false, 'error', 'invalid');
     end if;
 
@@ -576,20 +596,91 @@ begin
           and day between start_day and end_day
         group by page, control
     ),
+    page_totals as (
+        select page, sum(amount)::bigint as total
+        from sums
+        group by page
+    ),
+    buckets as (
+        select bucket_start::date as bucket_start,
+            case grouping
+                when 'day' then (bucket_start + interval '1 day')::date
+                when 'week' then (bucket_start + interval '7 day')::date
+                else (bucket_start + interval '1 month')::date
+            end as bucket_end
+        from generate_series(
+            case grouping
+                when 'day' then start_day::timestamp
+                when 'week' then date_trunc('week', start_day::timestamp)
+                else date_trunc('month', start_day::timestamp)
+            end,
+            case grouping
+                when 'day' then end_day::timestamp
+                when 'week' then date_trunc('week', end_day::timestamp)
+                else date_trunc('month', end_day::timestamp)
+            end,
+            case grouping
+                when 'day' then interval '1 day'
+                when 'week' then interval '7 day'
+                else interval '1 month'
+            end
+        ) as bucket_start
+        where end_day >= start_day
+    ),
+    today as (
+        select (timezone('America/Toronto', now()))::date as today
+    ),
+    bucket_counts as (
+        select
+            b.bucket_start,
+            pages.page,
+            coalesce(sum(r.value), 0)::bigint as amount,
+            (b.bucket_start <= t.today and t.today < b.bucket_end) as so_far
+        from buckets b
+        cross join (select distinct page from controls) pages
+        cross join today t
+        left join public.analytics_daily_rollups r
+            on r.kind = 'clicks'
+            and r.page = pages.page
+            and r.day >= b.bucket_start
+            and r.day < b.bucket_end
+            and r.day between start_day and end_day
+        group by b.bucket_start, b.bucket_end, pages.page, t.today
+    ),
     pages as (
         select
             c.page,
-            sum(coalesce(s.amount, 0))::bigint as total,
+            coalesce(max(t.total), 0)::bigint as total,
             jsonb_agg(
-                jsonb_build_object('control', c.control, 'count', coalesce(s.amount, 0))
-                order by c.ord
-            ) as controls
+                jsonb_build_object(
+                    'control', c.control,
+                    'count', coalesce(s.amount, 0),
+                    'share', case
+                        when coalesce(t.total, 0) = 0 then 0
+                        else round((100.0 * coalesce(s.amount, 0)) / t.total)
+                    end
+                )
+                order by coalesce(s.amount, 0) desc, c.ord
+            ) as controls,
+            (
+                select coalesce(jsonb_agg(
+                    jsonb_build_object(
+                        'start', bc.bucket_start,
+                        'count', bc.amount,
+                        'so_far', bc.so_far
+                    )
+                    order by bc.bucket_start
+                ), '[]'::jsonb)
+                from bucket_counts bc
+                where bc.page = c.page
+            ) as buckets
         from controls c
         left join sums s on s.page = c.page and s.control = c.control
+        left join page_totals t on t.page = c.page
         group by c.page
     )
     select coalesce(jsonb_agg(
-        jsonb_build_object('page', page, 'total', total, 'controls', controls)
+        jsonb_build_object('page', page, 'total', total, 'controls', controls, 'buckets', buckets)
         order by case page when 'start' then 1 when 'playing' then 2 else 3 end
     ), '[]'::jsonb)
     into payload
@@ -796,7 +887,7 @@ revoke all on function public.submit_analytics_batch(uuid, jsonb) from public, a
 revoke all on function public.analytics_who() from public, anon, authenticated;
 revoke all on function public.analytics_summary(date, date) from public, anon, authenticated;
 revoke all on function public.analytics_series(date, date, text, text) from public, anon, authenticated;
-revoke all on function public.analytics_clicks(date, date) from public, anon, authenticated;
+revoke all on function public.analytics_clicks(date, date, text) from public, anon, authenticated;
 revoke all on function public.analytics_reports(date, date, text, timestamptz, uuid) from public, anon, authenticated;
 revoke all on function public.analytics_delete_report(uuid, text) from public, anon, authenticated;
 revoke all on function public.analytics_cleanup_raw() from public, anon, authenticated;
@@ -805,7 +896,7 @@ grant execute on function public.submit_analytics_batch(uuid, jsonb) to authenti
 grant execute on function public.analytics_who() to authenticated;
 grant execute on function public.analytics_summary(date, date) to authenticated;
 grant execute on function public.analytics_series(date, date, text, text) to authenticated;
-grant execute on function public.analytics_clicks(date, date) to authenticated;
+grant execute on function public.analytics_clicks(date, date, text) to authenticated;
 grant execute on function public.analytics_reports(date, date, text, timestamptz, uuid) to authenticated;
 grant execute on function public.analytics_delete_report(uuid, text) to authenticated;
 

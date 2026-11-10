@@ -35,10 +35,15 @@ struct RootView: View {
             await cloud.start()
         }
         .onChange(of: scenePhase) { phase in
-            if phase == .background {
+            switch phase {
+            case .inactive:
+                cloud.analytics.markInactive()
+            case .background:
                 cloud.analytics.enteredBackground()
-            } else if phase == .active {
+            case .active:
                 cloud.analytics.enteredForeground()
+            @unknown default:
+                break
             }
         }
     }

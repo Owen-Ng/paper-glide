@@ -229,3 +229,24 @@ export function pageLabel(page) {
   const found = COPY.pages.find(([key]) => key === page);
   return found ? found[1] : page;
 }
+
+export function controlShare(count, total) {
+  const whole = Number(total) || 0;
+  if (whole <= 0) return 0;
+  return Math.round((Number(count) * 100) / whole);
+}
+
+export function sortControls(controls) {
+  return controls.map((control, index) => ({ control, index }))
+    .sort((a, b) => Number(b.control.count) - Number(a.control.count) || a.index - b.index)
+    .map((item) => item.control);
+}
+
+export function crashChartEmpty(buckets) {
+  if (!buckets || buckets.length === 0) return true;
+  return buckets.every((bucket) => {
+    const crashes = Number(bucket.count) || 0;
+    const sessions = Number(bucket.sessions) || 0;
+    return crashes === 0 && sessions === 0 && (bucket.crash_free === null || bucket.crash_free === undefined);
+  });
+}

@@ -14,6 +14,9 @@ import {
   parseControls,
   preview,
   rangeFor,
+  sortControls,
+  controlShare,
+  crashChartEmpty,
   retentionNote,
   serializeControls,
   torontoDay,
@@ -134,4 +137,14 @@ test("crash-free, retention, reports, and the local fixture gate", () => {
   const evening = formatToronto("2026-07-16T03:30:00Z");
   assert.match(evening, /Jul 15/);
   assert.match(evening, /11:30/);
+  assert.equal(controlShare(1, 4), 25);
+  assert.equal(controlShare(0, 0), 0);
+  const sorted = sortControls([
+    { control: "other", count: 1 },
+    { control: "play", count: 3 },
+    { control: "report", count: 3 }
+  ]);
+  assert.deepEqual(sorted.map((row) => row.control), ["play", "report", "other"]);
+  assert.equal(crashChartEmpty([{ count: 0, sessions: 0, crash_free: null }]), true);
+  assert.equal(crashChartEmpty([{ count: 0, sessions: 4, crash_free: 100 }]), false);
 });

@@ -3,7 +3,10 @@ import {
   accessGate,
   bucketLabel,
   chartIsEmpty,
+  controlShare,
+  crashChartEmpty,
   crashFreeText,
+  sortControls,
   emptyReports,
   fixtureName,
   formatToronto,
@@ -170,7 +173,7 @@ function dashboardHTML() {
     ${controlsHTML()}
     ${cardsHTML()}
     ${chartPanel("active", COPY.activeTitle, state.active)}
-    ${chartPanel("crashes", COPY.crashesTitle, state.crashes)}
+    ${crashesPanel()}
     ${clicksPanel()}
     ${reportsPanel()}
     ${state.confirm ? confirmHTML() : ""}
@@ -244,24 +247,61 @@ function chartPanel(key, title, buckets) {
   return `<section class="panel"><h2>${title}</h2>${body}</section>`;
 }
 
+function crashesPanel() {
+  let body;
+  if (state.sections.crashes === "loading") body = `<div class="skeleton"></div><div class="skeleton"></div>`;
+  else if (state.sections.crashes === "error") body = sectionError("crashes");
+  else if (crashChartEmpty(state.crashes)) body = `<div class="chart flat"><p>${COPY.noData}</p></div>`;
+  else body = bucketChart(state.crashes, true);
+  const summary = state.summary;
+  const totals = state.sections.summary === "loading"
+    ? `<p class="note">${COPY.cards.crashes} ${COPY.dash} · ${COPY.cards.crashFree} ${COPY.dash}</p>`
+    : `<p class="note">${COPY.cards.crashes} ${summary?.crashes ?? 0} · ${COPY.cards.crashFree} ${crashFreeText(summary?.crash_free)}</p>`;
+  return `<section class="panel"><h2>${COPY.crashesTitle}</h2>${totals}${body}</section>`;
+}
+
+function bucketChart(buckets, withFree) {
+  const max = Math.max(...buckets.map((bucket) => Number(bucket.count) || 0), 1);
+  const bars = buckets.map((bucket) => {
+    const height = Math.max(2, Math.round(((Number(bucket.count) || 0) / max) * 120));
+    const label = bucketLabel(bucket.start, state.controls.group, Boolean(bucket.so_far));
+    const free = withFree
+      ? `<span class="free">${bucket.crash_free === null || bucket.crash_free === undefined ? COPY.dash : `${bucket.crash_free}%`}</span>`
+      : "";
+    return `<div class="bar ${bucket.so_far ? "so-far" : ""}">
+      <strong>${bucket.count}</strong>
+      <div class="fill" style="height:${height}px"></div>
+      ${free}
+      <span>${label}</span>
+    </div>`;
+  }).join("");
+  return `<div class="chart-scroll"><div class="chart ${buckets.length > 10 ? "long" : ""}" style="--n:${buckets.length}">${bars}</div></div>`;
+}
+
 function clicksPanel() {
   let body;
   if (state.sections.clicks === "loading") body = `<div class="skeleton"></div>`;
   else if (state.sections.clicks === "error") body = sectionError("clicks");
   else {
     const pages = state.clicks || [];
-    const total = pages.reduce((sum, page) => sum + Number(page.total || 0), 0);
-    if (total === 0) body = `<div class="chart flat"><p>${COPY.noData}</p></div>`;
-    else {
-      body = pages.map((page) => `<div class="click-page">
+    body = pages.map((page) => {
+      const controls = sortControls(page.controls || []);
+      const chart = Number(page.total) === 0 || chartIsEmpty(page.buckets)
+        ? `<div class="chart flat"><p>${COPY.noData}</p></div>`
+        : bucketChart(page.buckets, false);
+      const rows = controls.map((control) => {
+        const share = control.share === undefined ? controlShare(control.count, page.total) : control.share;
+        return `<tr><td>${escapeHTML(control.control)}</td><td>${control.count}</td><td>${share}%</td></tr>`;
+      }).join("");
+      return `<div class="click-page">
         <h3>${pageLabel(page.page)} ${page.total}</h3>
+        ${chart}
         <table>
-          <tbody>
-            ${(page.controls || []).map((control) => `<tr><td>${escapeHTML(control.control)}</td><td>${control.count}</td></tr>`).join("")}
-          </tbody>
+          <thead><tr><th>control</th><th>clicks</th><th>% of page</th></tr></thead>
+          <tbody>${rows}</tbody>
         </table>
-      </div>`).join("");
-    }
+      </div>`;
+    }).join("");
   }
   return `<section class="panel"><h2>${COPY.clicksTitle}</h2>${body}</section>`;
 }
@@ -412,10 +452,11 @@ async function loadAll() {
     ["summary", () => rpc("analytics_summary", { start_day: state.controls.start, end_day: state.controls.end })],
     ["active", () => rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "active" })],
     ["crashes", () => rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "crashes" })],
-    ["clicks", () => rpc("analytics_clicks", { start_day: state.controls.start, end_day: state.controls.end })],
+    ["clicks", () => rpc("analytics_clicks", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group })],
     ["reports", () => loadReports(false)]
   ];
   const results = await Promise.allSettled(jobs.map(([, run]) => run()));
+  if (results.some((result) => result.status === "rejected" && result.reason?.status === 401)) return;
   if (results.every((result) => result.status === "rejected")) {
     state.fullFailure = true;
     render();
@@ -466,12 +507,26 @@ async function loadReports(append) {
   return value;
 }
 
+function noteSignedOut() {
+  saveSession(null);
+  state.screen = "signin";
+  state.notice = COPY.signedOut;
+  state.fullFailure = false;
+  state.confirm = null;
+  render();
+}
+
 async function rpc(name, args) {
-  return api(`/rest/v1/rpc/${name}`, {
-    method: "POST",
-    token: state.session.access_token,
-    body: JSON.stringify(args)
-  });
+  try {
+    return await api(`/rest/v1/rpc/${name}`, {
+      method: "POST",
+      token: state.session.access_token,
+      body: JSON.stringify(args)
+    });
+  } catch (error) {
+    if (error.status === 401) noteSignedOut();
+    throw error;
+  }
 }
 
 async function reloadSection(key) {
@@ -481,16 +536,17 @@ async function reloadSection(key) {
     if (key === "summary") accept(key, await rpc("analytics_summary", { start_day: state.controls.start, end_day: state.controls.end }));
     if (key === "active") accept(key, await rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "active" }));
     if (key === "crashes") accept(key, await rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "crashes" }));
-    if (key === "clicks") accept(key, await rpc("analytics_clicks", { start_day: state.controls.start, end_day: state.controls.end }));
+    if (key === "clicks") accept(key, await rpc("analytics_clicks", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group }));
     if (key === "reports") accept(key, await loadReports(false));
-  } catch {
+  } catch (error) {
+    if (error.status === 401) return;
     state.sections[key] = "error";
   }
   render();
 }
 
 async function reloadCharts() {
-  await Promise.all([reloadSection("active"), reloadSection("crashes")]);
+  await Promise.all([reloadSection("active"), reloadSection("crashes"), reloadSection("clicks")]);
 }
 
 function showToast(text) {
@@ -517,7 +573,8 @@ async function confirmDelete() {
   try {
     const result = await rpc("analytics_delete_report", { report_id: target.id, report_kind: target.kind });
     if (!result || result.ok === false || result.result === "missing") throw new Error("delete");
-  } catch {
+  } catch (error) {
+    if (error.status === 401) return;
     state.reports = { ...state.reports, reports: previous };
     showToast(COPY.deleteFailed);
   }
@@ -572,8 +629,8 @@ function useFixture(name) {
     ? [{ start: day, count: 0, so_far: true }]
     : [{ start: addDaysSafe(day, -1), count: 2, so_far: false }, { start: day, count: 3, so_far: true }];
   state.crashes = empty
-    ? [{ start: day, count: 0, so_far: true }]
-    : [{ start: day, count: 1, so_far: true }];
+    ? [{ start: day, count: 0, sessions: 0, crash_free: null, so_far: true }]
+    : [{ start: addDaysSafe(day, -1), count: 0, sessions: 4, crash_free: 100, so_far: false }, { start: day, count: 1, sessions: 6, crash_free: 83, so_far: true }];
   state.clicks = empty ? zeroClicks() : sampleClicks();
   state.reports = empty
     ? { counts: { all: 0, crash: 0, player: 0 }, reports: [], has_more: false, retention_note: retentionNote(state.controls.start, day) }
@@ -625,26 +682,32 @@ function zeroClicks() {
   return sampleClicks().map((page) => ({
     ...page,
     total: 0,
-    controls: page.controls.map((control) => ({ ...control, count: 0 }))
+    controls: page.controls.map((control) => ({ ...control, count: 0, share: 0 })),
+    buckets: (page.buckets || []).map((bucket) => ({ ...bucket, count: 0 }))
   }));
 }
 
 function sampleClicks() {
+  const day = today();
+  const buckets = (counts) => [
+    { start: addDaysSafe(day, -1), count: counts[0], so_far: false },
+    { start: day, count: counts[1], so_far: true }
+  ];
   return [
-    { page: "start", total: 6, controls: [
-      { control: "play", count: 3 },
-      { control: "leaderboard", count: 1 },
-      { control: "report", count: 1 },
-      { control: "other", count: 1 }
+    { page: "start", total: 6, buckets: buckets([2, 4]), controls: [
+      { control: "play", count: 3, share: 50 },
+      { control: "leaderboard", count: 1, share: 17 },
+      { control: "report", count: 1, share: 17 },
+      { control: "other", count: 1, share: 17 }
     ] },
-    { page: "playing", total: 40, controls: [{ control: "flap", count: 40 }] },
-    { page: "leaderboard", total: 5, controls: [
-      { control: "Today", count: 2 },
-      { control: "This week", count: 1 },
-      { control: "All time", count: 0 },
-      { control: "back", count: 1 },
-      { control: "other", count: 0 },
-      { control: "scroll", count: 1 }
+    { page: "playing", total: 40, buckets: buckets([15, 25]), controls: [{ control: "flap", count: 40, share: 100 }] },
+    { page: "leaderboard", total: 5, buckets: buckets([1, 4]), controls: [
+      { control: "Today", count: 2, share: 40 },
+      { control: "This week", count: 1, share: 20 },
+      { control: "All time", count: 0, share: 0 },
+      { control: "back", count: 1, share: 20 },
+      { control: "other", count: 0, share: 0 },
+      { control: "scroll", count: 1, share: 20 }
     ] }
   ];
 }
@@ -701,7 +764,8 @@ root.addEventListener("click", (event) => {
     loadReports(true).then((value) => {
       accept("reports", value);
       render();
-    }).catch(() => {
+    }).catch((error) => {
+      if (error.status === 401) return;
       state.sections.reports = "error";
       render();
     });

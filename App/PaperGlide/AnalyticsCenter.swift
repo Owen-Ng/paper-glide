@@ -64,15 +64,41 @@ final class AnalyticsCenter: ObservableObject {
             client.markTerminated()
         }
         await client.flushNow()
+        #if DEBUG
+        if LaunchOptions.forceCrash {
+            fatalError("Paper Glide forced crash")
+        }
+        #endif
     }
 
     func record(page: String, control: String) {
         client.recordClick(page: page, control: control)
     }
 
+    /// Synchronous. An app-switcher visit is inactive, not a crash.
+    func markInactive() {
+        client.markInactive(at: Date())
+    }
+
+    /// The exit mark and any in-memory clicks are written before the task is scheduled.
     func enteredBackground() {
+        client.markBackground(at: Date())
+        let application = UIApplication.shared
+        let box = BackgroundTaskBox()
+        box.id = application.beginBackgroundTask(withName: "paperGlide.analytics") {
+            let ending = box.id
+            box.id = .invalid
+            if ending != .invalid {
+                application.endBackgroundTask(ending)
+            }
+        }
         Task { [client] in
-            await client.enteredBackground(at: Date())
+            await client.flushNow()
+            let ending = box.id
+            box.id = .invalid
+            if ending != .invalid {
+                application.endBackgroundTask(ending)
+            }
         }
     }
 
@@ -83,6 +109,10 @@ final class AnalyticsCenter: ObservableObject {
     func sendReport(category: String, text: String) async -> ReportSendResult {
         await client.sendReport(category: category, text: text)
     }
+}
+
+private final class BackgroundTaskBox {
+    var id = UIBackgroundTaskIdentifier.invalid
 }
 
 final class IdleAnalyticsTransport: AnalyticsTransport {

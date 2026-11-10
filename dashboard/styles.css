@@ -157,10 +157,12 @@ header.top h1 {
   outline: 1px dashed #1c1e21;
 }
 
-.bar span, .bar strong {
+.bar span, .bar strong, .bar .free {
   font-size: 0.75rem;
   text-align: center;
 }
+
+.bar .free { color: #3d6f8a; }
 
 .chart.flat {
   align-items: center;

@@ -5,6 +5,20 @@ import FoundationNetworking
 import PaperGlideCore
 import XCTest
 
+final class OfflineTransport: AnalyticsTransport {
+    var offline = true
+    var stored: [String: [QueuedEvent]] = [:]
+
+    func submitBatch(id: String, events: [QueuedEvent], accessToken: String) async throws -> AnalyticsAck {
+        if offline { throw AnalyticsTransportError.unreachable }
+        if stored[id] != nil { return .duplicate }
+        stored[id] = events
+        return .stored
+    }
+
+    var all: [QueuedEvent] { stored.values.flatMap { $0 } }
+}
+
 final class FakeAnalyticsTransport: AnalyticsTransport {
     var stored: [String: [QueuedEvent]] = [:]
     var calls: [String] = []
@@ -204,6 +218,51 @@ final class AnalyticsQueueTests: XCTestCase {
         XCTAssertEqual(SupabaseAnalyticsTransport.json(report!)["text"] as? String, "the sky flickered")
     }
 
+    func testOfflineFlapsSurviveBackgroundThenForceQuit() async {
+        let store = MemoryAnalyticsStore()
+        let net = OfflineTransport()
+        let first = AnalyticsClient(store: store, transport: net)
+        _ = first.beginLaunch(at: Date())
+        await first.flushNow()
+        for _ in 0..<10 {
+            first.recordClick(page: "playing", control: "flap")
+        }
+        await first.enteredBackground(at: Date())
+        net.offline = false
+        let second = AnalyticsClient(store: store, transport: net)
+        _ = second.beginLaunch(at: Date())
+        await second.flushNow()
+        let flaps = net.all.filter { $0.kind == .click }.compactMap { $0.count }.reduce(0, +)
+        XCTAssertEqual(net.all.filter { $0.kind == .sessionStart }.count, 2)
+        XCTAssertEqual(flaps, 10)
+    }
+
+    func testReturnAfterThirtyMinutesStartsASession() async {
+        let store = MemoryAnalyticsStore()
+        let net = OfflineTransport()
+        net.offline = false
+        let client = AnalyticsClient(store: store, transport: net)
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        _ = client.beginLaunch(at: start)
+        await client.enteredBackground(at: start.addingTimeInterval(60))
+        client.enteredForeground(at: start.addingTimeInterval(60 + 31 * 60 * 24))
+        await client.flushNow()
+        XCTAssertEqual(net.all.filter { $0.kind == .sessionStart }.count, 2)
+    }
+
+    func testReturnBeforeThirtyMinutesKeepsTheSession() async {
+        let store = MemoryAnalyticsStore()
+        let net = OfflineTransport()
+        net.offline = false
+        let client = AnalyticsClient(store: store, transport: net)
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        _ = client.beginLaunch(at: start)
+        await client.enteredBackground(at: start.addingTimeInterval(60))
+        client.enteredForeground(at: start.addingTimeInterval(60 + 29 * 60))
+        await client.flushNow()
+        XCTAssertEqual(net.all.filter { $0.kind == .sessionStart }.count, 1)
+    }
+
     func testMissingTokenKeepsTheQueue() async {
         let (client, transport) = makeClient(token: nil)
         await client.absorb(event(3))
@@ -284,13 +343,14 @@ final class CrashClassificationTests: XCTestCase {
 
     func testExitStates() {
         XCTAssertFalse(CrashExit.countsAsCrash(nil))
+        XCTAssertFalse(CrashExit.countsAsCrash(.inactive))
         XCTAssertFalse(CrashExit.countsAsCrash(.background))
         XCTAssertFalse(CrashExit.countsAsCrash(.terminated))
         XCTAssertTrue(CrashExit.countsAsCrash(.active))
     }
 
     func testUserKillAndBackgroundTerminationAreNotCrashes() {
-        for state in [SessionExit.background, SessionExit.terminated] {
+        for state in [SessionExit.inactive, SessionExit.background, SessionExit.terminated] {
             let store = MemoryAnalyticsStore(state: AnalyticsDiskState(
                 exit: ExitRecord(sessionID: "old-session", state: state, startedAt: TestTime.iso("2026-07-15T12:00:00Z"), context: context)
             ))
@@ -327,6 +387,15 @@ final class CrashClassificationTests: XCTestCase {
         XCTAssertEqual(crashes.count, 2)
         XCTAssertEqual(Set(crashes.compactMap { $0.sessionID }), ["crashed-session"])
         XCTAssertEqual(crashes.compactMap { $0.crashKind }.sorted(), ["metrickit", "unclean_exit"])
+    }
+
+    func testInactiveExitIsNotACrashOnNextLaunch() {
+        let store = MemoryAnalyticsStore(state: AnalyticsDiskState(
+            exit: ExitRecord(sessionID: "switcher", state: .inactive, startedAt: TestTime.iso("2026-07-15T12:00:00Z"), context: context)
+        ))
+        let client = AnalyticsClient(store: store, transport: FakeAnalyticsTransport(), context: context)
+        XCTAssertEqual(client.beginLaunch(at: TestTime.iso("2026-07-15T12:01:00Z")), .clean)
+        XCTAssertTrue(store.state.pending.filter { $0.kind == .crash }.isEmpty)
     }
 }
 

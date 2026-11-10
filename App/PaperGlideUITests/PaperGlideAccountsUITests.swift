@@ -67,4 +67,20 @@ final class PaperGlideAccountsUITests: XCTestCase {
         XCTAssertEqual(toast.label, "saved. we'll send it when you're back online")
         XCTAssertTrue(app.buttons["playButton"].waitForExistence(timeout: 5))
     }
+
+    func testOneLeaderboardScrollCountsOnce() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-paperGlideResetStore"]
+        app.launch()
+        if app.buttons["nameLaterButton"].waitForExistence(timeout: 15) {
+            app.buttons["nameLaterButton"].tap()
+        }
+        app.buttons["leaderboardButton"].tap()
+        let count = app.staticTexts["leaderboardScrollCount"]
+        XCTAssertTrue(count.waitForExistence(timeout: 10))
+        XCTAssertEqual(count.label, "scroll=0")
+        app.swipeUp()
+        XCTAssertTrue(count.waitForExistence(timeout: 5))
+        XCTAssertEqual(count.label, "scroll=1")
+    }
 }

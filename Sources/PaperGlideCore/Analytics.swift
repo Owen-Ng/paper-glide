@@ -207,6 +207,7 @@ public struct QueuedEvent: Codable, Equatable, Identifiable {
 
 public enum SessionExit: String, Codable, Equatable {
     case active
+    case inactive
     case background
     case terminated
 }
@@ -215,12 +216,21 @@ public struct ExitRecord: Codable, Equatable {
     public var sessionID: String
     public var state: SessionExit
     public var startedAt: Date
+    /// When the session left the foreground. Used for the 30-minute resume rule.
+    public var backgroundedAt: Date?
     public var context: AnalyticsContext
 
-    public init(sessionID: String, state: SessionExit, startedAt: Date, context: AnalyticsContext) {
+    public init(
+        sessionID: String,
+        state: SessionExit,
+        startedAt: Date,
+        backgroundedAt: Date? = nil,
+        context: AnalyticsContext
+    ) {
         self.sessionID = sessionID
         self.state = state
         self.startedAt = startedAt
+        self.backgroundedAt = backgroundedAt
         self.context = context
     }
 }
@@ -404,6 +414,8 @@ public final class AnalyticsClient: @unchecked Sendable {
     public static let batchSize = 50
     public static let flushInterval: TimeInterval = 60
     public static let uncleanAttachWindow: TimeInterval = 3 * 24 * 60 * 60
+    /// A return to the foreground after this long in the background starts a new session.
+    public static let newSessionAfterBackground: TimeInterval = 30 * 60
 
     public let counters = ClickCounters()
     private let store: AnalyticsStateStore
@@ -478,7 +490,7 @@ public final class AnalyticsClient: @unchecked Sendable {
             state.pendingUnclean = nil
         }
         let sessionID = makeID()
-        let active = ExitRecord(sessionID: sessionID, state: .active, startedAt: date, context: self.context)
+        let active = ExitRecord(sessionID: sessionID, state: .active, startedAt: date, backgroundedAt: nil, context: self.context)
         state.sessionID = sessionID
         state.exit = active
         state.pending.append(QueuedEvent(
@@ -530,26 +542,89 @@ public final class AnalyticsClient: @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
         guard var exit = state.exit else { return }
+        let leftAt = exit.backgroundedAt
+        let wasAway = exit.state == .inactive || exit.state == .background
+        if wasAway, let leftAt, date.timeIntervalSince(leftAt) >= Self.newSessionAfterBackground {
+            let sessionID = makeID()
+            state.sessionID = sessionID
+            state.exit = ExitRecord(
+                sessionID: sessionID,
+                state: .active,
+                startedAt: date,
+                backgroundedAt: nil,
+                context: context
+            )
+            state.pending.append(QueuedEvent(
+                id: makeID(),
+                kind: .sessionStart,
+                occurredAt: date,
+                sessionID: sessionID,
+                context: context
+            ))
+            persistLocked()
+            return
+        }
         exit.state = .active
+        exit.backgroundedAt = nil
         state.exit = exit
         persistLocked()
     }
 
+    /// Synchronous. App switcher and an inactive scene are not crashes, and clicks are already on disk.
+    public func markInactive(at date: Date) {
+        lock.lock()
+        defer { lock.unlock() }
+        drainClicksLocked()
+        guard var exit = state.exit, exit.state == .active else {
+            persistLocked()
+            return
+        }
+        exit.state = .inactive
+        exit.backgroundedAt = date
+        state.exit = exit
+        persistLocked()
+    }
+
+    /// Synchronous. Call this before any background flush so a force-quit cannot drop the clicks.
     public func markBackground(at date: Date) {
-        markExit(.background)
+        lock.lock()
+        defer { lock.unlock() }
+        drainClicksLocked()
+        guard var exit = state.exit else {
+            persistLocked()
+            return
+        }
+        exit.state = .background
+        if exit.backgroundedAt == nil {
+            exit.backgroundedAt = date
+        }
+        state.exit = exit
+        persistLocked()
     }
 
     public func markTerminated() {
-        markExit(.terminated)
+        lock.lock()
+        defer { lock.unlock() }
+        drainClicksLocked()
+        guard var exit = state.exit else {
+            persistLocked()
+            return
+        }
+        exit.state = .terminated
+        if exit.backgroundedAt == nil {
+            exit.backgroundedAt = Date()
+        }
+        state.exit = exit
+        persistLocked()
     }
 
     public func enteredBackground(at date: Date) async {
-        markExit(.background)
+        markBackground(at: date)
         await flush(reason: .background)
     }
 
     public func willTerminate() async {
-        markExit(.terminated)
+        markTerminated()
         await flush(reason: .background)
     }
 
@@ -607,15 +682,6 @@ public final class AnalyticsClient: @unchecked Sendable {
         if count >= Self.batchSize {
             await flush(reason: .threshold)
         }
-    }
-
-    private func markExit(_ next: SessionExit) {
-        lock.lock()
-        defer { lock.unlock() }
-        guard var exit = state.exit else { return }
-        exit.state = next
-        state.exit = exit
-        persistLocked()
     }
 
     private func flush(reason: AnalyticsFlushReason) async {

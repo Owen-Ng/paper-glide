@@ -15,6 +15,8 @@ SwiftData is not used. It requires iOS 17, and this target is iOS 16. The best s
 
 Open `App/PaperGlide.xcodeproj`, choose an iPhone simulator, and run the Paper Glide scheme.
 
+A debug build can force a crash to check the next-launch unclean-exit report. Scheme → Run → Arguments, add `-paperGlideForceCrash`, and run. The process traps after the session is marked active. Delete the argument and run again; that session is counted as a crash. Release builds do not include the hook.
+
 From the repo root, a simulator build with no signing team:
 
 ```sh

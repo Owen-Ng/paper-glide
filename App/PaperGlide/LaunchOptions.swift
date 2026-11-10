@@ -6,6 +6,14 @@ enum LaunchOptions {
         ProcessInfo.processInfo.arguments.contains("-paperGlideResetStore")
     }
 
+    #if DEBUG
+    /// Debug launches only. After the active-session mark is saved, the process traps.
+    /// The next launch reports that session as an unclean exit. Release builds omit this.
+    static var forceCrash: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideForceCrash")
+    }
+    #endif
+
     /// When set, physics waits on the coach screen. The first tap ends the run
     /// at this score through `GameSession.endRun(withScore:)`. This is a test hook,
     /// not a simulated flight.

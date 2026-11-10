@@ -336,8 +336,30 @@ begin
     result := public.analytics_series(date '2026-07-01', date '2026-07-31', 'month', 'crashes');
     if (result -> 'buckets' -> 0 ->> 'start') is distinct from '2026-07-01'
         or (result -> 'buckets' -> 0 ->> 'count')::bigint <> 1
+        or (result -> 'buckets' -> 0 ->> 'crash_free')::int <> 0
+        or (result -> 'buckets' -> 0 ->> 'sessions')::bigint <> 1
     then
         raise exception 'month crash bucket was wrong: %', result;
+    end if;
+    result := public.analytics_clicks(date '2026-07-15', date '2026-07-15', 'day');
+    if result ->> 'ok' is distinct from 'true' then
+        raise exception 'click buckets failed: %', result;
+    end if;
+    if (
+        select (control ->> 'share')::int
+        from jsonb_array_elements(result -> 'pages') page
+        cross join lateral jsonb_array_elements(page -> 'controls') control
+        where page ->> 'page' = 'playing' and control ->> 'control' = 'flap'
+    ) is distinct from 100 then
+        raise exception 'flap share was not 100: %', result;
+    end if;
+    if (
+        select (bucket ->> 'count')::bigint
+        from jsonb_array_elements(result -> 'pages') page
+        cross join lateral jsonb_array_elements(page -> 'buckets') bucket
+        where page ->> 'page' = 'playing'
+    ) is distinct from 10 then
+        raise exception 'playing bucket missed the flaps: %', result;
     end if;
 
     result := public.analytics_summary(date '2026-07-15', date '2026-07-15');
