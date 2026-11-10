@@ -40,14 +40,13 @@ final class PaperGlideScreenshotTests: XCTestCase {
         XCTAssertEqual(app.staticTexts["bestScoreLabel"].label, "Best score 1")
         save("hook-03-death-new-best-HOOK")
 
-        app.buttons["shareButton"].tap()
+        tap(app.buttons["shareButton"], in: app)
         let shareLabel = try assertShareSheet(app, contains: "I scored 1 in Paper Glide")
         save("hook-04-share-sheet")
         XCTAssertTrue(shareLabel.contains("Paper Glide"))
         dismissShareSheet(app)
 
-        XCTAssertTrue(app.buttons["homeButton"].waitForExistence(timeout: 5))
-        app.buttons["homeButton"].tap()
+        tap(app.buttons["homeButton"], in: app)
         let startBest = app.staticTexts["startBestScore"]
         XCTAssertTrue(startBest.waitForExistence(timeout: 10))
         XCTAssertEqual(startBest.label, "Best score 1")
@@ -131,7 +130,7 @@ final class PaperGlideScreenshotTests: XCTestCase {
         XCTAssertTrue(app.staticTexts["newBestLabel"].exists)
         save("sim-05-collision-death")
 
-        app.buttons["homeButton"].tap()
+        tap(app.buttons["homeButton"], in: app)
         let startBest = app.staticTexts["startBestScore"]
         XCTAssertTrue(startBest.waitForExistence(timeout: 10))
         XCTAssertEqual(startBest.label, "Best score \(score)")
@@ -202,6 +201,16 @@ final class PaperGlideScreenshotTests: XCTestCase {
             }
         }
         app.swipeDown()
+    }
+
+    private func tap(_ element: XCUIElement, in app: XCUIApplication) {
+        XCTAssertTrue(element.waitForExistence(timeout: 10))
+        var swipes = 0
+        while !element.isHittable && swipes < 3 {
+            app.swipeUp()
+            swipes += 1
+        }
+        element.tap()
     }
 
     private func save(_ name: String) {

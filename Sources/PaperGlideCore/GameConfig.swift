@@ -1,9 +1,9 @@
 /// Tunable rules for a run. Distances are logical points. Time is seconds.
 ///
-/// A tap assigns `flapVelocity` instead of adding a hop. `gravity` (points/s²) and
-/// `flapVelocity` (points/s) are the flappybird.gg design-aspect rates — 5 units/s²
-/// and 1.55 units/s on a 2.56-unit visible height — scaled by `worldHeight / 2.56`
-/// and rounded to the nearest point. `maxUpwardSpeed` equals the flap so taps cannot stack.
+/// A tap assigns `flapVelocity` instead of adding a hop. `gravity` (points/s²) is the
+/// flappybird.gg design-aspect rate of 5 units/s² on a 2.56-unit visible height, scaled
+/// by `worldHeight / 2.56` and rounded to the nearest point. The shipped flap is 500
+/// points/s. `maxUpwardSpeed` equals the flap so taps cannot stack.
 ///
 /// `obstacleGapHeight` and `scrollSpeed` are the opening of a run. `DifficultyRamp`
 /// tightens later windows and the live scroll. Gravity, flap, and the speed caps

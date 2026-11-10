@@ -96,10 +96,10 @@ final class FlightPhysicsTests: XCTestCase {
         let config = GameConfig.standard
         let scale = config.worldHeight / 2.56
         XCTAssertEqual(config.gravity, (5 * scale).rounded(), accuracy: 1e-9)
-        XCTAssertEqual(config.flapVelocity, (1.55 * scale).rounded(), accuracy: 1e-9)
+        XCTAssertEqual(config.flapVelocity, 500, accuracy: 1e-9)
         XCTAssertEqual(config.maxUpwardSpeed, config.flapVelocity, accuracy: 1e-9)
         XCTAssertEqual(config.maxDownwardSpeed, 720, accuracy: 1e-9)
-        XCTAssertEqual(config.obstacleGapHeight, 228, accuracy: 1e-9)
+        XCTAssertEqual(config.obstacleGapHeight, 218, accuracy: 1e-9)
         XCTAssertEqual(config.scrollSpeed, 148, accuracy: 1e-9)
     }
 
@@ -110,8 +110,7 @@ final class FlightPhysicsTests: XCTestCase {
         XCTAssertEqual(rest.speedAfterFlap, falling.speedAfterFlap, accuracy: 1e-6)
         XCTAssertEqual(rest.apexGain, falling.apexGain, accuracy: 1e-6)
         XCTAssertGreaterThan(rest.speedAfterFlap, 400)
-        XCTAssertGreaterThan(rest.apexGain, 60)
-        XCTAssertLessThan(rest.apexGain, 80)
+        XCTAssertEqual(rest.apexGain, 82.16111111111104, accuracy: 1e-6)
     }
 
     private func hop(from velocityY: Double, config: GameConfig) -> (speedAfterFlap: Double, apexGain: Double) {

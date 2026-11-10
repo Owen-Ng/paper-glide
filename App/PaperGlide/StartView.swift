@@ -1,49 +1,74 @@
 import SwiftUI
 
 struct StartView: View {
-    let bestScore: Int
-    let onPlay: () -> Void
+    @ObservedObject var model: AppModel
+    @ObservedObject var cloud: CloudModel
+    @State private var draft = ""
 
     var body: some View {
-        ZStack {
-            MorningStill()
-            VStack(spacing: 22) {
-                Spacer()
-                mark
-                Text("Paper Glide")
-                    .font(.system(size: 44, weight: .semibold, design: .rounded))
-                    .foregroundStyle(AppTheme.ink)
-                Text("Glide a paper plane through open windows.")
-                    .font(.system(.body, design: .rounded))
-                    .foregroundStyle(AppTheme.ink.opacity(0.75))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
-                Text("Best score \(bestScore)")
-                    .font(.system(.title3, design: .rounded).weight(.medium))
-                    .foregroundStyle(AppTheme.ink)
-                    .accessibilityIdentifier("startBestScore")
-                    .accessibilityLabel("Best score \(bestScore)")
-                Button(action: onPlay) {
-                    Text("Play")
-                        .font(.system(.title3, design: .rounded).weight(.semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
+        GeometryReader { geo in
+            ZStack {
+                MorningStill()
+                ScrollView {
+                    VStack(spacing: 22) {
+                        Spacer(minLength: 12)
+                        mark
+                        Text("Paper Glide")
+                            .font(.system(size: 44, weight: .semibold, design: .rounded))
+                            .foregroundStyle(AppTheme.ink)
+                        Text("Glide a paper plane through open windows.")
+                            .font(.system(.body, design: .rounded))
+                            .foregroundStyle(AppTheme.ink.opacity(0.75))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 32)
+                        Text("Best score \(model.bestScore)")
+                            .font(.system(.title3, design: .rounded).weight(.medium))
+                            .foregroundStyle(AppTheme.ink)
+                            .accessibilityIdentifier("startBestScore")
+                            .accessibilityLabel("Best score \(model.bestScore)")
+                        if let chip = cloud.chipText {
+                            Button(chip) {
+                                Task { await cloud.retry() }
+                            }
+                            .buttonStyle(.bordered)
+                            .font(.system(.footnote, design: .rounded))
+                            .disabled(cloud.busy)
+                            .accessibilityIdentifier("syncChip")
+                        }
+                        Button(action: model.startRun) {
+                            Text("Play")
+                                .font(.system(.title3, design: .rounded).weight(.semibold))
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 6)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .accessibilityIdentifier("playButton")
+                        .padding(.horizontal, 48)
+                        .padding(.top, 8)
+                        VStack(spacing: 10) {
+                            Button("Leaderboard", action: model.showLeaderboard)
+                                .accessibilityIdentifier("leaderboardButton")
+                            Button("Report — coming soon") {}
+                                .disabled(true)
+                        }
+                        .buttonStyle(.bordered)
+                        .font(.system(.body, design: .rounded))
+                        .padding(.horizontal, 48)
+                        if cloud.snapshot.showsLaunchPrompt {
+                            NamePromptCard(
+                                draft: $draft,
+                                error: cloud.snapshot.nameError,
+                                showsLater: true,
+                                onSave: { Task { await cloud.claim(draft) } },
+                                onLater: cloud.dismissLaunch
+                            )
+                            .padding(.horizontal, 32)
+                        }
+                        Spacer(minLength: 12)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: geo.size.height)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .accessibilityIdentifier("playButton")
-                .padding(.horizontal, 48)
-                .padding(.top, 8)
-                VStack(spacing: 10) {
-                    Button("Leaderboard — coming soon") {}
-                        .disabled(true)
-                    Button("Report — coming soon") {}
-                        .disabled(true)
-                }
-                .buttonStyle(.bordered)
-                .font(.system(.body, design: .rounded))
-                .padding(.horizontal, 48)
-                Spacer()
             }
         }
     }

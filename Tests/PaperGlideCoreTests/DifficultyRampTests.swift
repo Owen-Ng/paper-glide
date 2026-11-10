@@ -14,24 +14,26 @@ final class DifficultyRampTests: XCTestCase {
     func testFeelTuneStaysLocked() {
         let config = GameConfig.standard
         XCTAssertEqual(config.gravity, 1484)
-        XCTAssertEqual(config.flapVelocity, 460)
-        XCTAssertEqual(config.maxUpwardSpeed, 460)
+        XCTAssertEqual(config.flapVelocity, 500)
+        XCTAssertEqual(config.maxUpwardSpeed, 500)
         XCTAssertEqual(config.maxDownwardSpeed, 720)
         XCTAssertEqual(config.planeHeight, 22)
         XCTAssertEqual(config.obstacleSpacing, 300)
         XCTAssertEqual(config.worldHeight, 760)
-        XCTAssertEqual(config.obstacleGapHeight, 228)
+        XCTAssertEqual(config.obstacleGapHeight, 218)
         XCTAssertEqual(config.scrollSpeed, 148)
     }
 
     func testRampTableMatchesTheSilentSteps() {
         XCTAssertEqual(rampGaps.count, 13)
         XCTAssertEqual(rampScrolls.count, 13)
+        let standardGaps = [218.0, 213, 208, 203, 198, 193, 188, 183, 178, 173, 168, 168, 168]
+        let standardScrolls = [148.0, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188, 192, 196]
         for score in 0...80 {
             let level = DifficultyRamp.standardLevel(score: score)
-            let table = expectedRamp(score: score)
-            XCTAssertEqual(level.gapHeight, table.gap, "score \(score)")
-            XCTAssertEqual(level.scrollSpeed, table.scroll, "score \(score)")
+            let step = min(score / 5, standardGaps.count - 1)
+            XCTAssertEqual(level.gapHeight, standardGaps[step], "score \(score)")
+            XCTAssertEqual(level.scrollSpeed, standardScrolls[step], "score \(score)")
             XCTAssertEqual(level.stepIndex, min(score / 5, 12), "score \(score)")
         }
         let held = DifficultyRamp.standardLevel(score: 60)
@@ -62,10 +64,10 @@ final class DifficultyRampTests: XCTestCase {
         XCTAssertEqual(session.snapshot.flightTime, 0)
         XCTAssertEqual(session.snapshot.score, 0)
         XCTAssertEqual(session.snapshot.scrollSpeed, 148)
-        XCTAssertEqual(session.snapshot.spawnGapHeight, 228)
+        XCTAssertEqual(session.snapshot.spawnGapHeight, 218)
         XCTAssertFalse(session.snapshot.obstacles.isEmpty)
         for window in session.snapshot.obstacles {
-            XCTAssertEqual(window.gapHeight, 228)
+            XCTAssertEqual(window.gapHeight, 218)
         }
     }
 

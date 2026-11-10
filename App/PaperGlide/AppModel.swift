@@ -14,6 +14,7 @@ final class AppModel: ObservableObject {
     let scene: PaperGlideScene
 
     @Published var screen: Screen = .start
+    @Published var showingLeaderboard = false
     @Published var score = 0
     @Published var bestScore = 0
     @Published var isNewBest = false
@@ -21,6 +22,8 @@ final class AppModel: ObservableObject {
     @Published var planeY: Double = 0
     @Published var guidedTargetY: Double = 0
     @Published var flightAdvice = "coast"
+    /// Score, simulated duration, and whether this finish raised the local best.
+    var onRunFinished: ((Int, Double, Bool) -> Void)?
 
     init(storage: GameStorage) {
         self.storage = storage
@@ -50,7 +53,16 @@ final class AppModel: ObservableObject {
     func showHome() {
         bestScore = storage.loadBestScore()
         isNewBest = false
+        showingLeaderboard = false
         screen = .start
+    }
+
+    func showLeaderboard() {
+        showingLeaderboard = true
+    }
+
+    func hideLeaderboard() {
+        showingLeaderboard = false
     }
 
     /// Test hook. The first coach tap ends the run at a chosen score. Physics does not run.
@@ -81,6 +93,7 @@ final class AppModel: ObservableObject {
         refreshFlightReadout(snapshot)
         if snapshot.phase == .dead, screen == .playing {
             screen = .dead
+            onRunFinished?(snapshot.score, snapshot.flightTime, snapshot.isNewBest)
         }
     }
 
