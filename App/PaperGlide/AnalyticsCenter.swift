@@ -51,7 +51,7 @@ final class AnalyticsCenter: ObservableObject {
         crashWatch = watch
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue(label: "paperGlide.analytics"))
         timer.schedule(deadline: .now() + AnalyticsClient.flushInterval, repeating: AnalyticsClient.flushInterval)
-        timer.setEventHandler {
+        timer.setEventHandler { [client] in
             Task { await client.flushIfDue(at: Date()) }
         }
         timer.resume()
@@ -71,7 +71,9 @@ final class AnalyticsCenter: ObservableObject {
     }
 
     func enteredBackground() {
-        Task { await client.enteredBackground(at: Date()) }
+        Task { [client] in
+            await client.enteredBackground(at: Date())
+        }
     }
 
     func enteredForeground() {
