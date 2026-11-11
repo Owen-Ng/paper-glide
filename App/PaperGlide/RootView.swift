@@ -25,6 +25,11 @@ struct RootView: View {
             if model.showingLeaderboard {
                 LeaderboardView(cloud: cloud, localBest: model.bestScore, onBack: model.hideLeaderboard)
             }
+            #if DEBUG
+            if LaunchOptions.analyticsReadout {
+                AnalyticsQueueReadout(analytics: cloud.analytics)
+            }
+            #endif
         }
         .preferredColorScheme(.light)
         .tint(AppTheme.coral)
@@ -48,3 +53,19 @@ struct RootView: View {
         }
     }
 }
+
+#if DEBUG
+private struct AnalyticsQueueReadout: View {
+    @ObservedObject var analytics: AnalyticsCenter
+
+    var body: some View {
+        let label = analytics.leaderboardQueueLabel()
+        Text(label)
+            .font(.system(size: 1))
+            .opacity(0.01)
+            .frame(width: 4, height: 4)
+            .accessibilityIdentifier("analyticsQueue")
+            .accessibilityLabel(label)
+    }
+}
+#endif

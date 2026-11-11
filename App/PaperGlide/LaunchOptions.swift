@@ -12,6 +12,16 @@ enum LaunchOptions {
     static var forceCrash: Bool {
         ProcessInfo.processInfo.arguments.contains("-paperGlideForceCrash")
     }
+
+    /// Shows the real queued leaderboard click counts for the UI test. Release builds omit this.
+    static var analyticsReadout: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideAnalyticsReadout")
+    }
+
+    /// Fills the leaderboard with enough rows to scroll. Release builds omit this.
+    static var leaderboardFixture: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideLeaderboardFixture")
+    }
     #endif
 
     /// When set, physics waits on the coach screen. The first tap ends the run

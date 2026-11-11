@@ -6,10 +6,6 @@ struct LeaderboardView: View {
     var localBest: Int
     var onBack: () -> Void
     @State private var draft = ""
-    @State private var pickerWidth: CGFloat = 1
-    #if DEBUG
-    @State private var scrollClicks = 0
-    #endif
 
     var body: some View {
         let presentation = cloud.presentation(localBest: localBest)
@@ -31,30 +27,13 @@ struct LeaderboardView: View {
             .padding(.horizontal, 16)
             .padding(.top, 8)
 
-            Picker("Board", selection: $cloud.period) {
+            Picker("Board", selection: periodSelection) {
                 Text("Today").tag(BoardPeriod.daily)
                 Text("This week").tag(BoardPeriod.weekly)
                 Text("All time").tag(BoardPeriod.allTime)
             }
             .pickerStyle(.segmented)
             .accessibilityIdentifier("boardPicker")
-            .background(
-                GeometryReader { geo in
-                    Color.clear.preference(
-                        key: ControlFrameKey.self,
-                        value: ["picker": geo.frame(in: .named("board-clicks"))]
-                    )
-                }
-            )
-            .onPreferenceChange(ControlFrameKey.self) { frames in
-                pickerWidth = frames["picker"]?.width ?? pickerWidth
-            }
-            .simultaneousGesture(SpatialTapGesture().onEnded { value in
-                let width = pickerWidth
-                guard width > 0 else { return }
-                let index = min(2, max(0, Int(value.location.x / (width / 3))))
-                cloud.analytics.record(page: "leaderboard", control: ClickMap.leaderboard[index])
-            })
             .padding(.horizontal, 16)
 
             if let caption = presentation.caption {
@@ -69,10 +48,24 @@ struct LeaderboardView: View {
             board(presentation)
         }
         .background(AppTheme.paper.ignoresSafeArea())
-        .coordinateSpace(name: "board-clicks")
         .onChange(of: cloud.period) { _ in
             Task { await cloud.refreshSelected() }
         }
+        .onDisappear {
+            cloud.analytics.flushSoon()
+        }
+    }
+
+    /// The segmented control writes here only when the player picks a different board.
+    private var periodSelection: Binding<BoardPeriod> {
+        Binding(
+            get: { cloud.period },
+            set: { newValue in
+                guard newValue != cloud.period else { return }
+                cloud.analytics.record(page: "leaderboard", control: ClickMap.leaderboardPeriod(newValue))
+                cloud.period = newValue
+            }
+        )
     }
 
     @ViewBuilder
@@ -115,27 +108,29 @@ struct LeaderboardView: View {
             } else {
                 Section {
                     ForEach(presentation.entries) { entry in
-                        HStack {
-                            Text("#\(entry.rank)")
-                                .foregroundStyle(AppTheme.ink.opacity(0.65))
-                            Text(entry.username)
-                                .foregroundStyle(AppTheme.ink)
-                            if entry.isYou {
-                                Text("you")
-                                    .font(.system(.caption, design: .rounded).weight(.semibold))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 2)
-                                    .background(AppTheme.coral.opacity(0.18), in: Capsule())
-                            }
-                            Spacer()
-                            Text("\(entry.score)")
-                                .foregroundStyle(AppTheme.ink)
-                        }
-                        .font(.system(.body, design: .rounded))
-                        .accessibilityIdentifier(entry.isYou ? "boardYouRow" : "boardRow")
-                        .simultaneousGesture(TapGesture().onEnded {
+                        Button {
                             cloud.analytics.record(page: "leaderboard", control: "other")
-                        })
+                        } label: {
+                            HStack {
+                                Text("#\(entry.rank)")
+                                    .foregroundStyle(AppTheme.ink.opacity(0.65))
+                                Text(entry.username)
+                                    .foregroundStyle(AppTheme.ink)
+                                if entry.isYou {
+                                    Text("you")
+                                        .font(.system(.caption, design: .rounded).weight(.semibold))
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 2)
+                                        .background(AppTheme.coral.opacity(0.18), in: Capsule())
+                                }
+                                Spacer()
+                                Text("\(entry.score)")
+                                    .foregroundStyle(AppTheme.ink)
+                            }
+                            .font(.system(.body, design: .rounded))
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier(entry.isYou ? "boardYouRow" : "boardRow")
                     }
                     if let title = presentation.emptyTitle {
                         VStack(alignment: .leading, spacing: 4) {
@@ -157,12 +152,12 @@ struct LeaderboardView: View {
                         draft: $draft,
                         error: cloud.snapshot.nameError,
                         showsLater: false,
-                        onSave: { Task { await cloud.claim(draft) } },
+                        onSave: {
+                            cloud.analytics.record(page: "leaderboard", control: "other")
+                            Task { await cloud.claim(draft) }
+                        },
                         onLater: {}
                     )
-                    .simultaneousGesture(TapGesture().onEnded {
-                        cloud.analytics.record(page: "leaderboard", control: "other")
-                    })
                     .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                     .listRowBackground(Color.clear)
                 }
@@ -170,24 +165,9 @@ struct LeaderboardView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 24).onEnded { _ in
-                #if DEBUG
-                scrollClicks += 1
-                #endif
-                cloud.analytics.record(page: "leaderboard", control: "scroll")
-            }
-        )
-        #if DEBUG
-        .overlay(alignment: .bottomLeading) {
-            Text("scroll=\(scrollClicks)")
-                .font(.system(size: 1))
-                .opacity(0.01)
-                .frame(width: 4, height: 4)
-                .accessibilityIdentifier("leaderboardScrollCount")
-                .accessibilityLabel("scroll=\(scrollClicks)")
-        }
-        #endif
+        .modifier(LeaderboardScrollCounter {
+            cloud.analytics.record(page: "leaderboard", control: "scroll")
+        })
 
         VStack(spacing: 0) {
             if presentation.canPullToRefresh {
@@ -230,5 +210,98 @@ struct LeaderboardView: View {
         if banner == BoardCopy.syncRetry { return "boardSyncRetry" }
         if banner == BoardCopy.loadFailed { return "boardRetryButton" }
         return "boardBanner"
+    }
+}
+
+/// One user drag is one scroll. Deceleration is a later phase of the same gesture, so it is not counted again.
+private struct LeaderboardScrollCounter: ViewModifier {
+    var onScroll: () -> Void
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.onScrollPhaseChange { oldPhase, newPhase in
+                if newPhase == .interacting, oldPhase != .interacting {
+                    onScroll()
+                }
+            }
+        } else {
+            content.background(ScrollDragStart(onBegan: onScroll))
+        }
+    }
+}
+
+/// iOS 16 and 17 have no scroll-phase callback. The list's pan recognizer enters `.began`
+/// once when the finger starts a drag, and deceleration after the finger lifts does not start it again.
+private struct ScrollDragStart: UIViewRepresentable {
+    var onBegan: () -> Void
+
+    func makeUIView(context: Context) -> Probe {
+        let probe = Probe()
+        probe.onBegan = onBegan
+        return probe
+    }
+
+    func updateUIView(_ probe: Probe, context: Context) {
+        probe.onBegan = onBegan
+    }
+
+    final class Probe: UIView {
+        var onBegan: () -> Void = {}
+        private weak var scrollView: UIScrollView?
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            attachIfNeeded()
+        }
+
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            attachIfNeeded()
+        }
+
+        private func attachIfNeeded() {
+            guard scrollView == nil, let found = enclosingScrollView() else { return }
+            scrollView = found
+            found.panGestureRecognizer.addTarget(self, action: #selector(pan(_:)))
+        }
+
+        @objc private func pan(_ gesture: UIPanGestureRecognizer) {
+            if gesture.state == .began {
+                onBegan()
+            }
+        }
+
+        private func enclosingScrollView() -> UIScrollView? {
+            var node: UIView? = superview
+            var steps = 0
+            while let current = node, steps < 10 {
+                if let match = largestScrollView(in: current), match.bounds.height > 120 {
+                    return match
+                }
+                node = current.superview
+                steps += 1
+            }
+            return nil
+        }
+
+        private func largestScrollView(in root: UIView) -> UIScrollView? {
+            var best: UIScrollView?
+            var stack = [root]
+            var seen = 0
+            while let view = stack.popLast(), seen < 80 {
+                seen += 1
+                if let scroll = view as? UIScrollView {
+                    if (best?.bounds.height ?? 0) < scroll.bounds.height {
+                        best = scroll
+                    }
+                }
+                stack.append(contentsOf: view.subviews)
+            }
+            return best
+        }
+
+        deinit {
+            scrollView?.panGestureRecognizer.removeTarget(self, action: #selector(pan(_:)))
+        }
     }
 }

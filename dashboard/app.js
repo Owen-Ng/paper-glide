@@ -11,6 +11,7 @@ import {
   fixtureName,
   formatToronto,
   pageLabel,
+  dashboardURL,
   parseControls,
   preview,
   rangeFor,
@@ -54,11 +55,14 @@ function config() {
 }
 
 function writeURL() {
-  const params = new URLSearchParams(serializeControls(state.controls));
-  const fixture = new URLSearchParams(location.search).get("fixture");
-  if (fixture) params.set("fixture", fixture);
-  const next = `${location.pathname}?${params.toString()}`;
-  if (`${location.pathname}${location.search}` !== next) {
+  const next = dashboardURL({
+    pathname: location.pathname,
+    search: location.search,
+    hash: location.hash,
+    today: today()
+  });
+  const current = `${location.pathname}${location.search}${location.hash}`;
+  if (current !== next) {
     history.replaceState(null, "", next);
   }
 }
@@ -836,13 +840,13 @@ function readHash() {
 }
 
 function boot() {
+  if (readHash()) return;
   writeURL();
   const fixture = fixtureName(location.hostname, location.search);
   if (fixture) {
     useFixture(fixture);
     return;
   }
-  if (readHash()) return;
   const session = loadSession();
   if (!session) {
     render();

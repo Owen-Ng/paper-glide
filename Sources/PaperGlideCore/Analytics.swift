@@ -380,6 +380,13 @@ public final class ClickCounters: @unchecked Sendable {
         lock.unlock()
     }
 
+    public func total(page: String, control: String) -> Int {
+        let key = page + "\u{1}" + control
+        lock.lock()
+        defer { lock.unlock() }
+        return counts[key, default: 0]
+    }
+
     public func drain() -> [(page: String, control: String, count: Int)] {
         lock.lock()
         let snapshot = counts
@@ -458,6 +465,19 @@ public final class AnalyticsClient: @unchecked Sendable {
     /// One in-memory increment. Safe on the tap path.
     public func recordClick(page: String, control: String) {
         counters.increment(page: page, control: control)
+    }
+
+    /// In-memory clicks plus any already drained into the disk queue.
+    public func queuedClickCount(page: String, control: String) -> Int {
+        let memory = counters.total(page: page, control: control)
+        lock.lock()
+        defer { lock.unlock() }
+        let stored = state.pending + (state.inflight?.events ?? [])
+        let queued = stored.reduce(0) { partial, event in
+            guard event.kind == .click, event.page == page, event.control == control else { return partial }
+            return partial + (event.count ?? 0)
+        }
+        return memory + queued
     }
 
     @discardableResult

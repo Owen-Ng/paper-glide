@@ -156,6 +156,16 @@ export function serializeControls(controls) {
   return params.toString();
 }
 
+/// Query controls are written into the URL. A magic-link fragment stays on the URL until it is read.
+export function dashboardURL({ pathname, search, hash, today }) {
+  const controls = parseControls(search, today);
+  const params = new URLSearchParams(controls.canonical);
+  const existing = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search);
+  const fixture = existing.get("fixture");
+  if (fixture) params.set("fixture", fixture);
+  return `${pathname}?${params.toString()}${hash || ""}`;
+}
+
 export function formatDay(iso) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",

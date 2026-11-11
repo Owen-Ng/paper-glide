@@ -135,6 +135,18 @@ final class CloudModel: ObservableObject {
     }
 
     func presentation(localBest: Int) -> BoardPresentation {
+        #if DEBUG
+        if LaunchOptions.leaderboardFixture {
+            let entries = (1...40).map { rank in
+                BoardEntry(rank: rank, username: "pilot\(rank)", score: 200 - rank, isYou: false)
+            }
+            return BoardPresentation(
+                entries: entries,
+                caption: BoardCopy.caption(for: period),
+                canPullToRefresh: false
+            )
+        }
+        #endif
         let cached = snapshot.boards[period]
         let time = cached.map { BoardTimeFormat.string($0.fetchedAt) }
         return BoardPresenter.present(

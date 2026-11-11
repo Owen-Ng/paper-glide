@@ -11,6 +11,7 @@ enum PlayClicks {
 @MainActor
 final class AnalyticsCenter: ObservableObject {
     let client: AnalyticsClient
+    @Published private(set) var revision = 0
     private var timer: DispatchSourceTimer?
     private var crashWatch: CrashWatch?
     private var terminateObserver: NSObjectProtocol?
@@ -73,6 +74,19 @@ final class AnalyticsCenter: ObservableObject {
 
     func record(page: String, control: String) {
         client.recordClick(page: page, control: control)
+        revision += 1
+    }
+
+    func flushSoon() {
+        Task { await client.flushNow() }
+    }
+
+    /// Leaderboard controls, in locked order, from the live queue.
+    func leaderboardQueueLabel() -> String {
+        _ = revision
+        return ClickMap.leaderboard.map { control in
+            "\(control)=\(client.queuedClickCount(page: "leaderboard", control: control))"
+        }.joined(separator: ";")
     }
 
     /// Synchronous. An app-switcher visit is inactive, not a crash.

@@ -6,6 +6,7 @@ import {
   addDays,
   bucketLabel,
   chartIsEmpty,
+  dashboardURL,
   crashFreeText,
   emptyReports,
   fixtureName,
@@ -147,4 +148,26 @@ test("crash-free, retention, reports, and the local fixture gate", () => {
   assert.deepEqual(sorted.map((row) => row.control), ["play", "report", "other"]);
   assert.equal(crashChartEmpty([{ count: 0, sessions: 0, crash_free: null }]), true);
   assert.equal(crashChartEmpty([{ count: 0, sessions: 4, crash_free: 100 }]), false);
+});
+
+test("a magic-link hash survives the boot url rewrite", () => {
+  const hash = "#access_token=abc&refresh_token=def&expires_in=3600&token_type=bearer&type=magiclink";
+  const next = dashboardURL({
+    pathname: "/",
+    search: "",
+    hash,
+    today: "2026-11-11"
+  });
+  assert.ok(next.includes("range=7d"));
+  assert.ok(next.includes("group=day"));
+  assert.ok(next.endsWith(hash));
+  const kept = dashboardURL({
+    pathname: "/",
+    search: "?range=30d&group=week",
+    hash,
+    today: "2026-11-11"
+  });
+  assert.ok(kept.includes("range=30d"));
+  assert.ok(kept.includes("group=week"));
+  assert.ok(kept.endsWith(hash));
 });

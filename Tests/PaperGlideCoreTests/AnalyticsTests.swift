@@ -79,6 +79,15 @@ final class AnalyticsQueueTests: XCTestCase {
         return (client, transport)
     }
 
+    func testQueuedClickCountKeepsMemoryUntilTheBatchIsSent() async {
+        let (client, transport) = makeClient()
+        client.recordClick(page: "leaderboard", control: "Today")
+        XCTAssertEqual(client.queuedClickCount(page: "leaderboard", control: "Today"), 1)
+        await client.flushNow()
+        XCTAssertEqual(transport.allEvents.filter { $0.control == "Today" }.first?.count, 1)
+        XCTAssertEqual(client.queuedClickCount(page: "leaderboard", control: "Today"), 0)
+    }
+
     func testClicksStayInMemoryUntilDrain() async {
         let (client, transport) = makeClient()
         for _ in 0..<40 {
