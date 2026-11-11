@@ -24,6 +24,7 @@
 		E7A100000000000000000075 /* FakeAccountBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000065 /* FakeAccountBackend.swift */; };
 		E7A100000000000000000076 /* AccountSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000066 /* AccountSyncTests.swift */; };
 		E7A100000000000000000077 /* SupabaseHTTPBackendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */; };
+		E7A100000000000000000091 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000090 /* AnalyticsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		E7A100000000000000000065 /* FakeAccountBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/FakeAccountBackend.swift; sourceTree = "<group>"; };
 		E7A100000000000000000066 /* AccountSyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/AccountSyncTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/SupabaseHTTPBackendTests.swift; sourceTree = "<group>"; };
+		E7A100000000000000000090 /* AnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/AnalyticsTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000080 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Supabase.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 				E7A100000000000000000065 /* FakeAccountBackend.swift */,
 				E7A100000000000000000066 /* AccountSyncTests.swift */,
 				E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */,
+				E7A100000000000000000090 /* AnalyticsTests.swift */,
 			);
 			name = PaperGlideTests;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				E7A100000000000000000075 /* FakeAccountBackend.swift in Sources */,
 				E7A100000000000000000076 /* AccountSyncTests.swift in Sources */,
 				E7A100000000000000000077 /* SupabaseHTTPBackendTests.swift in Sources */,
+				E7A100000000000000000091 /* AnalyticsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

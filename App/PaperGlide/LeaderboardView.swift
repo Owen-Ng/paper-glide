@@ -11,7 +11,10 @@ struct LeaderboardView: View {
         let presentation = cloud.presentation(localBest: localBest)
         VStack(spacing: 12) {
             HStack {
-                Button("Back", action: onBack)
+                Button("Back") {
+                    cloud.analytics.record(page: "leaderboard", control: "back")
+                    onBack()
+                }
                     .buttonStyle(.bordered)
                     .accessibilityIdentifier("leaderboardBackButton")
                 Spacer()
@@ -24,14 +27,14 @@ struct LeaderboardView: View {
             .padding(.horizontal, 16)
             .padding(.top, 8)
 
-            Picker("Board", selection: $cloud.period) {
+            Picker("Board", selection: periodSelection) {
                 Text("Today").tag(BoardPeriod.daily)
                 Text("This week").tag(BoardPeriod.weekly)
                 Text("All time").tag(BoardPeriod.allTime)
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal, 16)
             .accessibilityIdentifier("boardPicker")
+            .padding(.horizontal, 16)
 
             if let caption = presentation.caption {
                 Text(caption)
@@ -48,6 +51,21 @@ struct LeaderboardView: View {
         .onChange(of: cloud.period) { _ in
             Task { await cloud.refreshSelected() }
         }
+        .onDisappear {
+            cloud.analytics.flushSoon()
+        }
+    }
+
+    /// The segmented control writes here only when the player picks a different board.
+    private var periodSelection: Binding<BoardPeriod> {
+        Binding(
+            get: { cloud.period },
+            set: { newValue in
+                guard newValue != cloud.period else { return }
+                cloud.analytics.record(page: "leaderboard", control: ClickMap.leaderboardPeriod(newValue))
+                cloud.period = newValue
+            }
+        )
     }
 
     @ViewBuilder
@@ -57,6 +75,7 @@ struct LeaderboardView: View {
                 Section {
                     ForEach(presentation.banners, id: \.self) { banner in
                         Button(banner) {
+                            cloud.analytics.record(page: "leaderboard", control: "other")
                             Task { await cloud.retry() }
                         }
                         .font(.system(.footnote, design: .rounded))
@@ -89,23 +108,28 @@ struct LeaderboardView: View {
             } else {
                 Section {
                     ForEach(presentation.entries) { entry in
-                        HStack {
-                            Text("#\(entry.rank)")
-                                .foregroundStyle(AppTheme.ink.opacity(0.65))
-                            Text(entry.username)
-                                .foregroundStyle(AppTheme.ink)
-                            if entry.isYou {
-                                Text("you")
-                                    .font(.system(.caption, design: .rounded).weight(.semibold))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 2)
-                                    .background(AppTheme.coral.opacity(0.18), in: Capsule())
+                        Button {
+                            cloud.analytics.record(page: "leaderboard", control: "other")
+                        } label: {
+                            HStack {
+                                Text("#\(entry.rank)")
+                                    .foregroundStyle(AppTheme.ink.opacity(0.65))
+                                Text(entry.username)
+                                    .foregroundStyle(AppTheme.ink)
+                                if entry.isYou {
+                                    Text("you")
+                                        .font(.system(.caption, design: .rounded).weight(.semibold))
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 2)
+                                        .background(AppTheme.coral.opacity(0.18), in: Capsule())
+                                }
+                                Spacer()
+                                Text("\(entry.score)")
+                                    .foregroundStyle(AppTheme.ink)
                             }
-                            Spacer()
-                            Text("\(entry.score)")
-                                .foregroundStyle(AppTheme.ink)
+                            .font(.system(.body, design: .rounded))
                         }
-                        .font(.system(.body, design: .rounded))
+                        .buttonStyle(.plain)
                         .accessibilityIdentifier(entry.isYou ? "boardYouRow" : "boardRow")
                     }
                     if let title = presentation.emptyTitle {
@@ -128,7 +152,10 @@ struct LeaderboardView: View {
                         draft: $draft,
                         error: cloud.snapshot.nameError,
                         showsLater: false,
-                        onSave: { Task { await cloud.claim(draft) } },
+                        onSave: {
+                            cloud.analytics.record(page: "leaderboard", control: "other")
+                            Task { await cloud.claim(draft) }
+                        },
                         onLater: {}
                     )
                     .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
@@ -138,6 +165,9 @@ struct LeaderboardView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
+        .modifier(LeaderboardScrollCounter {
+            cloud.analytics.record(page: "leaderboard", control: "scroll")
+        })
 
         VStack(spacing: 0) {
             if presentation.canPullToRefresh {
@@ -180,5 +210,98 @@ struct LeaderboardView: View {
         if banner == BoardCopy.syncRetry { return "boardSyncRetry" }
         if banner == BoardCopy.loadFailed { return "boardRetryButton" }
         return "boardBanner"
+    }
+}
+
+/// One user drag is one scroll. Deceleration is a later phase of the same gesture, so it is not counted again.
+private struct LeaderboardScrollCounter: ViewModifier {
+    var onScroll: () -> Void
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.onScrollPhaseChange { oldPhase, newPhase in
+                if newPhase == .interacting, oldPhase != .interacting {
+                    onScroll()
+                }
+            }
+        } else {
+            content.background(ScrollDragStart(onBegan: onScroll))
+        }
+    }
+}
+
+/// iOS 16 and 17 have no scroll-phase callback. The list's pan recognizer enters `.began`
+/// once when the finger starts a drag, and deceleration after the finger lifts does not start it again.
+private struct ScrollDragStart: UIViewRepresentable {
+    var onBegan: () -> Void
+
+    func makeUIView(context: Context) -> Probe {
+        let probe = Probe()
+        probe.onBegan = onBegan
+        return probe
+    }
+
+    func updateUIView(_ probe: Probe, context: Context) {
+        probe.onBegan = onBegan
+    }
+
+    final class Probe: UIView {
+        var onBegan: () -> Void = {}
+        private weak var scrollView: UIScrollView?
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            attachIfNeeded()
+        }
+
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            attachIfNeeded()
+        }
+
+        private func attachIfNeeded() {
+            guard scrollView == nil, let found = enclosingScrollView() else { return }
+            scrollView = found
+            found.panGestureRecognizer.addTarget(self, action: #selector(pan(_:)))
+        }
+
+        @objc private func pan(_ gesture: UIPanGestureRecognizer) {
+            if gesture.state == .began {
+                onBegan()
+            }
+        }
+
+        private func enclosingScrollView() -> UIScrollView? {
+            var node: UIView? = superview
+            var steps = 0
+            while let current = node, steps < 10 {
+                if let match = largestScrollView(in: current), match.bounds.height > 120 {
+                    return match
+                }
+                node = current.superview
+                steps += 1
+            }
+            return nil
+        }
+
+        private func largestScrollView(in root: UIView) -> UIScrollView? {
+            var best: UIScrollView?
+            var stack = [root]
+            var seen = 0
+            while let view = stack.popLast(), seen < 80 {
+                seen += 1
+                if let scroll = view as? UIScrollView {
+                    if (best?.bounds.height ?? 0) < scroll.bounds.height {
+                        best = scroll
+                    }
+                }
+                stack.append(contentsOf: view.subviews)
+            }
+            return best
+        }
+
+        deinit {
+            scrollView?.panGestureRecognizer.removeTarget(self, action: #selector(pan(_:)))
+        }
     }
 }

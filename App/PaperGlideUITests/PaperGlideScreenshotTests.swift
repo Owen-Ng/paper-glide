@@ -22,6 +22,10 @@ final class PaperGlideScreenshotTests: XCTestCase {
 
         let play = app.buttons["playButton"]
         XCTAssertTrue(play.waitForExistence(timeout: 15))
+        let report = app.buttons["reportButton"]
+        XCTAssertTrue(report.exists)
+        XCTAssertTrue(report.isEnabled)
+        XCTAssertEqual(report.label, "Report a problem")
         save("hook-01-start")
 
         play.tap()
