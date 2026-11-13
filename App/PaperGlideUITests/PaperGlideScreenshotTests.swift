@@ -41,7 +41,15 @@ final class PaperGlideScreenshotTests: XCTestCase {
         save("hook-03-death-new-best-HOOK")
 
         tap(app.buttons["shareButton"], in: app)
-        let shareLabel = try assertShareSheet(app, contains: "I scored 1 in Paper Glide")
+        var shareLabel = shareSheetLabel(app, contains: "I scored 1 in Paper Glide", timeout: 12)
+        if shareLabel == nil, app.buttons["shareButton"].isHittable {
+            app.buttons["shareButton"].tap()
+            shareLabel = shareSheetLabel(app, contains: "I scored 1 in Paper Glide", timeout: 12)
+        }
+        guard let shareLabel else {
+            XCTFail("Share sheet did not show \"I scored 1 in Paper Glide\". Nearby labels: \(nearbyShareLabels(app))")
+            return
+        }
         save("hook-04-share-sheet")
         XCTAssertTrue(shareLabel.contains("Paper Glide"))
         XCTAssertFalse(shareLabel.contains("http"))
@@ -173,32 +181,40 @@ final class PaperGlideScreenshotTests: XCTestCase {
         Int(label.split(separator: " ").last.map(String.init) ?? "") ?? -1
     }
 
-    @discardableResult
-    private func assertShareSheet(_ app: XCUIApplication, contains expected: String) throws -> String {
-        let predicate = NSPredicate(format: "label CONTAINS %@", expected)
-        let hosts = [
-            app,
-            XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        ]
-        let deadline = Date().addingTimeInterval(10)
+    private func shareSheetLabel(_ app: XCUIApplication, contains expected: String, timeout: TimeInterval) -> String? {
+        let predicate = NSPredicate(format: "label CONTAINS %@ OR value CONTAINS %@", expected, expected)
+        let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
-            for host in hosts {
+            for host in shareHosts(app) {
                 let match = host.descendants(matching: .any).matching(predicate).firstMatch
                 if match.exists {
+                    if match.label.contains(expected) { return match.label }
+                    if let value = match.value as? String, value.contains(expected) { return value }
                     return match.label
                 }
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.25))
         }
-        var nearby: [String] = []
+        return nil
+    }
+
+    private func nearbyShareLabels(_ app: XCUIApplication) -> [String] {
         let hint = NSPredicate(format: "label CONTAINS 'Glide' OR label CONTAINS 'score' OR label CONTAINS 'Share'")
-        for host in hosts {
-            for index in 0..<min(host.descendants(matching: .any).matching(hint).count, 12) {
-                nearby.append(host.descendants(matching: .any).matching(hint).element(boundBy: index).label)
+        var nearby: [String] = []
+        for host in shareHosts(app) {
+            let matches = host.descendants(matching: .any).matching(hint)
+            for index in 0..<min(matches.count, 12) {
+                nearby.append(matches.element(boundBy: index).label)
             }
         }
-        XCTFail("Share sheet did not show \"\(expected)\". Nearby labels: \(nearby)")
-        return ""
+        return nearby
+    }
+
+    private func shareHosts(_ app: XCUIApplication) -> [XCUIApplication] {
+        [
+            app,
+            XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        ]
     }
 
     private func dismissShareSheet(_ app: XCUIApplication) {

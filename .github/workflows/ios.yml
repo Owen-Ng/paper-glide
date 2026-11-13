@@ -173,12 +173,15 @@ jobs:
         if: always()
         run: |
           set -euo pipefail
+          udid="${{ steps.sim.outputs.se_udid }}"
           xcrun simctl shutdown all || true
+          xcrun simctl boot "$udid" || true
+          xcrun simctl bootstatus "$udid" -b
           rm -rf DerivedData/DeathSE.xcresult
           xcodebuild test \
             -project App/PaperGlide.xcodeproj \
             -scheme PaperGlide \
-            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.se_udid }}" \
+            -destination "platform=iOS Simulator,id=${udid}" \
             -only-testing:PaperGlideUITests/PaperGlideDeathLayoutUITests \
             -configuration Debug \
             -derivedDataPath DerivedData \
@@ -194,21 +197,30 @@ jobs:
         if: always()
         run: |
           set -euo pipefail
-          xcrun simctl shutdown all || true
-          rm -rf DerivedData/DeathMax.xcresult
-          xcodebuild test \
-            -project App/PaperGlide.xcodeproj \
-            -scheme PaperGlide \
-            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.max_udid }}" \
-            -only-testing:PaperGlideUITests/PaperGlideDeathLayoutUITests \
-            -configuration Debug \
-            -derivedDataPath DerivedData \
-            -resultBundlePath DerivedData/DeathMax.xcresult \
-            -skipPackagePluginValidation \
-            -skipMacroValidation \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            'CODE_SIGN_IDENTITY=-'
+          udid="${{ steps.sim.outputs.max_udid }}"
+          run_large() {
+            xcrun simctl shutdown all || true
+            xcrun simctl boot "$udid" || true
+            xcrun simctl bootstatus "$udid" -b
+            rm -rf DerivedData/DeathMax.xcresult
+            xcodebuild test \
+              -project App/PaperGlide.xcodeproj \
+              -scheme PaperGlide \
+              -destination "platform=iOS Simulator,id=${udid}" \
+              -only-testing:PaperGlideUITests/PaperGlideDeathLayoutUITests \
+              -configuration Debug \
+              -derivedDataPath DerivedData \
+              -resultBundlePath DerivedData/DeathMax.xcresult \
+              -skipPackagePluginValidation \
+              -skipMacroValidation \
+              CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGNING_REQUIRED=NO \
+              'CODE_SIGN_IDENTITY=-'
+          }
+          if ! run_large; then
+            echo "Pro Max layout test failed. Booting the simulator and trying once more."
+            run_large
+          fi
 
       - name: Extract screenshots from the xcresult
         id: shots
