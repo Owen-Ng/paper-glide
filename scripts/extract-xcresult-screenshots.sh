@@ -56,10 +56,10 @@ if export_log.exists():
         suggested[pathlib.Path(source_name).stem] = clean
 
 def attachment_name(path: pathlib.Path):
-    if path.stem.startswith("hook-") or path.stem.startswith("sim-"):
+    if path.stem.startswith(("hook-", "sim-", "death-")):
         return path.stem
     for parent in path.parents:
-        if parent.stem.startswith("hook-") or parent.stem.startswith("sim-"):
+        if parent.stem.startswith(("hook-", "sim-", "death-")):
             return parent.stem
     return None
 
@@ -79,7 +79,7 @@ def name_for_uuid(uuid):
         if index < 0:
             return None
         window = catalog[max(0, index - 120):index]
-        match = re.search(r"((?:hook|sim)-[A-Za-z0-9-]+)$", window)
+        match = re.search(r"((?:hook|sim|death)-[A-Za-z0-9-]+)$", window)
         if match:
             return match.group(1)
         start = index + len(uuid)

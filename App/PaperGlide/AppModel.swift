@@ -37,6 +37,19 @@ final class AppModel: ObservableObject {
         scene.onSnapshot = { [weak self] snapshot in
             self?.consume(snapshot)
         }
+        #if DEBUG
+        if LaunchOptions.forcesWorstCaseDeath {
+            session.endRun(withScore: LaunchOptions.worstCaseDeathScore)
+            let snapshot = session.snapshot
+            score = snapshot.score
+            bestScore = snapshot.bestScore
+            isNewBest = snapshot.isNewBest
+            showCoach = snapshot.showCoach
+            refreshFlightReadout(snapshot)
+            scene.presentCurrentSnapshot()
+            screen = .dead
+        }
+        #endif
     }
 
     func startRun() {

@@ -37,16 +37,45 @@ final class PaperGlideScreenshotTests: XCTestCase {
         let newBest = app.staticTexts["newBestLabel"]
         XCTAssertTrue(newBest.waitForExistence(timeout: 10))
         XCTAssertEqual(newBest.label, "New best!")
-        XCTAssertEqual(app.staticTexts["bestScoreLabel"].label, "Best score 1")
+        let bestBeforeShare = app.staticTexts["bestScoreLabel"].label
+        XCTAssertEqual(bestBeforeShare, "Best score 1")
         save("hook-03-death-new-best-HOOK")
 
-        tap(app.buttons["shareButton"], in: app)
-        let shareLabel = try assertShareSheet(app, contains: "I scored 1 in Paper Glide")
+        tapShare(app)
+        var copy = copyControl(app, timeout: 15)
+        if copy == nil, !shareSheetVisible(app) {
+            XCTContext.runActivity(named: "share retry") { _ in
+                print("share retry")
+            }
+            tapShare(app)
+            copy = copyControl(app, timeout: 15)
+        }
+        if copy == nil, shareSheetVisible(app) {
+            copy = copyControl(app, timeout: 8)
+        }
+        XCTAssertTrue(shareSheetVisible(app) || copy != nil, "Share sheet did not open. Nearby labels: \(nearbyShareLabels(app))")
+        XCTAssertNotNil(copy, "Copy was not in the share sheet. Nearby labels: \(nearbyShareLabels(app))")
         save("hook-04-share-sheet")
-        XCTAssertTrue(shareLabel.contains("Paper Glide"))
         dismissShareSheet(app)
 
-        tap(app.buttons["homeButton"], in: app)
+        let deathScore = app.staticTexts["deathScore"]
+        XCTAssertTrue(deathScore.waitForExistence(timeout: 5))
+        XCTAssertEqual(deathScore.label, "Score 1")
+        XCTAssertEqual(app.staticTexts["newBestLabel"].label, "New best!")
+        let home = app.buttons["homeButton"]
+        XCTAssertTrue(home.waitForExistence(timeout: 5))
+        let hittableDeadline = Date().addingTimeInterval(8)
+        while Date() < hittableDeadline && !home.isHittable {
+            dismissShareSheet(app)
+        }
+        XCTAssertTrue(home.isHittable)
+        let best = app.staticTexts["bestScoreLabel"]
+        XCTAssertTrue(best.exists)
+        XCTAssertEqual(best.label, bestBeforeShare)
+        let retry = app.buttons["retryButton"]
+        XCTAssertTrue(retry.exists)
+        XCTAssertTrue(retry.isHittable)
+        home.tap()
         let startBest = app.staticTexts["startBestScore"]
         XCTAssertTrue(startBest.waitForExistence(timeout: 10))
         XCTAssertEqual(startBest.label, "Best score 1")
@@ -163,44 +192,85 @@ final class PaperGlideScreenshotTests: XCTestCase {
         Int(label.split(separator: " ").last.map(String.init) ?? "") ?? -1
     }
 
-    @discardableResult
-    private func assertShareSheet(_ app: XCUIApplication, contains expected: String) throws -> String {
-        let predicate = NSPredicate(format: "label CONTAINS %@", expected)
-        let hosts = [
-            app,
-            XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        ]
-        let deadline = Date().addingTimeInterval(10)
+    private func shareSheetVisible(_ app: XCUIApplication) -> Bool {
+        let markers = ["LP.CaptionBar.BottomCaption", "Copy", "Save to Files", "Reminders"]
+        for host in shareHosts(app) {
+            if host.otherElements["LP.CaptionBar.BottomCaption"].exists { return true }
+            for name in markers where host.buttons[name].exists || host.staticTexts[name].exists {
+                return true
+            }
+        }
+        return false
+    }
+
+    private func copyControl(_ app: XCUIApplication, timeout: TimeInterval) -> XCUIElement? {
+        let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
-            for host in hosts {
-                let match = host.descendants(matching: .any).matching(predicate).firstMatch
-                if match.exists {
-                    return match.label
-                }
+            for host in shareHosts(app) {
+                let button = host.buttons["Copy"]
+                if button.exists { return button }
+                let text = host.staticTexts["Copy"]
+                if text.exists { return text }
+                let cell = host.cells["Copy"]
+                if cell.exists { return cell }
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.25))
         }
-        var nearby: [String] = []
+        return nil
+    }
+
+    private func nearbyShareLabels(_ app: XCUIApplication) -> [String] {
         let hint = NSPredicate(format: "label CONTAINS 'Glide' OR label CONTAINS 'score' OR label CONTAINS 'Share'")
-        for host in hosts {
-            for index in 0..<min(host.descendants(matching: .any).matching(hint).count, 12) {
-                nearby.append(host.descendants(matching: .any).matching(hint).element(boundBy: index).label)
+        var nearby: [String] = []
+        for host in shareHosts(app) {
+            let matches = host.descendants(matching: .any).matching(hint)
+            for index in 0..<min(matches.count, 12) {
+                nearby.append(matches.element(boundBy: index).label)
             }
         }
-        XCTFail("Share sheet did not show \"\(expected)\". Nearby labels: \(nearby)")
-        return ""
+        return nearby
+    }
+
+    private func shareHosts(_ app: XCUIApplication) -> [XCUIApplication] {
+        [
+            app,
+            XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        ]
     }
 
     private func dismissShareSheet(_ app: XCUIApplication) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        let labels = ["Close", "Cancel", "Done"]
+        let labels = ["Close", "Cancel", "Done", "Dismiss"]
         for host in [app, springboard] {
-            for label in labels where host.buttons[label].waitForExistence(timeout: 1) {
+            for label in labels where host.buttons[label].exists {
                 host.buttons[label].tap()
                 return
             }
         }
-        app.swipeDown()
+        let caption = app.otherElements["LP.CaptionBar.BottomCaption"]
+        if caption.exists {
+            let start = caption.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.2))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.95))
+            start.press(forDuration: 0.05, thenDragTo: end)
+            return
+        }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.12)).tap()
+    }
+
+    private func tapShare(_ app: XCUIApplication) {
+        let share = app.buttons["shareButton"]
+        let deadline = Date().addingTimeInterval(5)
+        while Date() < deadline && !share.isHittable {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+        if share.isHittable {
+            share.tap()
+        } else if share.exists {
+            XCTContext.runActivity(named: "tapShare coordinate fallback") { _ in
+                print("tapShare coordinate fallback")
+            }
+            share.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
     }
 
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {

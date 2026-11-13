@@ -41,13 +41,36 @@ final class CloudModel: ObservableObject {
                 guard let self else { return }
                 self.pathOnline = online
                 guard self.started else { return }
+                #if DEBUG
+                if LaunchOptions.forcesWorstCaseDeath { return }
+                #endif
                 self.snapshot = await self.sync.setOnline(online)
             }
         }
         let queue = DispatchQueue(label: "paperGlide.reachability")
         monitor.start(queue: queue)
         pathOnline = monitor.currentPath.status == .satisfied
+        #if DEBUG
+        if LaunchOptions.forcesWorstCaseDeath {
+            presentWorstCaseDeath()
+        }
+        #endif
     }
+
+    #if DEBUG
+    /// Layout fixture for the death-screen reachability test. Release builds omit it.
+    private func presentWorstCaseDeath() {
+        snapshot = AccountSnapshot(
+            username: nil,
+            online: false,
+            configured: false,
+            pendingCount: 1,
+            showsLaunchPrompt: false,
+            deathPromptVisible: true,
+            lastRunState: .pending
+        )
+    }
+    #endif
 
     var chipText: String? {
         if busy || snapshot.syncing { return BoardCopy.syncing }
@@ -62,6 +85,12 @@ final class CloudModel: ObservableObject {
     func start() async {
         guard !started else { return }
         started = true
+        #if DEBUG
+        if LaunchOptions.forcesWorstCaseDeath {
+            presentWorstCaseDeath()
+            return
+        }
+        #endif
         snapshot = sync.prepare(online: pathOnline)
         snapshot = await sync.bootstrap()
         guard snapshot.online else { return }
