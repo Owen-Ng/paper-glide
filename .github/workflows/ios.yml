@@ -10,7 +10,7 @@ permissions:
 jobs:
   build-and-test:
     runs-on: macos-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -37,7 +37,7 @@ jobs:
           set -euo pipefail
           xcrun simctl list devices available
           UDID=$(python3 - <<'PY'
-          import json, subprocess, sys
+          import json, re, subprocess, sys
           raw = subprocess.check_output(["xcrun", "simctl", "list", "devices", "available", "-j"])
           data = json.loads(raw)
           candidates = []
@@ -50,14 +50,90 @@ jobs:
                       candidates.append((runtime, name, device["udid"]))
           if not candidates:
               sys.exit("No available iPhone simulator")
-          candidates.sort()
-          plain = [item for item in candidates if all(word not in item[1] for word in ("Pro", "Max", "Plus", "SE", "mini", "Air"))]
-          choice = plain[-1] if plain else candidates[-1]
-          print(f"Using {choice[1]} on {choice[0]}", file=sys.stderr)
-          print(choice[2])
+          def version_tuple(text):
+              return tuple(int(part) for part in re.findall(r"\d+", text))
+
+          def model_number(name):
+              match = re.search(r"iPhone\s+(\d+)", name)
+              return int(match.group(1)) if match else -1
+
+          phones = []
+          for runtime, devices in data.get("devices", {}).items():
+              if "iOS" not in runtime:
+                  continue
+              for device in devices:
+                  name = device.get("name", "")
+                  if device.get("isAvailable") and name.startswith("iPhone"):
+                      phones.append({
+                          "runtime": runtime,
+                          "version": version_tuple(runtime),
+                          "name": name,
+                          "udid": device["udid"],
+                      })
+
+          def choose_plain():
+              plain = [item for item in phones if all(word not in item["name"] for word in ("Pro", "Max", "Plus", "SE", "mini", "Air"))]
+              pool = plain or phones
+              if not pool:
+                  sys.exit("No available iPhone simulator")
+              pool.sort(key=lambda item: (item["version"], model_number(item["name"]), item["name"]))
+              return pool[-1]
+
+          def choose_se():
+              matches = [item for item in phones if "SE" in item["name"] and "3rd" in item["name"]]
+              matches.sort(key=lambda item: (item["version"], item["name"]))
+              return matches[-1] if matches else None
+
+          def choose_pro_max():
+              matches = [item for item in phones if "Pro Max" in item["name"]]
+              matches.sort(key=lambda item: (item["version"], model_number(item["name"]), item["name"]))
+              return matches[-1] if matches else None
+
+          def create(type_match, label):
+              types = json.loads(subprocess.check_output(["xcrun", "simctl", "list", "devicetypes", "-j"]))["devicetypes"]
+              runtimes = json.loads(subprocess.check_output(["xcrun", "simctl", "list", "runtimes", "available", "-j"]))["runtimes"]
+              ios = [runtime for runtime in runtimes if "iOS" in runtime.get("name", "") and runtime.get("isAvailable", True)]
+              if not ios:
+                  sys.exit("No available iOS runtime")
+              ios.sort(key=lambda runtime: version_tuple(runtime.get("version") or runtime["name"]))
+              runtime = ios[-1]
+              matches = [item for item in types if type_match(item["name"]) and item["name"].startswith("iPhone")]
+              if not matches:
+                  names = ", ".join(sorted(item["name"] for item in types if "iPhone" in item["name"]))
+                  sys.exit(f"Missing iPhone device type. Installed: {names}")
+              matches.sort(key=lambda item: (model_number(item["name"]), item["name"]))
+              chosen = matches[-1]
+              udid = subprocess.check_output(
+                  ["xcrun", "simctl", "create", label, chosen["identifier"], runtime["identifier"]],
+                  text=True,
+              ).strip()
+              print(f"Created {chosen['name']} ({udid}) on {runtime['name']}", file=sys.stderr)
+              return udid, chosen["name"]
+
+          primary = choose_plain()
+          small = choose_se()
+          large = choose_pro_max()
+          if small is None:
+              se_udid, se_name = create(lambda name: "SE" in name and "3rd" in name, "PaperGlide SE")
+          else:
+              se_udid, se_name = small["udid"], small["name"]
+          if large is None:
+              max_udid, max_name = create(lambda name: "Pro Max" in name, "PaperGlide Pro Max")
+          else:
+              max_udid, max_name = large["udid"], large["name"]
+          print(f"Primary {primary['name']} on {primary['runtime']}", file=sys.stderr)
+          print(f"Small {se_name}", file=sys.stderr)
+          print(f"Large {max_name}", file=sys.stderr)
+          print(f"{primary['udid']}|{se_udid}|{max_udid}")
           PY
           )
-          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          PRIMARY_UDID="${UDID%%|*}"
+          REST="${UDID#*|}"
+          SE_UDID="${REST%%|*}"
+          MAX_UDID="${REST##*|}"
+          echo "udid=$PRIMARY_UDID" >> "$GITHUB_OUTPUT"
+          echo "se_udid=$SE_UDID" >> "$GITHUB_OUTPUT"
+          echo "max_udid=$MAX_UDID" >> "$GITHUB_OUTPUT"
 
       - name: Build Paper Glide for the iOS Simulator
         run: |
@@ -92,6 +168,48 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             'CODE_SIGN_IDENTITY=-'
 
+      - name: Run death-screen layout test on iPhone SE
+        id: se
+        if: always()
+        run: |
+          set -euo pipefail
+          xcrun simctl shutdown all || true
+          rm -rf DerivedData/DeathSE.xcresult
+          xcodebuild test \
+            -project App/PaperGlide.xcodeproj \
+            -scheme PaperGlide \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.se_udid }}" \
+            -only-testing:PaperGlideUITests/PaperGlideDeathLayoutUITests \
+            -configuration Debug \
+            -derivedDataPath DerivedData \
+            -resultBundlePath DerivedData/DeathSE.xcresult \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            'CODE_SIGN_IDENTITY=-'
+
+      - name: Run death-screen layout test on iPhone Pro Max
+        id: large
+        if: always()
+        run: |
+          set -euo pipefail
+          xcrun simctl shutdown all || true
+          rm -rf DerivedData/DeathMax.xcresult
+          xcodebuild test \
+            -project App/PaperGlide.xcodeproj \
+            -scheme PaperGlide \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.max_udid }}" \
+            -only-testing:PaperGlideUITests/PaperGlideDeathLayoutUITests \
+            -configuration Debug \
+            -derivedDataPath DerivedData \
+            -resultBundlePath DerivedData/DeathMax.xcresult \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            'CODE_SIGN_IDENTITY=-'
+
       - name: Extract screenshots from the xcresult
         id: shots
         if: always()
@@ -99,6 +217,25 @@ jobs:
           set -euo pipefail
           chmod +x scripts/extract-xcresult-screenshots.sh
           scripts/extract-xcresult-screenshots.sh DerivedData/PaperGlide.xcresult /tmp/paper-glide-screenshots
+          mkdir -p /tmp/merged-shots
+          find /tmp/paper-glide-screenshots/png -name '*.png' -type f -exec cp {} /tmp/merged-shots/ \;
+          if [[ -d DerivedData/DeathSE.xcresult ]]; then
+            scripts/extract-xcresult-screenshots.sh DerivedData/DeathSE.xcresult /tmp/paper-glide-se
+            find /tmp/paper-glide-se/png -name '*.png' -type f -exec cp {} /tmp/merged-shots/ \;
+          fi
+          if [[ -d DerivedData/DeathMax.xcresult ]]; then
+            scripts/extract-xcresult-screenshots.sh DerivedData/DeathMax.xcresult /tmp/paper-glide-max
+            find /tmp/paper-glide-max/png -name '*.png' -type f -exec cp {} /tmp/merged-shots/ \;
+          fi
+          rm -rf /tmp/paper-glide-screenshots/png
+          mkdir -p /tmp/paper-glide-screenshots/png
+          find /tmp/merged-shots -name '*.png' -type f -exec cp {} /tmp/paper-glide-screenshots/png/ \;
+          manifest=/tmp/paper-glide-screenshots/png/MANIFEST.txt
+          : > "$manifest"
+          while IFS= read -r file; do
+            size=$(wc -c < "$file" | tr -d ' ')
+            printf '%8d  %s\n' "$size" "$(basename "$file")" >> "$manifest"
+          done < <(find /tmp/paper-glide-screenshots/png -name '*.png' -type f | sort)
           echo "---- screenshot files with sizes ----"
           find /tmp/paper-glide-screenshots/png -type f -exec ls -l {} \;
           count=$(find /tmp/paper-glide-screenshots/png -name '*.png' -type f | wc -l | tr -d ' ')
@@ -107,6 +244,16 @@ jobs:
           if [[ "${{ steps.tests.outcome }}" == "success" && "$count" -eq 0 ]]; then
             echo "Tests passed but no PNG attachments were extracted."
             exit 1
+          fi
+          death_count=$(find /tmp/paper-glide-screenshots/png -name 'death-worst-*.png' -type f | wc -l | tr -d ' ')
+          echo "DEATH_PNG_COUNT=$death_count"
+          if [[ "${{ steps.se.outcome }}" == "success" ]]; then
+            find /tmp/paper-glide-screenshots/png -name 'death-worst-*375x667*.png' -type f | grep -q . \
+              || { echo "iPhone SE layout test passed but no 375x667 death screenshot was extracted."; exit 1; }
+          fi
+          if [[ "${{ steps.large.outcome }}" == "success" ]]; then
+            find /tmp/paper-glide-screenshots/png -name 'death-worst-*.png' -type f ! -name '*375x667*' | grep -q . \
+              || { echo "Pro Max layout test passed but no large-phone death screenshot was extracted."; exit 1; }
           fi
 
       - name: Upload screenshots

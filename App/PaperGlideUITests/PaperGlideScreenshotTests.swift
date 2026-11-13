@@ -44,7 +44,17 @@ final class PaperGlideScreenshotTests: XCTestCase {
         let shareLabel = try assertShareSheet(app, contains: "I scored 1 in Paper Glide")
         save("hook-04-share-sheet")
         XCTAssertTrue(shareLabel.contains("Paper Glide"))
+        XCTAssertFalse(shareLabel.contains("http"))
+        XCTAssertFalse(shareLabel.lowercased().contains("rank"))
         dismissShareSheet(app)
+
+        let deathScore = app.staticTexts["deathScore"]
+        XCTAssertTrue(deathScore.waitForExistence(timeout: 5))
+        XCTAssertEqual(deathScore.label, "Score 1")
+        XCTAssertEqual(app.staticTexts["newBestLabel"].label, "New best!")
+        XCTAssertTrue(app.buttons["shareButton"].exists)
+        XCTAssertTrue(app.buttons["retryButton"].exists)
+        XCTAssertTrue(app.buttons["homeButton"].exists)
 
         tap(app.buttons["homeButton"], in: app)
         let startBest = app.staticTexts["startBestScore"]

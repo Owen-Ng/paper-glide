@@ -49,7 +49,7 @@ xcodebuild test \
   CODE_SIGN_IDENTITY=-
 ```
 
-CI (`.github/workflows/ios.yml`) runs that build and `xcodebuild test` on a macOS runner for pull requests and manual `workflow_dispatch`. Screenshot UI tests attach images to the `.xcresult`. The workflow extracts those PNGs and commits them under `evidence/<commit>/`. See `evidence/README.md` for which files are a test hook and which are the real simulation.
+CI (`.github/workflows/ios.yml`) runs that build and `xcodebuild test` on a macOS runner for pull requests and manual `workflow_dispatch`. It also runs the death-screen layout UI test on an iPhone SE (3rd generation) simulator and on the newest iPhone Pro Max simulator. Screenshot UI tests attach images to the `.xcresult`. The workflow extracts those PNGs and commits them under `evidence/<commit>/`. See `evidence/README.md` for which files are a test hook and which are the real simulation.
 
 ## How a run works
 
@@ -103,7 +103,7 @@ The local package path from the Xcode project is the repo root.
 
 - **Start:** best score, Play, Leaderboard, and a disabled Report button labelled coming soon. The first launch offers a name. "later" dismisses it. A sync chip shows while a finished run is still waiting.
 - **Play:** score, and the coach hint until the first tap ever.
-- **End:** score, best, Retry, Share, Home, and a secondary Leaderboard. Share opens the system share sheet with text that includes the score and "Paper Glide". A new local best can offer the name once per launch if it was skipped or the device was offline.
+- **End:** score, "New best!" when this run beat the stored best, best, then Retry, Share, Home, and a secondary Leaderboard. The sync note and the name prompt sit under that cluster. On a short phone only that lower area scrolls, so the four actions stay on the first screen. Share opens the system share sheet with text only. With no claimed name the text is "I scored N in Paper Glide". With a claimed name it is "I scored N in Paper Glide as {username}". N is this run's score, including 0. The subject is "Paper Glide". Saving a name on this screen and then sharing uses that name. There is no link and no rank. A new local best can offer the name once per launch if it was skipped or the device was offline.
 - **Leaderboard:** Daily, Weekly, and All-time. Back returns to the screen that opened it.
 
 Daily boards reset at 00:00 America/Toronto. Weekly boards reset Monday at 00:00 America/Toronto. A run whose Toronto day or week has already closed when it syncs counts only toward all-time.

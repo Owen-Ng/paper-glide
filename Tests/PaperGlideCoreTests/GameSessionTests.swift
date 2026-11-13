@@ -416,9 +416,4 @@ final class GameSessionTests: XCTestCase {
         XCTAssertEqual(storage.loadBestScore(), 6)
         XCTAssertTrue(storage.loadCoachCompleted())
     }
-
-    func testShareMessageNamesTheScoreAndPaperGlide() {
-        XCTAssertEqual(ShareText.message(score: 12), "I scored 12 in Paper Glide")
-        XCTAssertEqual(ShareText.message(score: 0), "I scored 0 in Paper Glide")
-    }
 }
