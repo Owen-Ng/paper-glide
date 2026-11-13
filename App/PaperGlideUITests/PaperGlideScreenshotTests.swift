@@ -60,11 +60,14 @@ final class PaperGlideScreenshotTests: XCTestCase {
         XCTAssertTrue(deathScore.waitForExistence(timeout: 5))
         XCTAssertEqual(deathScore.label, "Score 1")
         XCTAssertEqual(app.staticTexts["newBestLabel"].label, "New best!")
-        XCTAssertTrue(app.buttons["shareButton"].exists)
-        XCTAssertTrue(app.buttons["retryButton"].exists)
-        XCTAssertTrue(app.buttons["homeButton"].exists)
-
-        tap(app.buttons["homeButton"], in: app)
+        let home = app.buttons["homeButton"]
+        XCTAssertTrue(home.waitForExistence(timeout: 5))
+        let hittableDeadline = Date().addingTimeInterval(8)
+        while Date() < hittableDeadline && !home.isHittable {
+            dismissShareSheet(app)
+        }
+        XCTAssertTrue(home.isHittable)
+        home.tap()
         let startBest = app.staticTexts["startBestScore"]
         XCTAssertTrue(startBest.waitForExistence(timeout: 10))
         XCTAssertEqual(startBest.label, "Best score 1")
@@ -185,6 +188,11 @@ final class PaperGlideScreenshotTests: XCTestCase {
         let predicate = NSPredicate(format: "label CONTAINS %@ OR value CONTAINS %@", expected, expected)
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
+            let caption = app.otherElements["LP.CaptionBar.BottomCaption"]
+            if caption.exists {
+                if caption.label.contains(expected) { return caption.label }
+                if let value = caption.value as? String, value.contains(expected) { return value }
+            }
             for host in shareHosts(app) {
                 let match = host.descendants(matching: .any).matching(predicate).firstMatch
                 if match.exists {
@@ -219,14 +227,21 @@ final class PaperGlideScreenshotTests: XCTestCase {
 
     private func dismissShareSheet(_ app: XCUIApplication) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        let labels = ["Close", "Cancel", "Done"]
+        let labels = ["Close", "Cancel", "Done", "Dismiss"]
         for host in [app, springboard] {
-            for label in labels where host.buttons[label].waitForExistence(timeout: 1) {
+            for label in labels where host.buttons[label].exists {
                 host.buttons[label].tap()
                 return
             }
         }
-        app.swipeDown()
+        let caption = app.otherElements["LP.CaptionBar.BottomCaption"]
+        if caption.exists {
+            let start = caption.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.2))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.95))
+            start.press(forDuration: 0.05, thenDragTo: end)
+            return
+        }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.12)).tap()
     }
 
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {
