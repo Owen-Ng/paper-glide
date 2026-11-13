@@ -41,11 +41,12 @@ final class PaperGlideScreenshotTests: XCTestCase {
         XCTAssertEqual(bestBeforeShare, "Best score 1")
         save("hook-03-death-new-best-HOOK")
 
-        tap(app.buttons["shareButton"], in: app)
-        var shareLabel = shareSheetLabel(app, contains: "I scored 1 in Paper Glide", timeout: 12)
-        if shareLabel == nil, app.buttons["shareButton"].isHittable {
-            app.buttons["shareButton"].tap()
-            shareLabel = shareSheetLabel(app, contains: "I scored 1 in Paper Glide", timeout: 12)
+        let expectedShare = "I scored 1 in Paper Glide"
+        tapShare(app)
+        var shareLabel = shareSheetLabel(app, contains: expectedShare, timeout: 15)
+        if shareLabel == nil {
+            tapShare(app)
+            shareLabel = shareSheetLabel(app, contains: expectedShare, timeout: 15)
         }
         guard let shareLabel else {
             XCTFail("Share sheet did not show \"I scored 1 in Paper Glide\". Nearby labels: \(nearbyShareLabels(app))")
@@ -249,6 +250,19 @@ final class PaperGlideScreenshotTests: XCTestCase {
             return
         }
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.12)).tap()
+    }
+
+    private func tapShare(_ app: XCUIApplication) {
+        let share = app.buttons["shareButton"]
+        let deadline = Date().addingTimeInterval(5)
+        while Date() < deadline && !share.isHittable {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+        if share.isHittable {
+            share.tap()
+        } else if share.exists {
+            share.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
     }
 
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {
