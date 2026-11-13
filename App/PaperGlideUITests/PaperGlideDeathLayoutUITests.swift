@@ -35,10 +35,9 @@ final class PaperGlideDeathLayoutUITests: XCTestCase {
         XCTAssertTrue(board.exists)
         XCTAssertTrue(share.isEnabled)
 
-        save("death-worst-\(deviceSlug())")
-
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 5))
+        save("death-worst-\(deviceSlug(window.frame))")
         for (name, button) in [("Retry", retry), ("Share", share), ("Home", home), ("Leaderboard", board)] {
             assertFullyVisible(button, in: window, name: name)
         }
@@ -73,7 +72,7 @@ final class PaperGlideDeathLayoutUITests: XCTestCase {
         return element.isHittable
     }
 
-    private func deviceSlug() -> String {
+    private func deviceSlug(_ bounds: CGRect) -> String {
         let allowed = CharacterSet.alphanumerics
         let scalars = UIDevice.current.name.lowercased().unicodeScalars.map { scalar -> Character in
             allowed.contains(scalar) ? Character(String(scalar)) : "-"
@@ -83,8 +82,9 @@ final class PaperGlideDeathLayoutUITests: XCTestCase {
             slug = slug.replacingOccurrences(of: "--", with: "-")
         }
         slug = slug.trimmingCharacters(in: CharacterSet(charactersIn: "-"))
-        let bounds = UIScreen.main.bounds
-        return "\(slug)-\(Int(bounds.width))x\(Int(bounds.height))"
+        let width = Int(bounds.width.rounded())
+        let height = Int(bounds.height.rounded())
+        return "\(slug)-\(width)x\(height)"
     }
 
     private func save(_ name: String) {

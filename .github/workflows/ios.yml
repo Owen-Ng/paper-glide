@@ -248,12 +248,12 @@ jobs:
           death_count=$(find /tmp/paper-glide-screenshots/png -name 'death-worst-*.png' -type f | wc -l | tr -d ' ')
           echo "DEATH_PNG_COUNT=$death_count"
           if [[ "${{ steps.se.outcome }}" == "success" ]]; then
-            find /tmp/paper-glide-screenshots/png -name 'death-worst-*375x667*.png' -type f | grep -q . \
-              || { echo "iPhone SE layout test passed but no 375x667 death screenshot was extracted."; exit 1; }
+            find /tmp/paper-glide-screenshots/png -iname 'death-worst-*se*.png' -type f | grep -q . \
+              || { echo "iPhone SE layout test passed but no SE death screenshot was extracted."; exit 1; }
           fi
           if [[ "${{ steps.large.outcome }}" == "success" ]]; then
-            find /tmp/paper-glide-screenshots/png -name 'death-worst-*.png' -type f ! -name '*375x667*' | grep -q . \
-              || { echo "Pro Max layout test passed but no large-phone death screenshot was extracted."; exit 1; }
+            find /tmp/paper-glide-screenshots/png -iname 'death-worst-*pro-max*.png' -type f | grep -q . \
+              || { echo "Pro Max layout test passed but no Pro Max death screenshot was extracted."; exit 1; }
           fi
 
       - name: Upload screenshots
