@@ -110,8 +110,7 @@ struct DeathView: View {
 
             ShareLink(
                 item: shareText,
-                subject: Text(ShareMessage.subject),
-                message: Text(shareText)
+                subject: Text(ShareMessage.subject)
             ) {
                 Text("Share")
                     .font(.system(.title3, design: .rounded).weight(.semibold))

@@ -37,7 +37,8 @@ final class PaperGlideScreenshotTests: XCTestCase {
         let newBest = app.staticTexts["newBestLabel"]
         XCTAssertTrue(newBest.waitForExistence(timeout: 10))
         XCTAssertEqual(newBest.label, "New best!")
-        XCTAssertEqual(app.staticTexts["bestScoreLabel"].label, "Best score 1")
+        let bestBeforeShare = app.staticTexts["bestScoreLabel"].label
+        XCTAssertEqual(bestBeforeShare, "Best score 1")
         save("hook-03-death-new-best-HOOK")
 
         tap(app.buttons["shareButton"], in: app)
@@ -67,6 +68,12 @@ final class PaperGlideScreenshotTests: XCTestCase {
             dismissShareSheet(app)
         }
         XCTAssertTrue(home.isHittable)
+        let best = app.staticTexts["bestScoreLabel"]
+        XCTAssertTrue(best.exists)
+        XCTAssertEqual(best.label, bestBeforeShare)
+        let retry = app.buttons["retryButton"]
+        XCTAssertTrue(retry.exists)
+        XCTAssertTrue(retry.isHittable)
         home.tap()
         let startBest = app.staticTexts["startBestScore"]
         XCTAssertTrue(startBest.waitForExistence(timeout: 10))
