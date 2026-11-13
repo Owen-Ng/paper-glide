@@ -42,13 +42,16 @@ final class PaperGlideScreenshotTests: XCTestCase {
         save("hook-03-death-new-best-HOOK")
 
         tapShare(app)
-        var copy = copyButton(app, timeout: 15)
+        var copy = copyControl(app, timeout: 15)
         if copy == nil, !shareSheetVisible(app) {
             XCTContext.runActivity(named: "share retry") { _ in
                 print("share retry")
             }
             tapShare(app)
-            copy = copyButton(app, timeout: 15)
+            copy = copyControl(app, timeout: 15)
+        }
+        if copy == nil, shareSheetVisible(app) {
+            copy = copyControl(app, timeout: 8)
         }
         XCTAssertTrue(shareSheetVisible(app) || copy != nil, "Share sheet did not open. Nearby labels: \(nearbyShareLabels(app))")
         XCTAssertNotNil(copy, "Copy was not in the share sheet. Nearby labels: \(nearbyShareLabels(app))")
@@ -190,19 +193,26 @@ final class PaperGlideScreenshotTests: XCTestCase {
     }
 
     private func shareSheetVisible(_ app: XCUIApplication) -> Bool {
+        let markers = ["LP.CaptionBar.BottomCaption", "Copy", "Save to Files", "Reminders"]
         for host in shareHosts(app) {
             if host.otherElements["LP.CaptionBar.BottomCaption"].exists { return true }
-            if host.buttons["Copy"].exists { return true }
+            for name in markers where host.buttons[name].exists || host.staticTexts[name].exists {
+                return true
+            }
         }
         return false
     }
 
-    private func copyButton(_ app: XCUIApplication, timeout: TimeInterval) -> XCUIElement? {
+    private func copyControl(_ app: XCUIApplication, timeout: TimeInterval) -> XCUIElement? {
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
             for host in shareHosts(app) {
                 let button = host.buttons["Copy"]
                 if button.exists { return button }
+                let text = host.staticTexts["Copy"]
+                if text.exists { return text }
+                let cell = host.cells["Copy"]
+                if cell.exists { return cell }
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.25))
         }
