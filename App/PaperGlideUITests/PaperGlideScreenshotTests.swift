@@ -196,10 +196,12 @@ final class PaperGlideScreenshotTests: XCTestCase {
         let predicate = NSPredicate(format: "label CONTAINS %@ OR value CONTAINS %@", expected, expected)
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
-            let caption = app.otherElements["LP.CaptionBar.BottomCaption"]
-            if caption.exists {
-                if caption.label.contains(expected) { return caption.label }
-                if let value = caption.value as? String, value.contains(expected) { return value }
+            for host in shareHosts(app) {
+                let caption = host.otherElements["LP.CaptionBar.BottomCaption"]
+                if caption.exists {
+                    if caption.label.contains(expected) { return caption.label }
+                    if let value = caption.value as? String, value.contains(expected) { return value }
+                }
             }
             for host in shareHosts(app) {
                 let match = host.descendants(matching: .any).matching(predicate).firstMatch
