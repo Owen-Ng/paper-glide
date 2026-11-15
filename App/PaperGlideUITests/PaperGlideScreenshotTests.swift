@@ -56,6 +56,12 @@ final class PaperGlideScreenshotTests: XCTestCase {
         XCTAssertTrue(shareSheetVisible(app) || copy != nil, "Share sheet did not open. Nearby labels: \(nearbyShareLabels(app))")
         XCTAssertNotNil(copy, "Copy was not in the share sheet. Nearby labels: \(nearbyShareLabels(app))")
         save("hook-04-share-sheet")
+        let pasted = copiedShareText(app, copy: copy!)
+        let expected = expectedShareText(app)
+        XCTAssertEqual(pasted, expected)
+        XCTAssertFalse(pasted.contains("http"))
+        XCTAssertFalse(pasted.contains("#"))
+        XCTAssertFalse(pasted.lowercased().contains("rank"))
         dismissShareSheet(app)
 
         let deathScore = app.staticTexts["deathScore"]
@@ -190,6 +196,48 @@ final class PaperGlideScreenshotTests: XCTestCase {
 
     private func scoreValue(from label: String) -> Int {
         Int(label.split(separator: " ").last.map(String.init) ?? "") ?? -1
+    }
+
+    /// This hooked run never claims a name, so the share text is the score on the death screen.
+    private func expectedShareText(_ app: XCUIApplication) -> String {
+        let label = app.staticTexts["deathScore"].label
+        let score = Int(label.split(separator: " ").last.map(String.init) ?? "") ?? -1
+        return "I scored \(score) in Paper Glide"
+    }
+
+    /// The runner reads `UIPasteboard.general` after Copy. A system paste prompt is accepted if it appears.
+    private func copiedShareText(_ app: XCUIApplication, copy: XCUIElement) -> String {
+        UIPasteboard.general.items = []
+        let monitor = addUIInterruptionMonitor(withDescription: "Allow Paste") { alert in
+            for name in ["Allow Paste", "Paste"] {
+                let button = alert.buttons[name]
+                if button.exists {
+                    button.tap()
+                    return true
+                }
+            }
+            return false
+        }
+        defer { removeUIInterruptionMonitor(monitor) }
+        if copy.isHittable {
+            copy.tap()
+        } else {
+            copy.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let deadline = Date().addingTimeInterval(8)
+        while Date() < deadline {
+            for host in [springboard, app] {
+                for name in ["Allow Paste", "Paste"] where host.buttons[name].exists {
+                    host.buttons[name].tap()
+                }
+            }
+            if let value = UIPasteboard.general.string, !value.isEmpty {
+                return value
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.25))
+        }
+        return UIPasteboard.general.string ?? ""
     }
 
     private func shareSheetVisible(_ app: XCUIApplication) -> Bool {
