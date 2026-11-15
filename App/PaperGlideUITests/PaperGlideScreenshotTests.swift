@@ -10,6 +10,31 @@ import XCTest
 /// The test taps when the plane is below the next opening, the same rule
 /// as GlidePilot. After one real clear it only coasts into a collision.
 /// Nothing in that test forces the score.
+private final class PasteBox: @unchecked Sendable {
+    private let lock = NSLock()
+    private var stored: String?
+    private var finished = false
+
+    func finish(_ value: String?) {
+        lock.lock()
+        stored = value
+        finished = true
+        lock.unlock()
+    }
+
+    var isFinished: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return finished
+    }
+
+    var value: String? {
+        lock.lock()
+        defer { lock.unlock() }
+        return stored
+    }
+}
+
 final class PaperGlideScreenshotTests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -205,13 +230,16 @@ final class PaperGlideScreenshotTests: XCTestCase {
         return "I scored \(score) in Paper Glide"
     }
 
-    /// The runner reads `UIPasteboard.general` after Copy. A system paste prompt is accepted if it appears.
+    /// The runner reads `UIPasteboard.general.string` after Copy.
+    /// That read can block on the paste prompt, so it runs off the test thread while this thread taps Allow Paste.
     private func copiedShareText(_ app: XCUIApplication, copy: XCUIElement) -> String {
         UIPasteboard.general.items = []
         let monitor = addUIInterruptionMonitor(withDescription: "Allow Paste") { alert in
-            for name in ["Allow Paste", "Paste"] {
-                let button = alert.buttons[name]
-                if button.exists {
+            let buttons = alert.buttons.allElementsBoundByIndex
+            print("paste prompt: \(alert.label) buttons=\(buttons.map(\.label))")
+            for button in buttons {
+                let label = button.label.lowercased()
+                if label.contains("paste") || label == "allow" {
                     button.tap()
                     return true
                 }
@@ -224,20 +252,23 @@ final class PaperGlideScreenshotTests: XCTestCase {
         } else {
             copy.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
         }
+        let box = PasteBox()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let value = UIPasteboard.general.string
+            box.finish(value)
+        }
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        let deadline = Date().addingTimeInterval(8)
-        while Date() < deadline {
+        let deadline = Date().addingTimeInterval(12)
+        while Date() < deadline, !box.isFinished {
             for host in [springboard, app] {
                 for name in ["Allow Paste", "Paste"] where host.buttons[name].exists {
+                    print("tapping \(name)")
                     host.buttons[name].tap()
                 }
             }
-            if let value = UIPasteboard.general.string, !value.isEmpty {
-                return value
-            }
-            RunLoop.current.run(until: Date().addingTimeInterval(0.25))
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         }
-        return UIPasteboard.general.string ?? ""
+        return box.value ?? ""
     }
 
     private func shareSheetVisible(_ app: XCUIApplication) -> Bool {
