@@ -32,6 +32,17 @@ enum LaunchOptions {
         return stride
     }
 
+    #if DEBUG
+    /// Opens the death screen with a new best, the sync note, and the name prompt.
+    /// The flag is compiled out of Release. UI tests pass `-paperGlideWorstCaseDeath`.
+    static var forcesWorstCaseDeath: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideWorstCaseDeath")
+    }
+
+    /// This run's score for `forcesWorstCaseDeath`. Above zero so a reset store shows "New best!".
+    static let worstCaseDeathScore = 4
+    #endif
+
     private static func stringArgument(_ name: String) -> String? {
         let arguments = ProcessInfo.processInfo.arguments
         guard let flag = arguments.firstIndex(of: name) else { return nil }
