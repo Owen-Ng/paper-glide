@@ -10,6 +10,31 @@ import XCTest
 /// The test taps when the plane is below the next opening, the same rule
 /// as GlidePilot. After one real clear it only coasts into a collision.
 /// Nothing in that test forces the score.
+private final class PasteBox: @unchecked Sendable {
+    private let lock = NSLock()
+    private var stored: String?
+    private var finished = false
+
+    func finish(_ value: String?) {
+        lock.lock()
+        stored = value
+        finished = true
+        lock.unlock()
+    }
+
+    var isFinished: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return finished
+    }
+
+    var value: String? {
+        lock.lock()
+        defer { lock.unlock() }
+        return stored
+    }
+}
+
 final class PaperGlideScreenshotTests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -41,16 +66,51 @@ final class PaperGlideScreenshotTests: XCTestCase {
         let newBest = app.staticTexts["newBestLabel"]
         XCTAssertTrue(newBest.waitForExistence(timeout: 10))
         XCTAssertEqual(newBest.label, "New best!")
-        XCTAssertEqual(app.staticTexts["bestScoreLabel"].label, "Best score 1")
+        let bestBeforeShare = app.staticTexts["bestScoreLabel"].label
+        XCTAssertEqual(bestBeforeShare, "Best score 1")
         save("hook-03-death-new-best-HOOK")
 
-        tap(app.buttons["shareButton"], in: app)
-        let shareLabel = try assertShareSheet(app, contains: "I scored 1 in Paper Glide")
+        tapShare(app)
+        var copy = copyControl(app, timeout: 15)
+        if copy == nil, !shareSheetVisible(app) {
+            XCTContext.runActivity(named: "share retry") { _ in
+                print("share retry")
+            }
+            tapShare(app)
+            copy = copyControl(app, timeout: 15)
+        }
+        if copy == nil, shareSheetVisible(app) {
+            copy = copyControl(app, timeout: 8)
+        }
+        XCTAssertTrue(shareSheetVisible(app) || copy != nil, "Share sheet did not open. Nearby labels: \(nearbyShareLabels(app))")
+        XCTAssertNotNil(copy, "Copy was not in the share sheet. Nearby labels: \(nearbyShareLabels(app))")
         save("hook-04-share-sheet")
-        XCTAssertTrue(shareLabel.contains("Paper Glide"))
+        let pasted = copiedShareText(app, copy: copy!)
+        let expected = expectedShareText(app)
+        XCTAssertEqual(pasted, expected)
+        XCTAssertFalse(pasted.contains("http"))
+        XCTAssertFalse(pasted.contains("#"))
+        XCTAssertFalse(pasted.lowercased().contains("rank"))
         dismissShareSheet(app)
 
-        tap(app.buttons["homeButton"], in: app)
+        let deathScore = app.staticTexts["deathScore"]
+        XCTAssertTrue(deathScore.waitForExistence(timeout: 5))
+        XCTAssertEqual(deathScore.label, "Score 1")
+        XCTAssertEqual(app.staticTexts["newBestLabel"].label, "New best!")
+        let home = app.buttons["homeButton"]
+        XCTAssertTrue(home.waitForExistence(timeout: 5))
+        let hittableDeadline = Date().addingTimeInterval(8)
+        while Date() < hittableDeadline && !home.isHittable {
+            dismissShareSheet(app)
+        }
+        XCTAssertTrue(home.isHittable)
+        let best = app.staticTexts["bestScoreLabel"]
+        XCTAssertTrue(best.exists)
+        XCTAssertEqual(best.label, bestBeforeShare)
+        let retry = app.buttons["retryButton"]
+        XCTAssertTrue(retry.exists)
+        XCTAssertTrue(retry.isHittable)
+        home.tap()
         let startBest = app.staticTexts["startBestScore"]
         XCTAssertTrue(startBest.waitForExistence(timeout: 10))
         XCTAssertEqual(startBest.label, "Best score 1")
@@ -167,44 +227,133 @@ final class PaperGlideScreenshotTests: XCTestCase {
         Int(label.split(separator: " ").last.map(String.init) ?? "") ?? -1
     }
 
-    @discardableResult
-    private func assertShareSheet(_ app: XCUIApplication, contains expected: String) throws -> String {
-        let predicate = NSPredicate(format: "label CONTAINS %@", expected)
-        let hosts = [
-            app,
-            XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        ]
-        let deadline = Date().addingTimeInterval(10)
-        while Date() < deadline {
-            for host in hosts {
-                let match = host.descendants(matching: .any).matching(predicate).firstMatch
-                if match.exists {
-                    return match.label
+    /// This hooked run never claims a name, so the share text is the score on the death screen.
+    private func expectedShareText(_ app: XCUIApplication) -> String {
+        let label = app.staticTexts["deathScore"].label
+        let score = Int(label.split(separator: " ").last.map(String.init) ?? "") ?? -1
+        return "I scored \(score) in Paper Glide"
+    }
+
+    /// The runner reads `UIPasteboard.general.string` after Copy.
+    /// That read can block on the paste prompt, so it runs off the test thread while this thread taps Allow Paste.
+    private func copiedShareText(_ app: XCUIApplication, copy: XCUIElement) -> String {
+        UIPasteboard.general.items = []
+        let monitor = addUIInterruptionMonitor(withDescription: "Allow Paste") { alert in
+            let buttons = alert.buttons.allElementsBoundByIndex
+            print("paste prompt: \(alert.label) buttons=\(buttons.map(\.label))")
+            for button in buttons {
+                let label = button.label.lowercased()
+                if label.contains("paste") || label == "allow" {
+                    button.tap()
+                    return true
                 }
+            }
+            return false
+        }
+        defer { removeUIInterruptionMonitor(monitor) }
+        if copy.isHittable {
+            copy.tap()
+        } else {
+            copy.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
+        let box = PasteBox()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let value = UIPasteboard.general.string
+            box.finish(value)
+        }
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let deadline = Date().addingTimeInterval(12)
+        while Date() < deadline, !box.isFinished {
+            for host in [springboard, app] {
+                for name in ["Allow Paste", "Paste"] where host.buttons[name].exists {
+                    print("tapping \(name)")
+                    host.buttons[name].tap()
+                }
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+        return box.value ?? ""
+    }
+
+    private func shareSheetVisible(_ app: XCUIApplication) -> Bool {
+        let markers = ["LP.CaptionBar.BottomCaption", "Copy", "Save to Files", "Reminders"]
+        for host in shareHosts(app) {
+            if host.otherElements["LP.CaptionBar.BottomCaption"].exists { return true }
+            for name in markers where host.buttons[name].exists || host.staticTexts[name].exists {
+                return true
+            }
+        }
+        return false
+    }
+
+    private func copyControl(_ app: XCUIApplication, timeout: TimeInterval) -> XCUIElement? {
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            for host in shareHosts(app) {
+                let button = host.buttons["Copy"]
+                if button.exists { return button }
+                let text = host.staticTexts["Copy"]
+                if text.exists { return text }
+                let cell = host.cells["Copy"]
+                if cell.exists { return cell }
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.25))
         }
-        var nearby: [String] = []
+        return nil
+    }
+
+    private func nearbyShareLabels(_ app: XCUIApplication) -> [String] {
         let hint = NSPredicate(format: "label CONTAINS 'Glide' OR label CONTAINS 'score' OR label CONTAINS 'Share'")
-        for host in hosts {
-            for index in 0..<min(host.descendants(matching: .any).matching(hint).count, 12) {
-                nearby.append(host.descendants(matching: .any).matching(hint).element(boundBy: index).label)
+        var nearby: [String] = []
+        for host in shareHosts(app) {
+            let matches = host.descendants(matching: .any).matching(hint)
+            for index in 0..<min(matches.count, 12) {
+                nearby.append(matches.element(boundBy: index).label)
             }
         }
-        XCTFail("Share sheet did not show \"\(expected)\". Nearby labels: \(nearby)")
-        return ""
+        return nearby
+    }
+
+    private func shareHosts(_ app: XCUIApplication) -> [XCUIApplication] {
+        [
+            app,
+            XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        ]
     }
 
     private func dismissShareSheet(_ app: XCUIApplication) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        let labels = ["Close", "Cancel", "Done"]
+        let labels = ["Close", "Cancel", "Done", "Dismiss"]
         for host in [app, springboard] {
-            for label in labels where host.buttons[label].waitForExistence(timeout: 1) {
+            for label in labels where host.buttons[label].exists {
                 host.buttons[label].tap()
                 return
             }
         }
-        app.swipeDown()
+        let caption = app.otherElements["LP.CaptionBar.BottomCaption"]
+        if caption.exists {
+            let start = caption.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.2))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.95))
+            start.press(forDuration: 0.05, thenDragTo: end)
+            return
+        }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.12)).tap()
+    }
+
+    private func tapShare(_ app: XCUIApplication) {
+        let share = app.buttons["shareButton"]
+        let deadline = Date().addingTimeInterval(5)
+        while Date() < deadline && !share.isHittable {
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+        if share.isHittable {
+            share.tap()
+        } else if share.exists {
+            XCTContext.runActivity(named: "tapShare coordinate fallback") { _ in
+                print("tapShare coordinate fallback")
+            }
+            share.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
     }
 
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {
