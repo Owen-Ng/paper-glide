@@ -339,22 +339,22 @@ final class PaperGlideScreenshotTests: XCTestCase {
     }
 
     private func cardPreviewVisible(_ app: XCUIApplication) -> Bool {
-        let png = NSPredicate(format: "label CONTAINS[c] 'PNG'")
+        let preview = NSPredicate(format: "label CONTAINS[c] 'PNG' OR label == 'Paper Glide' OR label CONTAINS[c] 'Image'")
         for host in shareHosts(app) {
-            if host.staticTexts.matching(png).firstMatch.exists { return true }
-            if host.buttons.matching(png).firstMatch.exists { return true }
-            if host.images["Paper Glide"].exists { return true }
+            if host.staticTexts.matching(preview).firstMatch.exists { return true }
+            if host.buttons.matching(preview).firstMatch.exists { return true }
+            if host.images.matching(preview).firstMatch.exists { return true }
         }
         return false
     }
 
     private func nearbyShareLabels(_ app: XCUIApplication) -> [String] {
-        let hint = NSPredicate(format: "label CONTAINS 'Glide' OR label CONTAINS 'score' OR label CONTAINS 'Share'")
+        let hint = NSPredicate(format: "label CONTAINS 'Glide' OR label CONTAINS 'score' OR label CONTAINS 'Share' OR label CONTAINS 'Image'")
         var nearby: [String] = []
         for host in shareHosts(app) {
-            let matches = host.descendants(matching: .any).matching(hint)
-            for index in 0..<min(matches.count, 12) {
-                nearby.append(matches.element(boundBy: index).label)
+            let matches = host.descendants(matching: .any).matching(hint).allElementsBoundByIndex
+            for element in matches.prefix(8) {
+                nearby.append(element.label)
             }
         }
         return nearby
