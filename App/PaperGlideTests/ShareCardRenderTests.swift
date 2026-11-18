@@ -14,14 +14,14 @@ final class ShareCardRenderTests: XCTestCase {
         XCTAssertEqual(owen.image.scale, 1)
         XCTAssertGreaterThan(owen.png.count, 8_000)
         XCTAssertEqual(Array(owen.png.prefix(8)), [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A])
-        XCTAssertEqual(sample(owen.image, 20, 20), (189, 219, 236), "sky")
-        XCTAssertEqual(sample(owen.image, 111, 1300), (248, 227, 198), "facade")
-        XCTAssertEqual(sample(owen.image, 112, 1300), (247, 239, 226), "gap")
-        XCTAssertEqual(sample(owen.image, 40, 1241), (248, 227, 198), "facade top")
-        XCTAssertEqual(sample(owen.image, 40, 1240), (247, 239, 226), "above facade")
-        XCTAssertEqual(sample(owen.image, 470, 260), (214, 107, 91), "logo")
-        XCTAssertEqual(sample(owen.image, 500, 300), (206, 225, 233), "window")
-        XCTAssertEqual(sample(owen.image, 150, 170), (240, 242, 238), "cloud")
+        expect(owen.image, 20, 20, 189, 219, 236, "sky")
+        expect(owen.image, 111, 1300, 248, 227, 198, "facade")
+        expect(owen.image, 112, 1300, 247, 239, 226, "gap")
+        expect(owen.image, 40, 1241, 248, 227, 198, "facade top")
+        expect(owen.image, 40, 1240, 247, 239, 226, "above facade")
+        expect(owen.image, 470, 260, 214, 107, 91, "logo")
+        expect(owen.image, 500, 300, 206, 225, 233, "window")
+        expect(owen.image, 150, 170, 240, 242, 238, "cloud")
         attach(owen, name: "death-card-owen-27")
 
         let long = try XCTUnwrap(ShareCardRenderer.render(ShareCard.copy(score: 4096, username: "skyward_pilot_01")))
@@ -49,6 +49,23 @@ final class ShareCardRenderTests: XCTestCase {
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+    }
+
+    private func expect(
+        _ image: UIImage,
+        _ x: Int,
+        _ y: Int,
+        _ red: Int,
+        _ green: Int,
+        _ blue: Int,
+        _ name: String,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let pixel = sample(image, x, y)
+        XCTAssertEqual(pixel.0, red, "\(name) red at \(x),\(y) was \(pixel)", file: file, line: line)
+        XCTAssertEqual(pixel.1, green, "\(name) green at \(x),\(y) was \(pixel)", file: file, line: line)
+        XCTAssertEqual(pixel.2, blue, "\(name) blue at \(x),\(y) was \(pixel)", file: file, line: line)
     }
 
     private func sample(_ image: UIImage, _ x: Int, _ y: Int) -> (Int, Int, Int) {
