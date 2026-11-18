@@ -145,12 +145,13 @@ struct DeathView: View {
             username: cloud.snapshot.username,
             renderedPNG: rendered?.png
         )
-        if case .card(let png, let caption) = offer, let image = rendered?.image {
+        if case .card(let png, let caption) = offer {
+            let card = ScoreCardPNG(png: png)
             ShareLink(
-                item: ScoreCardPNG(png: png),
+                item: card,
                 subject: Text(copy.subject),
                 message: Text(caption),
-                preview: SharePreview(copy.subject, image: image)
+                preview: SharePreview(copy.subject, image: card)
             ) {
                 shareLabel(tight: tight)
             }
