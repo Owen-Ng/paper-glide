@@ -6,6 +6,24 @@ enum LaunchOptions {
         ProcessInfo.processInfo.arguments.contains("-paperGlideResetStore")
     }
 
+    #if DEBUG
+    /// Debug launches only. After the active-session mark is saved, the process traps.
+    /// The next launch reports that session as an unclean exit. Release builds omit this.
+    static var forceCrash: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideForceCrash")
+    }
+
+    /// Shows the real queued leaderboard click counts for the UI test. Release builds omit this.
+    static var analyticsReadout: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideAnalyticsReadout")
+    }
+
+    /// Fills the leaderboard with enough rows to scroll. Release builds omit this.
+    static var leaderboardFixture: Bool {
+        ProcessInfo.processInfo.arguments.contains("-paperGlideLeaderboardFixture")
+    }
+    #endif
+
     /// When set, physics waits on the coach screen. The first tap ends the run
     /// at this score through `GameSession.endRun(withScore:)`. This is a test hook,
     /// not a simulated flight.

@@ -251,6 +251,17 @@ public final class AccountSync: @unchecked Sendable {
         withLock { snapshotLocked() }
     }
 
+    /// Anonymous access token for the analytics queue.
+    /// Nil when Supabase is not configured or the path is offline, so a flush leaves the queue on disk.
+    public func accessToken() async -> String? {
+        await gate.lock()
+        defer { gate.unlock() }
+        let ready = withLock { online && configured }
+        guard ready else { return nil }
+        await ensureSessionUnlocked()
+        return withLock { session?.accessToken }
+    }
+
     private struct FlushContext {
         var token: String
         var pending: [StoredRun]

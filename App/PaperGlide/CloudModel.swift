@@ -11,6 +11,7 @@ final class CloudModel: ObservableObject {
     @Published private(set) var busy = false
 
     private let sync: AccountSync
+    let analytics: AnalyticsCenter
     private let monitor = NWPathMonitor()
     private var pathOnline = true
     private var started = false
@@ -29,12 +30,16 @@ final class CloudModel: ObservableObject {
         } else {
             backend = IdleAccountBackend()
         }
-        sync = AccountSync(
+        let sync = AccountSync(
             backend: backend,
             sessions: sessions,
             store: store,
             configured: config.isConfigured
         )
+        self.sync = sync
+        analytics = AnalyticsCenter {
+            await sync.accessToken()
+        }
         monitor.pathUpdateHandler = { [weak self] path in
             let online = path.status == .satisfied
             Task { @MainActor in
@@ -92,7 +97,9 @@ final class CloudModel: ObservableObject {
         }
         #endif
         snapshot = sync.prepare(online: pathOnline)
+        await analytics.boot()
         snapshot = await sync.bootstrap()
+        await analytics.client.flushNow()
         guard snapshot.online else { return }
         busy = true
         for period in BoardPeriod.allCases {
@@ -157,6 +164,18 @@ final class CloudModel: ObservableObject {
     }
 
     func presentation(localBest: Int) -> BoardPresentation {
+        #if DEBUG
+        if LaunchOptions.leaderboardFixture {
+            let entries = (1...40).map { rank in
+                BoardEntry(rank: rank, username: "pilot\(rank)", score: 200 - rank, isYou: false)
+            }
+            return BoardPresentation(
+                entries: entries,
+                caption: BoardCopy.caption(for: period),
+                canPullToRefresh: false
+            )
+        }
+        #endif
         let cached = snapshot.boards[period]
         let time = cached.map { BoardTimeFormat.string($0.fetchedAt) }
         return BoardPresenter.present(

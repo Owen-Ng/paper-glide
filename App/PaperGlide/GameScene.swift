@@ -95,6 +95,7 @@ final class PaperGlideScene: SKScene {
             return
         }
         let coachWasShowing = session.snapshot.showCoach
+        PlayClicks.recordFlap()
         session.tap()
         if coachWasShowing, let score = LaunchOptions.scriptedEndScore {
             session.endRun(withScore: score)

@@ -9,3 +9,4 @@ xcuserdata/
 **/*.xcodeproj/project.xcworkspace/xcuserdata/
 **/*.xcodeproj/xcuserdata/
 App/Config/Secrets.xcconfig
+dashboard/config.js
