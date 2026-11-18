@@ -1,6 +1,7 @@
 import CoreGraphics
 import CoreText
 import CoreTransferable
+import PaperGlideCore
 import UIKit
 import UniformTypeIdentifiers
 
