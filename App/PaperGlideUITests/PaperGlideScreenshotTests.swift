@@ -10,12 +10,19 @@ import XCTest
 /// The test taps when the plane is below the next opening, the same rule
 /// as GlidePilot. After one real clear it only coasts into a collision.
 /// Nothing in that test forces the score.
+private struct CopiedShare: @unchecked Sendable {
+    var text: String?
+    var pixelWidth = 0
+    var pixelHeight = 0
+    var byteCount = 0
+}
+
 private final class PasteBox: @unchecked Sendable {
     private let lock = NSLock()
-    private var stored: String?
+    private var stored = CopiedShare()
     private var finished = false
 
-    func finish(_ value: String?) {
+    func finish(_ value: CopiedShare) {
         lock.lock()
         stored = value
         finished = true
@@ -28,7 +35,7 @@ private final class PasteBox: @unchecked Sendable {
         return finished
     }
 
-    var value: String? {
+    var value: CopiedShare {
         lock.lock()
         defer { lock.unlock() }
         return stored
@@ -84,13 +91,24 @@ final class PaperGlideScreenshotTests: XCTestCase {
         }
         XCTAssertTrue(shareSheetVisible(app) || copy != nil, "Share sheet did not open. Nearby labels: \(nearbyShareLabels(app))")
         XCTAssertNotNil(copy, "Copy was not in the share sheet. Nearby labels: \(nearbyShareLabels(app))")
+        let saveImage = labeledControl(app, name: "Save Image", timeout: 8)
+        XCTAssertNotNil(saveImage, "Save Image was not in the share sheet. Nearby labels: \(nearbyShareLabels(app))")
+        XCTAssertTrue(cardPreviewVisible(app), "Share preview did not show the card. Nearby labels: \(nearbyShareLabels(app))")
         save("hook-04-share-sheet")
-        let pasted = copiedShareText(app, copy: copy!)
+        let pasted = copiedSharePayload(app, copy: copy!)
         let expected = expectedShareText(app)
-        XCTAssertEqual(pasted, expected)
-        XCTAssertFalse(pasted.contains("http"))
-        XCTAssertFalse(pasted.contains("#"))
-        XCTAssertFalse(pasted.lowercased().contains("rank"))
+        // Copy now places the PNG card on the pasteboard. The caption is the
+        // share message, not that pasteboard string.
+        XCTAssertGreaterThan(pasted.byteCount, 8_000, "Copy did not place the score card image")
+        XCTAssertEqual(pasted.pixelWidth, 1080, "copied card width")
+        XCTAssertEqual(pasted.pixelHeight, 1350, "copied card height")
+        if let text = pasted.text, !text.isEmpty {
+            XCTAssertEqual(text, expected)
+            XCTAssertFalse(text.contains("http"))
+            XCTAssertFalse(text.contains("#"))
+            XCTAssertFalse(text.lowercased().contains("rank"))
+            XCTAssertFalse(text.lowercased().contains("flappy"))
+        }
         dismissShareSheet(app)
 
         let deathScore = app.staticTexts["deathScore"]
@@ -234,9 +252,9 @@ final class PaperGlideScreenshotTests: XCTestCase {
         return "I scored \(score) in Paper Glide"
     }
 
-    /// The runner reads `UIPasteboard.general.string` after Copy.
+    /// The runner reads the pasteboard after Copy.
     /// That read can block on the paste prompt, so it runs off the test thread while this thread taps Allow Paste.
-    private func copiedShareText(_ app: XCUIApplication, copy: XCUIElement) -> String {
+    private func copiedSharePayload(_ app: XCUIApplication, copy: XCUIElement) -> CopiedShare {
         UIPasteboard.general.items = []
         let monitor = addUIInterruptionMonitor(withDescription: "Allow Paste") { alert in
             let buttons = alert.buttons.allElementsBoundByIndex
@@ -258,8 +276,22 @@ final class PaperGlideScreenshotTests: XCTestCase {
         }
         let box = PasteBox()
         DispatchQueue.global(qos: .userInitiated).async {
-            let value = UIPasteboard.general.string
-            box.finish(value)
+            let board = UIPasteboard.general
+            let image = board.image
+            let png = board.data(forPasteboardType: "public.png")
+            var payload = CopiedShare(text: board.string)
+            if let image {
+                payload.pixelWidth = Int(image.size.width * image.scale)
+                payload.pixelHeight = Int(image.size.height * image.scale)
+                payload.byteCount = image.pngData()?.count ?? png?.count ?? 0
+            } else if let png {
+                payload.byteCount = png.count
+                if let image = UIImage(data: png) {
+                    payload.pixelWidth = Int(image.size.width * image.scale)
+                    payload.pixelHeight = Int(image.size.height * image.scale)
+                }
+            }
+            box.finish(payload)
         }
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
         let deadline = Date().addingTimeInterval(12)
@@ -272,7 +304,7 @@ final class PaperGlideScreenshotTests: XCTestCase {
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         }
-        return box.value ?? ""
+        return box.value
     }
 
     private func shareSheetVisible(_ app: XCUIApplication) -> Bool {
@@ -287,19 +319,33 @@ final class PaperGlideScreenshotTests: XCTestCase {
     }
 
     private func copyControl(_ app: XCUIApplication, timeout: TimeInterval) -> XCUIElement? {
+        labeledControl(app, name: "Copy", timeout: timeout)
+    }
+
+    private func labeledControl(_ app: XCUIApplication, name: String, timeout: TimeInterval) -> XCUIElement? {
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
             for host in shareHosts(app) {
-                let button = host.buttons["Copy"]
+                let button = host.buttons[name]
                 if button.exists { return button }
-                let text = host.staticTexts["Copy"]
+                let text = host.staticTexts[name]
                 if text.exists { return text }
-                let cell = host.cells["Copy"]
+                let cell = host.cells[name]
                 if cell.exists { return cell }
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.25))
         }
         return nil
+    }
+
+    private func cardPreviewVisible(_ app: XCUIApplication) -> Bool {
+        let png = NSPredicate(format: "label CONTAINS[c] 'PNG'")
+        for host in shareHosts(app) {
+            if host.staticTexts.matching(png).firstMatch.exists { return true }
+            if host.buttons.matching(png).firstMatch.exists { return true }
+            if host.images["Paper Glide"].exists { return true }
+        }
+        return false
     }
 
     private func nearbyShareLabels(_ app: XCUIApplication) -> [String] {

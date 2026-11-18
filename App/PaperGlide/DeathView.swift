@@ -5,11 +5,12 @@ struct DeathView: View {
     @ObservedObject var model: AppModel
     @ObservedObject var cloud: CloudModel
     @State private var draft = ""
+    @State private var cardCache = ShareCardCache()
 
     /// Rebuilt whenever the run score or the claimed name changes, so a name
-    /// saved on this screen is what Share sends.
-    private var shareText: String {
-        ShareMessage.text(score: model.score, username: cloud.snapshot.username)
+    /// saved on this screen is what the card and its caption use.
+    private var shareCopy: ShareCardCopy {
+        ShareCard.copy(score: model.score, username: cloud.snapshot.username)
     }
 
     var body: some View {
@@ -108,19 +109,7 @@ struct DeathView: View {
             .controlSize(.large)
             .accessibilityIdentifier("retryButton")
 
-            ShareLink(
-                item: shareText,
-                subject: Text(ShareMessage.subject)
-            ) {
-                Text("Share")
-                    .font(.system(.title3, design: .rounded).weight(.semibold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, tight ? 2 : 6)
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.large)
-            .accessibilityIdentifier("shareButton")
-            .id(shareText)
+            shareControl(tight: tight)
 
             Button(action: model.showHome) {
                 Text("Home")
@@ -138,5 +127,60 @@ struct DeathView: View {
                 .accessibilityIdentifier("deathLeaderboardButton")
         }
         .padding(.horizontal, tight ? 24 : 48)
+    }
+
+    private func shareLabel(tight: Bool) -> some View {
+        Text("Share")
+            .font(.system(.title3, design: .rounded).weight(.semibold))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, tight ? 2 : 6)
+    }
+
+    @ViewBuilder
+    private func shareControl(tight: Bool) -> some View {
+        let copy = shareCopy
+        let rendered = cardCache.card(for: copy)
+        let offer = ShareCard.offer(
+            score: model.score,
+            username: cloud.snapshot.username,
+            renderedPNG: rendered?.png
+        )
+        if case .card(let png, let caption) = offer, let image = rendered?.image {
+            ShareLink(
+                item: ScoreCardPNG(png: png),
+                subject: Text(copy.subject),
+                message: Text(caption),
+                preview: SharePreview(copy.subject, image: image)
+            ) {
+                shareLabel(tight: tight)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .accessibilityIdentifier("shareButton")
+            .id(caption)
+        } else {
+            let caption = copy.caption
+            ShareLink(item: caption, subject: Text(copy.subject)) {
+                shareLabel(tight: tight)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .accessibilityIdentifier("shareButton")
+            .id(caption)
+        }
+    }
+}
+
+/// Holds the last card so the death screen does not redraw it on every frame.
+private final class ShareCardCache {
+    private var key: String?
+    private var rendered: RenderedShareCard?
+
+    func card(for copy: ShareCardCopy) -> RenderedShareCard? {
+        let key = "\(copy.scoreText)\u{1f}\(copy.scoredLine)"
+        if self.key == key { return rendered }
+        rendered = ShareCardRenderer.render(copy)
+        self.key = key
+        return rendered
     }
 }

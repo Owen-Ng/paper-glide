@@ -267,6 +267,12 @@ jobs:
             find /tmp/paper-glide-screenshots/png -iname 'death-worst-*pro-max*.png' -type f | grep -q . \
               || { echo "Pro Max layout test passed but no Pro Max death screenshot was extracted."; exit 1; }
           fi
+          card_count=$(find /tmp/paper-glide-screenshots/png -name 'death-card-*.png' -type f | wc -l | tr -d ' ')
+          echo "CARD_PNG_COUNT=$card_count"
+          if [[ "${{ steps.tests.outcome }}" == "success" && "$card_count" -eq 0 ]]; then
+            echo "Tests passed but no rendered share-card PNG was extracted."
+            exit 1
+          fi
 
       - name: Upload screenshots
         if: always()

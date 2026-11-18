@@ -26,6 +26,8 @@
 		E7A100000000000000000077 /* SupabaseHTTPBackendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */; };
 		E7A100000000000000000078 /* ShareMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000068 /* ShareMessageTests.swift */; };
 		E7A100000000000000000091 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A100000000000000000090 /* AnalyticsTests.swift */; };
+		E7A1000000000000000000A2 /* ShareCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1000000000000000000A1 /* ShareCardTests.swift */; };
+		E7A1000000000000000000A4 /* ShareCardRenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1000000000000000000A3 /* ShareCardRenderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/SupabaseHTTPBackendTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000068 /* ShareMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/ShareMessageTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000090 /* AnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/AnalyticsTests.swift; sourceTree = "<group>"; };
+		E7A1000000000000000000A1 /* ShareCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../Tests/PaperGlideCoreTests/ShareCardTests.swift; sourceTree = "<group>"; };
+		E7A1000000000000000000A3 /* ShareCardRenderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperGlideTests/ShareCardRenderTests.swift; sourceTree = "<group>"; };
 		E7A100000000000000000080 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Supabase.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +153,8 @@
 				E7A100000000000000000066 /* AccountSyncTests.swift */,
 				E7A100000000000000000067 /* SupabaseHTTPBackendTests.swift */,
 				E7A100000000000000000068 /* ShareMessageTests.swift */,
+				E7A1000000000000000000A1 /* ShareCardTests.swift */,
+				E7A1000000000000000000A3 /* ShareCardRenderTests.swift */,
 				E7A100000000000000000090 /* AnalyticsTests.swift */,
 			);
 			name = PaperGlideTests;
@@ -331,6 +337,8 @@
 				E7A100000000000000000076 /* AccountSyncTests.swift in Sources */,
 				E7A100000000000000000077 /* SupabaseHTTPBackendTests.swift in Sources */,
 				E7A100000000000000000078 /* ShareMessageTests.swift in Sources */,
+				E7A1000000000000000000A2 /* ShareCardTests.swift in Sources */,
+				E7A1000000000000000000A4 /* ShareCardRenderTests.swift in Sources */,
 				E7A100000000000000000091 /* AnalyticsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,8 +469,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Paper Glide";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Paper Glide saves the score card to your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -492,6 +502,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Paper Glide";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Paper Glide saves the score card to your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
