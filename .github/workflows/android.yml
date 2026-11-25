@@ -109,10 +109,13 @@ jobs:
 
       - name: KVM
         run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-kvm
-          if [[ -e /dev/kvm ]]; then sudo chmod 666 /dev/kvm; fi
-          ls -l /dev/kvm
+          set -euo pipefail
+          if [[ -e /dev/kvm ]]; then
+            sudo chmod 666 /dev/kvm
+            ls -l /dev/kvm
+          else
+            echo "No /dev/kvm on this runner. The emulator will use software emulation."
+          fi
 
       - name: Install the emulator image
         run: |
@@ -134,11 +137,12 @@ jobs:
       - name: Create the virtual device
         run: |
           set -euo pipefail
+          set +o pipefail
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd \
             --name paper \
             --package "system-images;android-${{ matrix.api }};google_apis;x86_64" \
-            --device pixel_5 \
             --force
+          set -o pipefail
           CFG="$HOME/.android/avd/paper.avd/config.ini"
           {
             echo "hw.lcd.width=${{ matrix.width }}"
@@ -153,6 +157,8 @@ jobs:
       - name: Boot the emulator
         run: |
           set -euo pipefail
+          accel=off
+          if [[ -w /dev/kvm ]]; then accel=on; fi
           nohup "$ANDROID_HOME/emulator/emulator" \
             -avd paper \
             -no-window \
@@ -160,7 +166,7 @@ jobs:
             -no-boot-anim \
             -no-snapshot \
             -gpu swiftshader_indirect \
-            -accel on \
+            -accel "$accel" \
             -memory 2048 \
             > /tmp/emulator.log 2>&1 &
           "$ANDROID_HOME/platform-tools/adb" wait-for-device
