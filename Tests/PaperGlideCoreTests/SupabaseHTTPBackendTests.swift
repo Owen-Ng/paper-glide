@@ -52,6 +52,26 @@ final class SupabaseHTTPBackendTests: XCTestCase {
         XCTAssertEqual(Set(SupabaseURLStub.capturedAPIKeys), ["test-anon-key"])
         XCTAssertTrue(SupabaseURLStub.capturedPaths.contains("/auth/v1/signup"))
         XCTAssertTrue(SupabaseURLStub.capturedPaths.contains("/rest/v1/rpc/submit_run"))
+        XCTAssertEqual(SupabaseURLStub.submittedPlatforms, ["ios", "ios"])
+    }
+
+    func testDeleteMyDataPostsTheCallerRPC() async throws {
+        let backend = makeBackend()
+        let session = try await backend.signInAnonymously()
+        try await backend.deleteMyData(accessToken: session.accessToken)
+        XCTAssertTrue(SupabaseURLStub.capturedPaths.contains("/rest/v1/rpc/delete_my_data"))
+        XCTAssertEqual(SupabaseURLStub.deleteBodies, ["{}"])
+        XCTAssertEqual(Set(SupabaseURLStub.capturedAPIKeys), ["test-anon-key"])
+        let event = QueuedEvent(
+            id: "event-1",
+            kind: .click,
+            occurredAt: SupabaseURLStub.fake.now,
+            page: "start",
+            control: "play",
+            count: 1
+        )
+        let json = SupabaseAnalyticsTransport.json(event)
+        XCTAssertEqual(json["platform"] as? String, "ios")
     }
 
     func testTakenResponseDoesNotEchoTheName() async throws {
@@ -108,12 +128,16 @@ final class SupabaseURLStub: URLProtocol {
     static var capturedAPIKeys: [String] = []
     static var capturedPaths: [String] = []
     static var claimBodies: [String] = []
+    static var submittedPlatforms: [String] = []
+    static var deleteBodies: [String] = []
 
     static func reset() {
         fake = FakeAccountBackend()
         capturedAPIKeys = []
         capturedPaths = []
         claimBodies = []
+        submittedPlatforms = []
+        deleteBodies = []
     }
 
     override class func canInit(with request: URLRequest) -> Bool { true }
@@ -167,7 +191,12 @@ final class SupabaseURLStub: URLProtocol {
                 return (200, ["ok": false, "error": wire(reason)])
             }
         }
+        if path.hasSuffix("/rpc/delete_my_data") {
+            Self.deleteBodies.append(String(data: body, encoding: .utf8) ?? "")
+            return (200, ["ok": true, "result": "deleted"])
+        }
         if path.hasSuffix("/rpc/submit_run") {
+            Self.submittedPlatforms.append(json["platform"] as? String ?? "")
             let run = StoredRun(
                 id: json["run_id"] as? String ?? "",
                 score: integer(json["score"]),

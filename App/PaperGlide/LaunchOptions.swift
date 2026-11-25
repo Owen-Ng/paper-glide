@@ -24,15 +24,16 @@ enum LaunchOptions {
     }
     #endif
 
+    #if DEBUG
     /// When set, physics waits on the coach screen. The first tap ends the run
     /// at this score through `GameSession.endRun(withScore:)`. This is a test hook,
-    /// not a simulated flight.
+    /// not a simulated flight. Release builds omit it.
     static var scriptedEndScore: Int? {
         guard let raw = stringArgument("-paperGlideEndScore") else { return nil }
         return Int(raw)
     }
 
-    /// Fixed window seed. Normal launches stay random.
+    /// Fixed window seed. Normal launches stay random. Release builds omit it.
     static var seed: UInt64? {
         guard let raw = stringArgument("-paperGlideSeed") else { return nil }
         return UInt64(raw)
@@ -40,7 +41,7 @@ enum LaunchOptions {
 
     /// When set, the free-running clock is paused. Each Glide tap applies one real
     /// flap and then advances the simulation by this many seconds. Coast advances
-    /// the same simulation with no flap.
+    /// the same simulation with no flap. Release builds omit it.
     static var guidedStride: Double? {
         guard let raw = stringArgument("-paperGlideGuidedStride"),
               let stride = Double(raw),
@@ -50,7 +51,6 @@ enum LaunchOptions {
         return stride
     }
 
-    #if DEBUG
     /// Opens the death screen with a new best, the sync note, and the name prompt.
     /// The flag is compiled out of Release. UI tests pass `-paperGlideWorstCaseDeath`.
     static var forcesWorstCaseDeath: Bool {
@@ -59,7 +59,17 @@ enum LaunchOptions {
 
     /// This run's score for `forcesWorstCaseDeath`. Above zero so a reset store shows "New best!".
     static let worstCaseDeathScore = 4
-    #endif
+
+    /// `success`, `failure`, or `offline`. UI tests use this instead of a network call.
+    static var deleteStub: String? {
+        stringArgument("-paperGlideDeleteStub")
+    }
+
+    /// Seeds the local best after a store reset so the delete test can watch it clear.
+    static var presetBest: Int? {
+        guard let raw = stringArgument("-paperGlidePresetBest") else { return nil }
+        return Int(raw)
+    }
 
     private static func stringArgument(_ name: String) -> String? {
         let arguments = ProcessInfo.processInfo.arguments
@@ -68,4 +78,5 @@ enum LaunchOptions {
         guard valueIndex < arguments.endIndex else { return nil }
         return arguments[valueIndex]
     }
+    #endif
 }

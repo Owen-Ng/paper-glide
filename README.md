@@ -69,7 +69,7 @@ Owen does not need a project checked in. Create one, then point the app at it:
 
 1. Create a free project at [supabase.com/dashboard](https://supabase.com/dashboard). The org can have two active free projects. This game needs one.
 2. In **Authentication → Sign In / Providers** (or **Authentication → Providers**), enable **Anonymous sign-ins**. Leave the default anonymous rate limit (30 new anonymous users per hour per IP) on.
-3. Open **SQL Editor → New query**, paste the whole file `supabase/migrations/20261109190000_accounts_leaderboards.sql`, and run it. It creates `profiles` and `runs`, the username and score checks, and the RPCs `claim_username`, `submit_run`, `leaderboard`, and `my_username`. It does not contain keys.
+3. Open **SQL Editor → New query**, paste the whole file `supabase/migrations/20261109190000_accounts_leaderboards.sql`, and run it. It creates `profiles` and `runs`, the username and score checks, and the RPCs `claim_username`, `submit_run`, `leaderboard`, and `my_username`. It does not contain keys. After the analytics migration, also run `supabase/migrations/20261125190000_delete_and_platform.sql`. That adds `delete_my_data()` and a `platform` column (`ios` or `android`) on runs and analytics events. Existing rows are backfilled as `ios`.
 4. If the `auth.users` trigger errors, delete the two trigger statements (`handle_new_user` can stay) and run the file again. `claim_username` and `submit_run` insert the profile row themselves.
 5. In **Project Settings → API**, copy the **Project URL** and the **anon public** key (or the publishable key). Do not copy the **service_role** key.
 6. Copy `App/Config/Secrets.example.xcconfig` to `App/Config/Secrets.xcconfig`. That file is gitignored. Set:
@@ -101,9 +101,13 @@ App/PaperGlide/             SwiftUI + SpriteKit
 
 The local package path from the Xcode project is the repo root.
 
+`fixtures/golden/` holds JSON oracles for a seeded run: plane position per physics step, score, difficulty ramp, and obstacle gap and spacing. `swift run GenerateGoldenFixtures fixtures/golden` rewrites them from PaperGlideCore. The format and tolerances are in `fixtures/golden/README.md`. The Kotlin port consumes those files unchanged.
+
+The shipping build is marketing version **1.0**, build **1**. `ITSAppUsesNonExemptEncryption` is false. Release builds omit the crash hook and the test launch arguments (`-paperGlideEndScore`, `-paperGlideWorstCaseDeath`, `-paperGlideSeed`, `-paperGlideGuidedStride`). CI builds the Release configuration and checks the binary.
+
 ## Screens
 
-- **Start:** best score, Play, Leaderboard, and Report a problem. The first launch offers a name. "later" dismisses it. A sync chip shows while a finished run is still waiting. Report a problem opens a paper card on the start sky.
+- **Start:** best score, Play, Leaderboard, and Report a problem. Next to Report is a low-emphasis **Delete my data** link. Confirming while online removes that account's name, scores, reports, and analytics events and resets this device to a fresh install. Nothing is queued if the device is offline, and the deletion is not an analytics event. The first launch offers a name. "later" dismisses it. A sync chip shows while a finished run is still waiting. Report a problem opens a paper card on the start sky.
 - **Play:** score, and the coach hint until the first tap ever.
 - **End:** score, "New best!" when this run beat the stored best, best, then Retry, Share, Home, and a secondary Leaderboard. The sync note and the name prompt sit under that cluster. On a short phone only that lower area scrolls, so the four actions stay on the first screen. Share opens the system share sheet with a 1080×1350 score card and the same sentence as the caption. The card shows the logo mark, "Paper Glide", "{username} scored" (or "I scored" when there is no name), and N, including 0. With no claimed name the caption is "I scored N in Paper Glide". With a claimed name it is "I scored N in Paper Glide as {username}". The subject is "Paper Glide". Saving a name on this screen and then sharing uses that name. If the card cannot be drawn, Share sends the caption text alone. There is no link and no rank. A new local best can offer the name once per launch if it was skipped or the device was offline.
 - **Leaderboard:** Daily, Weekly, and All-time. Back returns to the screen that opened it.
@@ -123,7 +127,9 @@ python3 -m http.server 8787
 
 Open `http://localhost:8787`. The default view is Last 7 days, grouped by Day. Range and grouping are stored in the URL. `config.js` is gitignored. Do not put the service-role key in it.
 
-`node --test dashboard/test/logic.test.mjs` checks Toronto bucketing, the default range, and the on-screen copy. `scripts/test-analytics-sql.sh` applies both migrations to a throwaway local database and checks the allowlist, rollups, empty ranges, and 90-day cleanup. It does not connect to the hosted project.
+The controls include a platform filter: All, iOS, or Android. All is the default and is omitted from the URL. iOS and Android are stored as `platform`. Player reports and crash details stay unfiltered because those tables do not carry a platform.
+
+`node --test dashboard/test/logic.test.mjs` checks Toronto bucketing, the default range, the platform filter, and the on-screen copy. `scripts/test-analytics-sql.sh` applies the migrations to a throwaway local database and checks the allowlist, rollups, empty ranges, 90-day cleanup, the platform column, and `delete_my_data()`. It does not connect to the hosted project.
 
 ## Supabase analytics setup
 

@@ -6,7 +6,9 @@ struct StartView: View {
     @ObservedObject var cloud: CloudModel
     @State private var draft = ""
     @State private var showReport = false
-    @State private var toast: String?
+    @State private var confirmDelete = false
+    @State private var deleting = false
+    @State private var toast: (id: String, text: String)?
     @State private var ownedFrames: [String: CGRect] = [:]
 
     var body: some View {
@@ -61,17 +63,15 @@ struct StartView: View {
                                 cloud.analytics.record(page: "start", control: "leaderboard")
                                 model.showLeaderboard()
                             }
+                            .buttonStyle(.bordered)
+                            .font(.system(.body, design: .rounded))
                             .accessibilityIdentifier("leaderboardButton")
                             .controlFrame("leaderboard")
-                            Button("Report a problem") {
-                                cloud.analytics.record(page: "start", control: "report")
-                                showReport = true
+                            HStack(alignment: .center, spacing: 14) {
+                                reportButton
+                                deleteLink
                             }
-                            .accessibilityIdentifier("reportButton")
-                            .controlFrame("report")
                         }
-                        .buttonStyle(.bordered)
-                        .font(.system(.body, design: .rounded))
                         .padding(.horizontal, 48)
                         if cloud.snapshot.showsLaunchPrompt {
                             NamePromptCard(
@@ -100,6 +100,31 @@ struct StartView: View {
                         cloud.analytics.record(page: "start", control: "other")
                     }
                 })
+                if confirmDelete {
+                    DeleteDataDialog(deleting: deleting, onCancel: {
+                        guard !deleting else { return }
+                        confirmDelete = false
+                    }, onDelete: {
+                        guard !deleting else { return }
+                        deleting = true
+                        Task {
+                            let result = await cloud.deleteMyData()
+                            if result == .deleted {
+                                model.resetToFreshInstall()
+                            }
+                            deleting = false
+                            confirmDelete = false
+                            switch result {
+                            case .deleted:
+                                toast = ("deleteToast", "Your data is deleted.")
+                            case .offline:
+                                toast = ("deleteToast", "You're offline. Connect and try again.")
+                            case .failed:
+                                toast = ("deleteToast", "Something went wrong. Nothing was deleted. Try again.")
+                            }
+                        }
+                    })
+                }
                 if showReport {
                     ReportSheet(
                         onClose: { showReport = false },
@@ -108,14 +133,14 @@ struct StartView: View {
                         },
                         onFinished: { result in
                             showReport = false
-                            toast = result == .sent ? ReportCopy.thanks : ReportCopy.saved
+                            toast = ("reportToast", result == .sent ? ReportCopy.thanks : ReportCopy.saved)
                         }
                     )
                 }
                 if let toast {
                     VStack {
                         Spacer()
-                        Text(toast)
+                        Text(toast.text)
                             .font(.system(.body, design: .rounded))
                             .foregroundStyle(AppTheme.ink)
                             .padding(.horizontal, 16)
@@ -123,16 +148,38 @@ struct StartView: View {
                             .background(AppTheme.paper, in: Capsule())
                             .shadow(color: .black.opacity(0.12), radius: 8, y: 3)
                             .padding(.bottom, 28)
-                            .accessibilityIdentifier("reportToast")
+                            .accessibilityIdentifier(toast.id)
                     }
                     .allowsHitTesting(false)
-                    .task(id: toast) {
+                    .task(id: toast.text) {
                         try? await Task.sleep(nanoseconds: 2_500_000_000)
                         self.toast = nil
                     }
                 }
             }
         }
+    }
+
+    private var reportButton: some View {
+        Button("Report a problem") {
+            cloud.analytics.record(page: "start", control: "report")
+            showReport = true
+        }
+        .buttonStyle(.bordered)
+        .font(.system(.body, design: .rounded))
+        .accessibilityIdentifier("reportButton")
+        .controlFrame("report")
+    }
+
+    private var deleteLink: some View {
+        Button("Delete my data") {
+            confirmDelete = true
+        }
+        .buttonStyle(.plain)
+        .font(.system(.subheadline, design: .rounded))
+        .foregroundStyle(AppTheme.ink.opacity(0.6))
+        .accessibilityIdentifier("deleteDataButton")
+        .controlFrame("delete")
     }
 
     private var mark: some View {

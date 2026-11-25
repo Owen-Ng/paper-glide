@@ -144,6 +144,41 @@ public final class AccountSync: @unchecked Sendable {
         }
     }
 
+    /// Live delete only. Offline and failed calls leave local rows in place.
+    public func deleteMyData() async -> (DeleteMyDataResult, AccountSnapshot) {
+        await gate.lock()
+        defer { gate.unlock() }
+        let ready = withLock { online && configured }
+        guard ready else {
+            return (.offline, withLock { snapshotLocked() })
+        }
+        await ensureSessionUnlocked()
+        let token = withLock { session?.accessToken }
+        guard let token else {
+            return (.failed, withLock { snapshotLocked() })
+        }
+        do {
+            try await backend.deleteMyData(accessToken: token)
+        } catch AccountTransportError.unreachable {
+            return (.offline, withLock { snapshotLocked() })
+        } catch {
+            return (.failed, withLock { snapshotLocked() })
+        }
+        let snapshot = withLock { () -> AccountSnapshot in
+            wipeLocked()
+            return snapshotLocked()
+        }
+        return (.deleted, snapshot)
+    }
+
+    /// Local fresh-install wipe after a confirmed delete, including the debug stub.
+    public func wipeLocalAccount() -> AccountSnapshot {
+        withLock {
+            wipeLocked()
+            return snapshotLocked()
+        }
+    }
+
     public func clearNameError() -> AccountSnapshot {
         withLock {
             nameError = nil
@@ -437,6 +472,29 @@ public final class AccountSync: @unchecked Sendable {
 
     private func persistRunsLocked() {
         store.saveRuns(runs)
+    }
+
+    private func wipeLocked() {
+        session = nil
+        sessions.clear()
+        username = nil
+        runs = []
+        boards = [:]
+        launchPromptDismissed = false
+        deathPromptVisible = false
+        deathPromptUsed = false
+        lastFlushFailed = false
+        nameError = nil
+        lastRunState = nil
+        loading = []
+        loadFailed = []
+        syncing = false
+        store.saveRuns([])
+        store.saveUsername(nil)
+        store.saveUserID(nil)
+        for period in BoardPeriod.allCases {
+            store.saveBoard(nil, period: period)
+        }
     }
 
     private func snapshotLocked() -> AccountSnapshot {

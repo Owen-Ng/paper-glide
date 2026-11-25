@@ -434,6 +434,8 @@ public final class AnalyticsClient: @unchecked Sendable {
     private var context: AnalyticsContext
     private var launched = false
     private var flushing = false
+    /// While held, flushes do not start. Delete-my-data holds sends across the RPC.
+    private var sendsHeld = false
 
     public init(
         store: AnalyticsStateStore,
@@ -665,6 +667,28 @@ public final class AnalyticsClient: @unchecked Sendable {
         await flush(reason: .manual)
     }
 
+    /// Stops new batches and waits until an in-flight send has finished.
+    public func holdSends() async {
+        withLock { sendsHeld = true }
+        while withLock({ flushing }) {
+            try? await Task.sleep(nanoseconds: 5_000_000)
+        }
+    }
+
+    public func resumeSends() {
+        withLock { sendsHeld = false }
+    }
+
+    /// Drops the local queue and any in-memory clicks. Does not post a batch.
+    public func discardLocalQueue() {
+        withLock {
+            state = .empty
+            sendsHeld = false
+            persistLocked()
+        }
+        _ = counters.drain()
+    }
+
     /// Persists the report before any network call. A timeout or failure leaves it queued once.
     public func sendReport(category: String, text: String, at date: Date = Date(), timeout: TimeInterval = ReportDraftRules.sendTimeout) async -> ReportSendResult {
         let reportID = makeID()
@@ -706,12 +730,14 @@ public final class AnalyticsClient: @unchecked Sendable {
 
     private func flush(reason: AnalyticsFlushReason) async {
         while true {
-            let started: Bool = withLock {
-                if flushing { return false }
+            let decision: Int = withLock {
+                if sendsHeld { return 0 }
+                if flushing { return 1 }
                 flushing = true
-                return true
+                return 2
             }
-            if started { break }
+            if decision == 0 { return }
+            if decision == 2 { break }
             try? await Task.sleep(nanoseconds: 5_000_000)
         }
         defer { withLock { flushing = false } }

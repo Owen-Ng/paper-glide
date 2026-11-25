@@ -47,6 +47,12 @@ export const COPY = {
     ["crash", "Crashes"],
     ["player", "Player reports"]
   ],
+  platforms: [
+    ["all", "All"],
+    ["ios", "iOS"],
+    ["android", "Android"]
+  ],
+  platformReports: "player reports and crash details include every platform.",
   noData: "no data for this range",
   noReports: "no reports in this range",
   noCrashes: "no crashes in this range",
@@ -69,6 +75,7 @@ export const COPY = {
 
 const RANGE_KEYS = new Set(COPY.ranges.map(([key]) => key));
 const GROUP_KEYS = new Set(COPY.groups.map(([key]) => key));
+const PLATFORM_KEYS = new Set(COPY.platforms.map(([key]) => key));
 
 export function torontoDay(date) {
   return new Intl.DateTimeFormat("en-CA", {
@@ -135,13 +142,15 @@ export function parseControls(search, today) {
   const params = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search);
   const range = RANGE_KEYS.has(params.get("range")) ? params.get("range") : "7d";
   const group = GROUP_KEYS.has(params.get("group")) ? params.get("group") : "day";
+  const platform = PLATFORM_KEYS.has(params.get("platform")) ? params.get("platform") : "all";
   const span = rangeFor(range, today, { start: params.get("from"), end: params.get("to") });
   return {
     range,
     group,
+    platform,
     start: span.start,
     end: span.end,
-    canonical: serializeControls({ range, group, start: span.start, end: span.end })
+    canonical: serializeControls({ range, group, platform, start: span.start, end: span.end })
   };
 }
 
@@ -153,7 +162,23 @@ export function serializeControls(controls) {
     params.set("from", controls.start);
     params.set("to", controls.end);
   }
+  if (controls.platform && controls.platform !== "all") {
+    params.set("platform", controls.platform);
+  }
   return params.toString();
+}
+
+/// null means every platform. The dashboard omits platform_filter in that case.
+export function platformFilter(platform) {
+  if (platform === "ios" || platform === "android") return platform;
+  return null;
+}
+
+export function withPlatform(args, platform) {
+  const body = { ...args };
+  const filter = platformFilter(platform);
+  if (filter) body.platform_filter = filter;
+  return body;
 }
 
 /// Query controls are written into the URL. A magic-link fragment stays on the URL until it is read.

@@ -17,7 +17,8 @@ import {
   rangeFor,
   retentionNote,
   serializeControls,
-  torontoDay
+  torontoDay,
+  withPlatform
 } from "./logic.js";
 
 const root = document.querySelector("#app");
@@ -55,16 +56,23 @@ function config() {
 }
 
 function writeURL() {
-  const next = dashboardURL({
-    pathname: location.pathname,
-    search: location.search,
-    hash: location.hash,
-    today: today()
-  });
+  const params = new URLSearchParams(serializeControls(state.controls));
+  const existing = new URLSearchParams(location.search.startsWith("?") ? location.search.slice(1) : location.search);
+  const fixture = existing.get("fixture");
+  if (fixture) params.set("fixture", fixture);
+  const next = `${location.pathname}?${params.toString()}${location.hash || ""}`;
   const current = `${location.pathname}${location.search}${location.hash}`;
   if (current !== next) {
     history.replaceState(null, "", next);
   }
+}
+
+function metricBody(extra = {}) {
+  return withPlatform({
+    start_day: state.controls.start,
+    end_day: state.controls.end,
+    ...extra
+  }, state.controls.platform);
 }
 
 function liveData() {
@@ -113,6 +121,7 @@ function applyControls(next) {
   state.controls = {
     range: next.range,
     group: next.group,
+    platform: next.platform || state.controls.platform || "all",
     start: span.start,
     end: span.end
   };
@@ -192,6 +201,10 @@ function controlsHTML() {
   const groups = COPY.groups.map(([key, label]) =>
     `<button type="button" data-group="${key}" aria-pressed="${state.controls.group === key}">${label}</button>`
   ).join("");
+  const platform = state.controls.platform || "all";
+  const platforms = COPY.platforms.map(([key, label]) =>
+    `<button type="button" data-platform="${key}" aria-pressed="${platform === key}">${label}</button>`
+  ).join("");
   const custom = state.controls.range === "custom"
     ? `<label>start <input type="date" data-custom="start" value="${state.controls.start}"></label>
        <label>end <input type="date" data-custom="end" value="${state.controls.end}"></label>`
@@ -201,10 +214,14 @@ function controlsHTML() {
   ).join("");
   return `<section class="controls">
     <div class="row desktop-controls presets">${presets}${custom}</div>
-    <div class="row desktop-controls"><div class="segmented">${groups}</div></div>
+    <div class="row desktop-controls">
+      <div class="segmented">${groups}</div>
+      <div class="segmented" aria-label="platform">${platforms}</div>
+    </div>
     <div class="row phone-controls">
       <select data-range-select aria-label="range">${options}</select>
       <div class="segmented">${groups}</div>
+      <div class="segmented" aria-label="platform">${platforms}</div>
     </div>
     ${state.controls.range === "custom" ? `<div class="row phone-controls">${custom}</div>` : ""}
     <p class="caption">${COPY.caption}</p>
@@ -320,13 +337,16 @@ function reportsPanel() {
       const count = data.counts?.[key] ?? 0;
       return `<button type="button" data-filter="${key}" aria-pressed="${state.reportFilter === key}">${label} ${count}</button>`;
     }).join("");
+    const platformNote = (state.controls.platform || "all") === "all"
+      ? ""
+      : `<p class="note">${COPY.platformReports}</p>`;
     const note = data.retention_note ? `<p class="note">${COPY.retention}</p>` : "";
     const rows = data.reports || [];
     const list = rows.length === 0
       ? `<p>${emptyReports(state.reportFilter)}</p>`
       : rows.map(reportRow).join("");
     const more = data.has_more ? `<button class="ghost" type="button" data-action="more">${COPY.loadMore}</button>` : "";
-    body = `<div class="filters">${filters}</div>${note}${list}${more}`;
+    body = `<div class="filters">${filters}</div>${platformNote}${note}${list}${more}`;
   }
   return `<section class="panel"><h2>${COPY.reportsTitle}</h2>${body}</section>`;
 }
@@ -453,10 +473,10 @@ async function loadAll() {
   for (const key of Object.keys(state.sections)) state.sections[key] = "loading";
   render();
   const jobs = [
-    ["summary", () => rpc("analytics_summary", { start_day: state.controls.start, end_day: state.controls.end })],
-    ["active", () => rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "active" })],
-    ["crashes", () => rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "crashes" })],
-    ["clicks", () => rpc("analytics_clicks", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group })],
+    ["summary", () => rpc("analytics_summary", metricBody())],
+    ["active", () => rpc("analytics_series", metricBody({ group_by: state.controls.group, metric: "active" }))],
+    ["crashes", () => rpc("analytics_series", metricBody({ group_by: state.controls.group, metric: "crashes" }))],
+    ["clicks", () => rpc("analytics_clicks", metricBody({ group_by: state.controls.group }))],
     ["reports", () => loadReports(false)]
   ];
   const results = await Promise.allSettled(jobs.map(([, run]) => run()));
@@ -537,10 +557,10 @@ async function reloadSection(key) {
   state.sections[key] = "loading";
   render();
   try {
-    if (key === "summary") accept(key, await rpc("analytics_summary", { start_day: state.controls.start, end_day: state.controls.end }));
-    if (key === "active") accept(key, await rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "active" }));
-    if (key === "crashes") accept(key, await rpc("analytics_series", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group, metric: "crashes" }));
-    if (key === "clicks") accept(key, await rpc("analytics_clicks", { start_day: state.controls.start, end_day: state.controls.end, group_by: state.controls.group }));
+    if (key === "summary") accept(key, await rpc("analytics_summary", metricBody()));
+    if (key === "active") accept(key, await rpc("analytics_series", metricBody({ group_by: state.controls.group, metric: "active" })));
+    if (key === "crashes") accept(key, await rpc("analytics_series", metricBody({ group_by: state.controls.group, metric: "crashes" })));
+    if (key === "clicks") accept(key, await rpc("analytics_clicks", metricBody({ group_by: state.controls.group })));
     if (key === "reports") accept(key, await loadReports(false));
   } catch (error) {
     if (error.status === 401) return;
@@ -734,6 +754,11 @@ root.addEventListener("click", (event) => {
     state.controls.group = target.dataset.group;
     writeURL();
     if (liveData()) reloadCharts();
+    else render();
+  } else if (target.dataset.platform) {
+    state.controls.platform = target.dataset.platform;
+    writeURL();
+    if (liveData()) loadAll();
     else render();
   } else if (target.dataset.filter) {
     state.reportFilter = target.dataset.filter;
