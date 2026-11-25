@@ -1,0 +1,560 @@
+{
+  "bestScore" : 0,
+  "checkpoints" : [
+    {
+      "bestScore" : 0,
+      "flightTime" : 0,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 510,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 810,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 0,
+        "x" : 108,
+        "y" : 390
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 0,
+      "flightTime" : 0.5000000000000007,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 435.9999999999991,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 735.9999999999991,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 451.40833333333325
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 0,
+      "flightTime" : 0.9999999999999989,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 361.9999999999982,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 661.9999999999982,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 961.9999999999982,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 512.8166666666682
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 0,
+      "flightTime" : 1.4999999999999971,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 287.99999999999727,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 587.9999999999973,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 887.9999999999973,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 574.225000000002
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    }
+  ],
+  "coachCompleted" : true,
+  "expect" : {
+    "bestScore" : 0,
+    "flightTime" : 1.4999999999999971,
+    "isNewBest" : false,
+    "obstacles" : [
+      {
+        "gapCenterY" : 230.79183203406166,
+        "gapHeight" : 218,
+        "id" : 1,
+        "left" : 287.99999999999727,
+        "scored" : false,
+        "width" : 70
+      },
+      {
+        "gapCenterY" : 457.3132962468603,
+        "gapHeight" : 218,
+        "id" : 2,
+        "left" : 587.9999999999973,
+        "scored" : false,
+        "width" : 70
+      },
+      {
+        "gapCenterY" : 423.608227462997,
+        "gapHeight" : 218,
+        "id" : 3,
+        "left" : 887.9999999999973,
+        "scored" : false,
+        "width" : 70
+      }
+    ],
+    "phase" : "playing",
+    "plane" : {
+      "velocityY" : -242.00000000000037,
+      "x" : 108,
+      "y" : 574.225000000002
+    },
+    "score" : 0,
+    "scrollSpeed" : 148,
+    "showCoach" : false,
+    "spawnGapHeight" : 218
+  },
+  "name" : "rate-60",
+  "seed" : 3,
+  "spawning" : true,
+  "steps" : [
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : true
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : true
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : true
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    },
+    {
+      "dt" : 0.016666666666666666,
+      "tap" : false
+    }
+  ]
+}

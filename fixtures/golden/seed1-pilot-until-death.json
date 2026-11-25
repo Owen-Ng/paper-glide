@@ -1,0 +1,7061 @@
+{
+  "bestScore" : 3,
+  "checkpoints" : [
+    {
+      "bestScore" : 3,
+      "flightTime" : 0,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 510,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 810,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 0,
+        "x" : 108,
+        "y" : 390
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 0.5000000000000007,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 435.9999999999991,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 735.9999999999991,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 451.40833333333325
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 0.9999999999999989,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 361.9999999999982,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 661.9999999999982,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 961.9999999999982,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 453.45666666666665
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 1.4999999999999971,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 287.99999999999727,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 587.9999999999973,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 887.9999999999973,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 470.34500000000014
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 1.9999999999999953,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 213.99999999999736,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 513.9999999999964,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 813.9999999999964,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 383.3533333333333
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 2.499999999999994,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 139.99999999999815,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 439.99999999999545,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 739.9999999999955,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 444.76166666666654
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 2.999999999999992,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 65.99999999999822,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 365.99999999999454,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 665.9999999999945,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 965.9999999999945,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 446.80999999999995
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 3.4999999999999902,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : -8.000000000001823,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 291.99999999999363,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 591.9999999999936,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 891.9999999999936,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 478.5383333333336
+      },
+      "score" : 1,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 3.9999999999999885,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 405.6927680165004,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : -82.00000000000188,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 217.9999999999936,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 517.9999999999927,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 817.9999999999927,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 465.7466666666679
+      },
+      "score" : 1,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 4.500000000000013,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 143.9999999999944,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 443.9999999999918,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 743.9999999999918,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 527.1550000000025
+      },
+      "score" : 1,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 5.000000000000038,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 69.99999999999451,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 369.9999999999909,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 669.9999999999909,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 969.9999999999909,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 529.2033333333367
+      },
+      "score" : 1,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 5.500000000000063,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : -4.000000000005533,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 295.99999999999,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 595.99999999999,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 895.99999999999,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 471.89166666667086
+      },
+      "score" : 2,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 6.000000000000088,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 474.87175830340266,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : -78.00000000000558,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 221.99999999998988,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 521.9999999999891,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 821.9999999999891,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 637.1800000000037
+      },
+      "score" : 2,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 6.500000000000113,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 147.99999999999068,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 447.9999999999882,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 747.9999999999882,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 579.8683333333372
+      },
+      "score" : 2,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 7.000000000000138,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 73.99999999999085,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 373.99999999998727,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 673.9999999999873,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 973.9999999999873,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 567.0766666666716
+      },
+      "score" : 2,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 7.5000000000001625,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : -9.202416606512998e-12,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 299.99999999998636,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 599.9999999999864,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 899.9999999999864,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 598.8050000000051
+      },
+      "score" : 3,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 8.000000000000187,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : -74.00000000000925,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 225.99999999998616,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 525.9999999999854,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 825.9999999999854,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -720,
+        "x" : 108,
+        "y" : 368.4091666666718
+      },
+      "score" : 3,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 8.500000000000158,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 561.8070628845034,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : -148.00000000000907,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 151.99999999998695,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 451.99999999998454,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 751.9999999999845,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 419.73583333333863
+      },
+      "score" : 3,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 9.00000000000013,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 77.99999999998717,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 377.99999999998363,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 677.9999999999836,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 977.9999999999836,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 362.4241666666721
+      },
+      "score" : 3,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 9.500000000000101,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : 3.9999999999871143,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 303.9999999999827,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 603.9999999999827,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 903.9999999999827,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 349.6325000000053
+      },
+      "score" : 4,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 10.000000000000073,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : -70.00000000001293,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 229.99999999998244,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 529.9999999999818,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 829.9999999999818,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 411.0408333333385
+      },
+      "score" : 4,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 10.500000000000044,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.522657783528,
+          "gapHeight" : 218,
+          "id" : 4,
+          "left" : -144.00000000001282,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 155.99999999998323,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 455.9999999999809,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 755.9999999999809,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 413.08916666667193
+      },
+      "score" : 4,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 11.000000000000016,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 81.99999999998349,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 381.99999999998,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 681.99999999998,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 981.99999999998,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 355.7775000000054
+      },
+      "score" : 4,
+      "scrollSpeed" : 148,
+      "showCoach" : false,
+      "spawnGapHeight" : 218
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 11.499999999999988,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : 7.833333333316772,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 307.83333333331257,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 607.8333333333126,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 907.8333333333126,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 417.1858333333386
+      },
+      "score" : 5,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 11.99999999999996,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : -68.16666666668318,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 231.8333333333129,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 531.8333333333135,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 831.8333333333135,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 537.9541666666732
+      },
+      "score" : 5,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 12.49999999999993,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 358.48617451897417,
+          "gapHeight" : 218,
+          "id" : 5,
+          "left" : -144.1666666666833,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 155.8333333333121,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 455.8333333333144,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 755.8333333333144,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 510.32250000000704
+      },
+      "score" : 5,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 12.999999999999902,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 79.83333333331187,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 379.8333333333153,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 679.8333333333153,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 979.8333333333153,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 512.3708333333417
+      },
+      "score" : 5,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 13.499999999999874,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : 3.8333333333119235,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 303.8333333333162,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 603.8333333333162,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 903.8333333333162,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 499.5791666666762
+      },
+      "score" : 6,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 13.999999999999845,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : -72.16666666668803,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 227.83333333331646,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 527.8333333333171,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 827.8333333333171,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 560.9875000000102
+      },
+      "score" : 6,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 14.499999999999817,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 481.47723527793977,
+          "gapHeight" : 218,
+          "id" : 6,
+          "left" : -148.1666666666882,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 151.83333333331566,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 451.833333333318,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 751.833333333318,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 592.7158333333427
+      },
+      "score" : 6,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 14.999999999999789,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : 75.83333333331547,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 375.83333333331893,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 675.8333333333189,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 975.8333333333189,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 505.7241666666773
+      },
+      "score" : 6,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 15.49999999999976,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : -0.16666666668448382,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 299.83333333331984,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 599.8333333333198,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 899.8333333333198,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 567.1325000000113
+      },
+      "score" : 7,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 15.999999999999732,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 525.6565930909708,
+          "gapHeight" : 218,
+          "id" : 7,
+          "left" : -76.16666666668443,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 223.83333333332,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 523.8333333333208,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 823.8333333333208,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 396.09666666667795
+      },
+      "score" : 7,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 16.499999999999705,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 147.83333333331922,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 447.83333333332166,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 747.8333333333217,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 383.30500000001115
+      },
+      "score" : 7,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 16.999999999999677,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : 71.83333333331906,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 371.83333333332257,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 671.8333333333226,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 971.8333333333226,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 444.7133333333444
+      },
+      "score" : 7,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 17.49999999999965,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : -4.166666666680891,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 295.8333333333235,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 595.8333333333235,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 895.8333333333235,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 446.7616666666778
+      },
+      "score" : 8,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 17.99999999999962,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 388.9039314224788,
+          "gapHeight" : 218,
+          "id" : 8,
+          "left" : -80.16666666668084,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 219.83333333332357,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 519.8333333333244,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 819.8333333333244,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -687.2000000000006,
+        "x" : 108,
+        "y" : 285.5700000000109
+      },
+      "score" : 8,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 18.49999999999959,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 143.83333333332277,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 443.8333333333253,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 743.8333333333253,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 346.97833333334415
+      },
+      "score" : 8,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 18.999999999999563,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : 67.83333333332266,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 367.8333333333262,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 667.8333333333262,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 967.8333333333262,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 349.02666666667756
+      },
+      "score" : 8,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 19.499999999999535,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : -8.166666666677298,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 291.8333333333271,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 591.8333333333271,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 891.8333333333271,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 291.71500000001095
+      },
+      "score" : 9,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 19.999999999999506,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 296.13389559921393,
+          "gapHeight" : 213,
+          "id" : 9,
+          "left" : -84.16666666667724,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 215.83333333332712,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 515.833333333328,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 815.833333333328,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 501.523333333345
+      },
+      "score" : 9,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 20.499999999999478,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 139.83333333332632,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 439.83333333332894,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 739.8333333333289,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 488.73166666667976
+      },
+      "score" : 9,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 20.99999999999945,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : 63.83333333332625,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 363.83333333332985,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 663.8333333333298,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 963.8333333333298,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 550.140000000014
+      },
+      "score" : 9,
+      "scrollSpeed" : 152,
+      "showCoach" : false,
+      "spawnGapHeight" : 213
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 21.49999999999942,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : -12.866666666673716,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 287.1333333333302,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 587.1333333333314,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 887.1333333333314,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 552.1883333333478
+      },
+      "score" : 10,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 21.999999999999392,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 494.9526728139615,
+          "gapHeight" : 213,
+          "id" : 10,
+          "left" : -90.8666666666736,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 209.13333333332952,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 509.13333333333395,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 809.1333333333341,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -687.2000000000006,
+        "x" : 108,
+        "y" : 390.9966666666817
+      },
+      "score" : 10,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 22.499999999999364,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 131.13333333332884,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 431.13333333333327,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 731.1333333333369,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 398.040833333348
+      },
+      "score" : 10,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 22.999999999999336,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : 53.13333333332898,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 353.1333333333326,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 653.1333333333396,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 953.1333333333396,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 370.40916666668176
+      },
+      "score" : 10,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 23.499999999999307,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : -24.866666666670998,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 275.1333333333319,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 575.1333333333423,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 875.1333333333423,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 446.65750000001515
+      },
+      "score" : 11,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 23.99999999999928,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 342.5195880986382,
+          "gapHeight" : 213,
+          "id" : 11,
+          "left" : -102.86666666667085,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 197.13333333333122,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 497.13333333334435,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 797.133333333345,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 433.86583333334835
+      },
+      "score" : 11,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 24.49999999999925,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 119.13333333333064,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 419.13333333334367,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 719.1333333333478,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 465.59416666668136
+      },
+      "score" : 11,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 24.999999999999222,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : 41.13333333333081,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 341.133333333343,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 641.1333333333505,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 941.1333333333505,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 497.322500000015
+      },
+      "score" : 11,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 25.499999999999194,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : -36.86666666666918,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 263.1333333333423,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 563.1333333333532,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 863.1333333333532,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -687.2000000000006,
+        "x" : 108,
+        "y" : 336.1308333333481
+      },
+      "score" : 12,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 25.999999999999165,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 421.2193642693537,
+          "gapHeight" : 213,
+          "id" : 12,
+          "left" : -114.86666666666902,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 185.13333333334162,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 485.13333333335476,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 785.133333333356,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 397.53916666668135
+      },
+      "score" : 12,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 26.499999999999137,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 107.13333333334118,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 407.1333333333541,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 707.1333333333587,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 429.26750000001505
+      },
+      "score" : 12,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 26.99999999999911,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : 29.133333333341344,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 329.1333333333534,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 629.1333333333614,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 929.1333333333614,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 342.2758333333482
+      },
+      "score" : 12,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 27.49999999999908,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : -48.866666666658645,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 251.1333333333527,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 551.1333333333641,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 851.1333333333641,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 403.68416666668145
+      },
+      "score" : 13,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 27.99999999999905,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 362.38072182088325,
+          "gapHeight" : 213,
+          "id" : 13,
+          "left" : -126.86666666665847,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 173.13333333335203,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 473.13333333336516,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 773.1333333333669,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 450.2525000000146
+      },
+      "score" : 13,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 28.499999999999023,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 95.13333333335171,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 395.1333333333645,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 695.1333333333696,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 422.62083333334834
+      },
+      "score" : 13,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 28.999999999998995,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : 17.133333333351842,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 317.1333333333638,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 617.1333333333723,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 917.1333333333723,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 424.6691666666817
+      },
+      "score" : 13,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 29.499999999998966,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : -60.86666666664811,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 239.1333333333631,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 539.133333333375,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 839.133333333375,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 411.8775000000149
+      },
+      "score" : 14,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 29.999999999998938,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 391.9112830106292,
+          "gapHeight" : 208,
+          "id" : 14,
+          "left" : -138.86666666664806,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 161.13333333336243,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 461.1333333333755,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 761.1333333333778,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 413.9258333333483
+      },
+      "score" : 14,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 30.49999999999891,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 83.13333333336224,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 383.1333333333748,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 683.1333333333805,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 983.1333333333805,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 326.93416666668145
+      },
+      "score" : 14,
+      "scrollSpeed" : 156,
+      "showCoach" : false,
+      "spawnGapHeight" : 208
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 30.99999999999888,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : 4.900000000029011,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 304.900000000041,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 604.9000000000493,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 904.9000000000493,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 388.3425000000147
+      },
+      "score" : 15,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 31.499999999998852,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 354.6422983305911,
+          "gapHeight" : 208,
+          "id" : 15,
+          "left" : -75.09999999997099,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 224.90000000004147,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 524.900000000047,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 824.900000000047,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 316.19083333334805
+      },
+      "score" : 15,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 31.999999999998824,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 144.9000000000409,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 444.90000000004767,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 744.9000000000448,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 229.1991666666812
+      },
+      "score" : 15,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 32.4999999999988,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : 64.90000000004102,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 364.9000000000488,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 664.9000000000425,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 964.9000000000425,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 290.60750000001434
+      },
+      "score" : 15,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 32.99999999999877,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : -15.099999999959028,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 284.90000000004994,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 584.9000000000402,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 884.9000000000402,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 322.3358333333479
+      },
+      "score" : 16,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 33.49999999999874,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 248.14585569965823,
+          "gapHeight" : 208,
+          "id" : 16,
+          "left" : -95.09999999995895,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 204.90000000004997,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 504.9000000000383,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 804.900000000038,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 487.62416666668156
+      },
+      "score" : 16,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 33.999999999998714,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 124.90000000004945,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 424.9000000000394,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 724.9000000000357,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 504.51250000001505
+      },
+      "score" : 16,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 34.499999999998685,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : 44.90000000004962,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 344.90000000004056,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 644.9000000000334,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 944.9000000000334,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 417.5208333333493
+      },
+      "score" : 16,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 34.99999999999866,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : -35.09999999995038,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 264.9000000000417,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 564.9000000000311,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 864.9000000000311,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 567.9691666666822
+      },
+      "score" : 17,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 35.49999999999863,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 437.55251752692436,
+          "gapHeight" : 208,
+          "id" : 17,
+          "left" : -115.09999999995024,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 184.9000000000413,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 484.90000000003005,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 784.9000000000289,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -538.8000000000005,
+        "x" : 108,
+        "y" : 480.9775000000168
+      },
+      "score" : 17,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 35.9999999999986,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 104.90000000004099,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 404.9000000000312,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 704.9000000000266,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 542.385833333351
+      },
+      "score" : 17,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 36.49999999999857,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : 24.900000000041082,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 324.9000000000323,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 624.9000000000243,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 924.9000000000243,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 54.799999999999734,
+        "x" : 108,
+        "y" : 544.4341666666851
+      },
+      "score" : 17,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 36.99999999999854,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : -55.09999999995894,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 244.9000000000332,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 544.900000000022,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 844.900000000022,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 487.1225000000193
+      },
+      "score" : 18,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 37.499999999998515,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 504.87883101376747,
+          "gapHeight" : 208,
+          "id" : 18,
+          "left" : -135.09999999995878,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 164.90000000003263,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 464.9000000000218,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 764.9000000000198,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -390.40000000000043,
+        "x" : 108,
+        "y" : 474.330833333354
+      },
+      "score" : 18,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 37.99999999999849,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 84.90000000003253,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 384.90000000002294,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 684.9000000000175,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 212.1472762553878,
+          "gapHeight" : 203,
+          "id" : 22,
+          "left" : 984.9000000000175,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 506.059166666687
+      },
+      "score" : 18,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 38.49999999999846,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : 4.90000000003256,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 304.9000000000241,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 604.9000000000152,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 212.1472762553878,
+          "gapHeight" : 203,
+          "id" : 22,
+          "left" : 904.9000000000152,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 493.2675000000209
+      },
+      "score" : 19,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 38.99999999999843,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 452.863694325616,
+          "gapHeight" : 203,
+          "id" : 19,
+          "left" : -75.09999999996744,
+          "scored" : true,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 224.90000000002453,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 524.9000000000129,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 212.1472762553878,
+          "gapHeight" : 203,
+          "id" : 22,
+          "left" : 824.9000000000129,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -242.00000000000037,
+        "x" : 108,
+        "y" : 554.6758333333551
+      },
+      "score" : 19,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 39.4999999999984,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 144.90000000002397,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 444.90000000001356,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 212.1472762553878,
+          "gapHeight" : 203,
+          "id" : 22,
+          "left" : 744.9000000000107,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -93.60000000000028,
+        "x" : 108,
+        "y" : 601.2441666666887
+      },
+      "score" : 19,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    },
+    {
+      "bestScore" : 3,
+      "flightTime" : 39.99999999999837,
+      "isNewBest" : false,
+      "obstacles" : [
+        {
+          "gapCenterY" : 534.1141499794558,
+          "gapHeight" : 203,
+          "id" : 20,
+          "left" : 64.90000000002408,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 205.95003745137615,
+          "gapHeight" : 203,
+          "id" : 21,
+          "left" : 364.9000000000147,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 212.1472762553878,
+          "gapHeight" : 203,
+          "id" : 22,
+          "left" : 664.9000000000084,
+          "scored" : false,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 378.34786058727093,
+          "gapHeight" : 203,
+          "id" : 23,
+          "left" : 964.9000000000084,
+          "scored" : false,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 573.6125000000218
+      },
+      "score" : 19,
+      "scrollSpeed" : 160,
+      "showCoach" : false,
+      "spawnGapHeight" : 203
+    }
+  ],
+  "coachCompleted" : true,
+  "expect" : {
+    "bestScore" : 3,
+    "flightTime" : 39.99999999999837,
+    "isNewBest" : false,
+    "obstacles" : [
+      {
+        "gapCenterY" : 534.1141499794558,
+        "gapHeight" : 203,
+        "id" : 20,
+        "left" : 64.90000000002408,
+        "scored" : false,
+        "width" : 70
+      },
+      {
+        "gapCenterY" : 205.95003745137615,
+        "gapHeight" : 203,
+        "id" : 21,
+        "left" : 364.9000000000147,
+        "scored" : false,
+        "width" : 70
+      },
+      {
+        "gapCenterY" : 212.1472762553878,
+        "gapHeight" : 203,
+        "id" : 22,
+        "left" : 664.9000000000084,
+        "scored" : false,
+        "width" : 70
+      },
+      {
+        "gapCenterY" : 378.34786058727093,
+        "gapHeight" : 203,
+        "id" : 23,
+        "left" : 964.9000000000084,
+        "scored" : false,
+        "width" : 70
+      }
+    ],
+    "phase" : "playing",
+    "plane" : {
+      "velocityY" : 203.19999999999982,
+      "x" : 108,
+      "y" : 573.6125000000218
+    },
+    "score" : 19,
+    "scrollSpeed" : 160,
+    "showCoach" : false,
+    "spawnGapHeight" : 203
+  },
+  "name" : "seed1-pilot-until-death",
+  "seed" : 1,
+  "spawning" : true,
+  "steps" : [
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : true
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    },
+    {
+      "dt" : 0.05,
+      "tap" : false
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+[
+  {
+    "bottom" : [
+      0.97,
+      0.94,
+      0.86
+    ],
+    "flightTime" : 0,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.34,
+    "sunX" : 0.62,
+    "top" : [
+      0.74,
+      0.86,
+      0.93
+    ]
+  },
+  {
+    "bottom" : [
+      0.97,
+      0.94,
+      0.86
+    ],
+    "flightTime" : 7.5,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.56,
+    "sunX" : 0.6599999999999999,
+    "top" : [
+      0.74,
+      0.86,
+      0.93
+    ]
+  },
+  {
+    "bottom" : [
+      0.82,
+      0.92,
+      0.98
+    ],
+    "flightTime" : 15,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.78,
+    "sunX" : 0.7,
+    "top" : [
+      0.48,
+      0.74,
+      0.95
+    ]
+  },
+  {
+    "bottom" : [
+      0.82,
+      0.92,
+      0.98
+    ],
+    "flightTime" : 20,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.89,
+    "sunX" : 0.73,
+    "top" : [
+      0.48,
+      0.74,
+      0.95
+    ]
+  },
+  {
+    "bottom" : [
+      0.96,
+      0.67,
+      0.48
+    ],
+    "flightTime" : 35,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.68,
+    "sunX" : 0.82,
+    "top" : [
+      0.46,
+      0.34,
+      0.55
+    ]
+  },
+  {
+    "bottom" : [
+      0.8329629629629629,
+      0.6311111111111112,
+      0.5318518518518518
+    ],
+    "flightTime" : 47,
+    "moonAlpha" : 0.5095999999999999,
+    "starAlpha" : 0.023632812500000003,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.21999999999999997,
+    "sunX" : 0.87,
+    "top" : [
+      0.4211111111111111,
+      0.3477777777777778,
+      0.5525925925925926
+    ]
+  },
+  {
+    "bottom" : [
+      0.47,
+      0.52,
+      0.68
+    ],
+    "flightTime" : 52,
+    "moonAlpha" : 0.7407407407407407,
+    "starAlpha" : 0.46406250000000004,
+    "sunAlpha" : 0,
+    "sunAltitude" : -0.05000000000000002,
+    "sunX" : 0.88,
+    "top" : [
+      0.31,
+      0.37,
+      0.56
+    ]
+  },
+  {
+    "bottom" : [
+      0.47,
+      0.52,
+      0.68
+    ],
+    "flightTime" : 56,
+    "moonAlpha" : 1,
+    "starAlpha" : 0.55,
+    "sunAlpha" : 0,
+    "sunAltitude" : -0.07934911242603551,
+    "sunX" : 0.8077560309512972,
+    "top" : [
+      0.31,
+      0.37,
+      0.56
+    ]
+  },
+  {
+    "bottom" : [
+      0.98,
+      0.84,
+      0.78
+    ],
+    "flightTime" : 65,
+    "moonAlpha" : 0.896,
+    "starAlpha" : 0.275,
+    "sunAlpha" : 0,
+    "sunAltitude" : -0.18,
+    "sunX" : 0.56,
+    "top" : [
+      0.63,
+      0.74,
+      0.88
+    ]
+  },
+  {
+    "bottom" : [
+      0.98,
+      0.84,
+      0.78
+    ],
+    "flightTime" : 71,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 0.7,
+    "sunAltitude" : 0.10000000000000003,
+    "sunX" : 0.58,
+    "top" : [
+      0.63,
+      0.74,
+      0.88
+    ]
+  },
+  {
+    "bottom" : [
+      0.97,
+      0.94,
+      0.86
+    ],
+    "flightTime" : 75,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.34,
+    "sunX" : 0.62,
+    "top" : [
+      0.74,
+      0.86,
+      0.93
+    ]
+  },
+  {
+    "bottom" : [
+      0.97,
+      0.94,
+      0.86
+    ],
+    "flightTime" : 80,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.4540740740740741,
+    "sunX" : 0.6407407407407407,
+    "top" : [
+      0.74,
+      0.86,
+      0.93
+    ]
+  },
+  {
+    "bottom" : [
+      0.82,
+      0.92,
+      0.98
+    ],
+    "flightTime" : 90.25,
+    "moonAlpha" : 0,
+    "starAlpha" : 0,
+    "sunAlpha" : 1,
+    "sunAltitude" : 0.780405625,
+    "sunX" : 0.700110625,
+    "top" : [
+      0.48,
+      0.74,
+      0.95
+    ]
+  }
+]
