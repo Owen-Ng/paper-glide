@@ -10,3 +10,8 @@ xcuserdata/
 **/*.xcodeproj/xcuserdata/
 App/Config/Secrets.xcconfig
 dashboard/config.js
+android/.gradle/
+android/build/
+android/local.properties
+android/secrets.properties
+android/**/build/

@@ -1,0 +1,249 @@
+name: Android
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      skip: ${{ steps.skip.outputs.skip }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Skip the evidence commit
+        id: skip
+        run: |
+          if git log -1 --pretty=%B | grep -q '\[skip ci\]'; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Select Java
+        if: steps.skip.outputs.skip != 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install the Android SDK
+        if: steps.skip.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/android-sdk/cmdline-tools"
+          curl -fsSL -o /tmp/cmdtools.zip "https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip"
+          unzip -q /tmp/cmdtools.zip -d "$HOME/android-sdk/cmdline-tools"
+          mv "$HOME/android-sdk/cmdline-tools/cmdline-tools" "$HOME/android-sdk/cmdline-tools/latest"
+          set +o pipefail
+          yes | "$HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$HOME/android-sdk" --licenses >/dev/null
+          set -o pipefail
+          "$HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$HOME/android-sdk" \
+            "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          echo "ANDROID_HOME=$HOME/android-sdk" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> "$GITHUB_ENV"
+          echo "sdk.dir=$HOME/android-sdk" > android/local.properties
+
+      - name: Unit tests, fixture tests, and debug build
+        if: steps.skip.outputs.skip != 'true'
+        working-directory: android
+        run: ./gradlew :core:test :app:assembleDebug :app:assembleDebugAndroidTest --stacktrace
+
+      - name: Upload unit results
+        if: always() && steps.skip.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-unit-tests
+          path: android/core/build/reports/tests/test
+          if-no-files-found: warn
+
+  emulator:
+    needs: unit
+    if: needs.unit.result == 'success' && needs.unit.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - api: 26
+            profile: small
+            width: 720
+            height: 1280
+            density: 320
+          - api: 29
+            profile: small
+            width: 720
+            height: 1280
+            density: 320
+          - api: 35
+            profile: pixel7pro
+            width: 1440
+            height: 3120
+            density: 512
+          - api: 36
+            profile: pixel7pro
+            width: 1440
+            height: 3120
+            density: 512
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Select Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: KVM
+        run: |
+          set -euo pipefail
+          if [[ -e /dev/kvm ]]; then
+            sudo chmod 666 /dev/kvm
+            ls -l /dev/kvm
+          else
+            echo "No /dev/kvm on this runner. The emulator will use software emulation."
+          fi
+
+      - name: Install the emulator image
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/android-sdk/cmdline-tools"
+          curl -fsSL -o /tmp/cmdtools.zip "https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip"
+          unzip -q /tmp/cmdtools.zip -d "$HOME/android-sdk/cmdline-tools"
+          mv "$HOME/android-sdk/cmdline-tools/cmdline-tools" "$HOME/android-sdk/cmdline-tools/latest"
+          set +o pipefail
+          yes | "$HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$HOME/android-sdk" --licenses >/dev/null
+          set -o pipefail
+          "$HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$HOME/android-sdk" \
+            "platform-tools" "platforms;android-36" "build-tools;36.0.0" "emulator" \
+            "system-images;android-${{ matrix.api }};google_apis;x86_64"
+          echo "ANDROID_HOME=$HOME/android-sdk" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> "$GITHUB_ENV"
+          echo "sdk.dir=$HOME/android-sdk" > android/local.properties
+
+      - name: Create the virtual device
+        run: |
+          set -euo pipefail
+          set +o pipefail
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd \
+            --name paper \
+            --package "system-images;android-${{ matrix.api }};google_apis;x86_64" \
+            --force
+          set -o pipefail
+          CFG="$HOME/.android/avd/paper.avd/config.ini"
+          {
+            echo "hw.lcd.width=${{ matrix.width }}"
+            echo "hw.lcd.height=${{ matrix.height }}"
+            echo "hw.lcd.density=${{ matrix.density }}"
+            echo "hw.keyboard=yes"
+            echo "hw.ramSize=2048"
+            echo "hw.gpu.enabled=yes"
+            echo "hw.gpu.mode=swiftshader_indirect"
+          } >> "$CFG"
+
+      - name: Boot the emulator
+        run: |
+          set -euo pipefail
+          accel=off
+          if [[ -w /dev/kvm ]]; then accel=on; fi
+          nohup "$ANDROID_HOME/emulator/emulator" \
+            -avd paper \
+            -no-window \
+            -no-audio \
+            -no-boot-anim \
+            -no-snapshot \
+            -gpu swiftshader_indirect \
+            -accel "$accel" \
+            -memory 2048 \
+            > /tmp/emulator.log 2>&1 &
+          "$ANDROID_HOME/platform-tools/adb" wait-for-device
+          for _ in $(seq 1 90); do
+            boot=$("$ANDROID_HOME/platform-tools/adb" shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
+            if [[ "$boot" == "1" ]]; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Emulator did not finish booting"
+          tail -n 80 /tmp/emulator.log || true
+          exit 1
+
+      - name: UI tests
+        working-directory: android
+        run: >
+          ./gradlew connectedDebugAndroidTest --stacktrace
+          -Pandroid.testInstrumentationRunnerArguments.profile=${{ matrix.profile }}
+
+      - name: Collect screenshots
+        if: always()
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/android-shots
+          "$ANDROID_HOME/platform-tools/adb" pull \
+            /sdcard/Android/data/com.paperglide.app/files/screenshots \
+            /tmp/android-shots || true
+          find /tmp/android-shots -type f -name '*.png' -print
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-shots-api${{ matrix.api }}
+          path: /tmp/android-shots
+          if-no-files-found: warn
+
+  evidence:
+    needs: emulator
+    if: github.event_name == 'pull_request' && needs.emulator.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Download screenshots
+        uses: actions/download-artifact@v4
+        with:
+          pattern: android-shots-api*
+          path: /tmp/android-shots
+          merge-multiple: true
+
+      - name: Commit screenshots onto the branch
+        run: |
+          set -euo pipefail
+          count=$(find /tmp/android-shots -name '*.png' -type f 2>/dev/null | wc -l | tr -d ' ')
+          if [[ "$count" -eq "0" ]]; then
+            echo "No Android screenshots to commit."
+            exit 0
+          fi
+          sha=$(git rev-parse HEAD)
+          mkdir -p "evidence/$sha"
+          find /tmp/android-shots -name '*.png' -type f -exec cp {} "evidence/$sha/" \;
+          {
+            echo "Android emulator screenshots"
+            find "evidence/$sha" -name 'android-*.png' -type f -printf '%f %s\n' | sort
+          } > "evidence/$sha/ANDROID.txt"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add "evidence/$sha"
+          if git diff --cached --quiet; then
+            echo "Screenshots already committed."
+            exit 0
+          fi
+          git commit -m "Add Android emulator screenshots for ${sha} [skip ci]"
+          git push origin "HEAD:${{ github.head_ref }}"

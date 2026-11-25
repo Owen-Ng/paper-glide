@@ -1,0 +1,4979 @@
+{
+  "config" : {
+    "despawnMargin" : 80,
+    "flapVelocity" : 500,
+    "gapMargin" : 78,
+    "gravity" : 1484,
+    "initialLead" : 120,
+    "maxDownwardSpeed" : 720,
+    "maxUpwardSpeed" : 500,
+    "obstacleGapHeight" : 218,
+    "obstacleSpacing" : 300,
+    "obstacleWidth" : 70,
+    "physicsStep" : 0.008333333333333333,
+    "planeHeight" : 22,
+    "planeStartY" : 390,
+    "planeWidth" : 46,
+    "planeX" : 108,
+    "scrollSpeed" : 148,
+    "worldHeight" : 760,
+    "worldWidth" : 390
+  },
+  "format" : 1,
+  "name" : "fixed-taps",
+  "seed" : 3,
+  "steps" : [
+    {
+      "flightTime" : 0,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 510,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 810,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 0,
+        "x" : 108,
+        "y" : 390
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 0
+    },
+    {
+      "flightTime" : 0.008333333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 508.76666666666665,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 808.7666666666667,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -12.366666666666667,
+        "x" : 108,
+        "y" : 389.89694444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 1
+    },
+    {
+      "flightTime" : 0.016666666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 507.5333333333333,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 807.5333333333333,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -24.733333333333334,
+        "x" : 108,
+        "y" : 389.69083333333333
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 2
+    },
+    {
+      "flightTime" : 0.025,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 506.29999999999995,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 806.3,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -37.1,
+        "x" : 108,
+        "y" : 389.38166666666666
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 3
+    },
+    {
+      "flightTime" : 0.03333333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 505.0666666666666,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 805.0666666666666,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -49.46666666666667,
+        "x" : 108,
+        "y" : 388.96944444444443
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 4
+    },
+    {
+      "flightTime" : 0.041666666666666664,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 503.83333333333326,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 803.8333333333333,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -61.833333333333336,
+        "x" : 108,
+        "y" : 388.45416666666665
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 5
+    },
+    {
+      "flightTime" : 0.049999999999999996,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 502.5999999999999,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 802.5999999999999,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -74.2,
+        "x" : 108,
+        "y" : 387.8358333333333
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 6
+    },
+    {
+      "flightTime" : 0.05833333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 501.36666666666656,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 801.3666666666666,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -86.56666666666666,
+        "x" : 108,
+        "y" : 387.1144444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 7
+    },
+    {
+      "flightTime" : 0.06666666666666667,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 500.1333333333332,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 800.1333333333332,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -98.93333333333334,
+        "x" : 108,
+        "y" : 386.28999999999996
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 8
+    },
+    {
+      "flightTime" : 0.075,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 498.89999999999986,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 798.8999999999999,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -111.30000000000001,
+        "x" : 108,
+        "y" : 385.36249999999995
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 9
+    },
+    {
+      "flightTime" : 0.08333333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 497.6666666666665,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 797.6666666666665,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -123.66666666666669,
+        "x" : 108,
+        "y" : 384.3319444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 10
+    },
+    {
+      "flightTime" : 0.09166666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 496.43333333333317,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 796.4333333333332,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : -136.03333333333336,
+        "x" : 108,
+        "y" : 383.19833333333327
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 11
+    },
+    {
+      "flightTime" : 0.09999999999999999,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 495.1999999999998,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 795.1999999999998,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 487.6333333333333,
+        "x" : 108,
+        "y" : 387.2619444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 12
+    },
+    {
+      "flightTime" : 0.10833333333333332,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 493.96666666666647,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 793.9666666666665,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 475.26666666666665,
+        "x" : 108,
+        "y" : 391.22249999999997
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 13
+    },
+    {
+      "flightTime" : 0.11666666666666665,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 492.7333333333331,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 792.7333333333331,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 462.9,
+        "x" : 108,
+        "y" : 395.08
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 14
+    },
+    {
+      "flightTime" : 0.12499999999999999,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 491.4999999999998,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 791.4999999999998,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 450.5333333333333,
+        "x" : 108,
+        "y" : 398.83444444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 15
+    },
+    {
+      "flightTime" : 0.13333333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 490.2666666666664,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 790.2666666666664,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 438.16666666666663,
+        "x" : 108,
+        "y" : 402.48583333333335
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 16
+    },
+    {
+      "flightTime" : 0.14166666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 489.0333333333331,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 789.0333333333331,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 425.79999999999995,
+        "x" : 108,
+        "y" : 406.0341666666667
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 17
+    },
+    {
+      "flightTime" : 0.15,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 487.7999999999997,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 787.7999999999997,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 413.4333333333333,
+        "x" : 108,
+        "y" : 409.4794444444445
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 18
+    },
+    {
+      "flightTime" : 0.15833333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 486.5666666666664,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 786.5666666666664,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 401.0666666666666,
+        "x" : 108,
+        "y" : 412.8216666666667
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 19
+    },
+    {
+      "flightTime" : 0.16666666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 485.33333333333303,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 785.333333333333,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 388.69999999999993,
+        "x" : 108,
+        "y" : 416.0608333333334
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 20
+    },
+    {
+      "flightTime" : 0.175,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 484.0999999999997,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 784.0999999999997,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 376.33333333333326,
+        "x" : 108,
+        "y" : 419.1969444444445
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 21
+    },
+    {
+      "flightTime" : 0.18333333333333332,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 482.86666666666633,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 782.8666666666663,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 363.9666666666666,
+        "x" : 108,
+        "y" : 422.2300000000001
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 22
+    },
+    {
+      "flightTime" : 0.19166666666666665,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 481.633333333333,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 781.633333333333,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 425.1600000000001
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 23
+    },
+    {
+      "flightTime" : 0.19999999999999998,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 480.39999999999964,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 780.3999999999996,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 339.23333333333323,
+        "x" : 108,
+        "y" : 427.98694444444453
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 24
+    },
+    {
+      "flightTime" : 0.20833333333333331,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 479.1666666666663,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 779.1666666666663,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 326.86666666666656,
+        "x" : 108,
+        "y" : 430.7108333333334
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 25
+    },
+    {
+      "flightTime" : 0.21666666666666665,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 477.93333333333294,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 777.9333333333329,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 314.4999999999999,
+        "x" : 108,
+        "y" : 433.33166666666676
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 26
+    },
+    {
+      "flightTime" : 0.22499999999999998,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 476.6999999999996,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 776.6999999999996,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 302.1333333333332,
+        "x" : 108,
+        "y" : 435.84944444444454
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 27
+    },
+    {
+      "flightTime" : 0.2333333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 475.46666666666624,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 775.4666666666662,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 289.76666666666654,
+        "x" : 108,
+        "y" : 438.26416666666677
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 28
+    },
+    {
+      "flightTime" : 0.24166666666666664,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 474.2333333333329,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 774.2333333333329,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 277.39999999999986,
+        "x" : 108,
+        "y" : 440.57583333333343
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 29
+    },
+    {
+      "flightTime" : 0.24999999999999997,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 472.99999999999955,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 772.9999999999995,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 487.6333333333333,
+        "x" : 108,
+        "y" : 444.63944444444456
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 30
+    },
+    {
+      "flightTime" : 0.2583333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 471.7666666666662,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 771.7666666666662,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 475.26666666666665,
+        "x" : 108,
+        "y" : 448.60000000000014
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 31
+    },
+    {
+      "flightTime" : 0.26666666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 470.53333333333285,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 770.5333333333328,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 462.9,
+        "x" : 108,
+        "y" : 452.45750000000015
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 32
+    },
+    {
+      "flightTime" : 0.275,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 469.2999999999995,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 769.2999999999995,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 450.5333333333333,
+        "x" : 108,
+        "y" : 456.2119444444446
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 33
+    },
+    {
+      "flightTime" : 0.2833333333333334,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 468.06666666666615,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 768.0666666666662,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 438.16666666666663,
+        "x" : 108,
+        "y" : 459.8633333333335
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 34
+    },
+    {
+      "flightTime" : 0.29166666666666674,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 466.8333333333328,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 766.8333333333328,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 425.79999999999995,
+        "x" : 108,
+        "y" : 463.41166666666686
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 35
+    },
+    {
+      "flightTime" : 0.3000000000000001,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 465.59999999999945,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 765.5999999999995,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 413.4333333333333,
+        "x" : 108,
+        "y" : 466.85694444444465
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 36
+    },
+    {
+      "flightTime" : 0.30833333333333346,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 464.3666666666661,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 764.3666666666661,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 401.0666666666666,
+        "x" : 108,
+        "y" : 470.1991666666669
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 37
+    },
+    {
+      "flightTime" : 0.3166666666666668,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 463.13333333333276,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 763.1333333333328,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 388.69999999999993,
+        "x" : 108,
+        "y" : 473.43833333333356
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 38
+    },
+    {
+      "flightTime" : 0.3250000000000002,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 461.8999999999994,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 761.8999999999994,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 376.33333333333326,
+        "x" : 108,
+        "y" : 476.5744444444447
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 39
+    },
+    {
+      "flightTime" : 0.33333333333333354,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 460.66666666666606,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 760.6666666666661,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 363.9666666666666,
+        "x" : 108,
+        "y" : 479.60750000000024
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 40
+    },
+    {
+      "flightTime" : 0.3416666666666669,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 459.4333333333327,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 759.4333333333327,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 482.53750000000025
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 41
+    },
+    {
+      "flightTime" : 0.35000000000000026,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 458.19999999999936,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 758.1999999999994,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 339.23333333333323,
+        "x" : 108,
+        "y" : 485.3644444444447
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 42
+    },
+    {
+      "flightTime" : 0.3583333333333336,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 456.966666666666,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 756.966666666666,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 326.86666666666656,
+        "x" : 108,
+        "y" : 488.0883333333336
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 43
+    },
+    {
+      "flightTime" : 0.366666666666667,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 455.73333333333267,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 755.7333333333327,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 314.4999999999999,
+        "x" : 108,
+        "y" : 490.70916666666693
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 44
+    },
+    {
+      "flightTime" : 0.37500000000000033,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 454.4999999999993,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 754.4999999999993,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 302.1333333333332,
+        "x" : 108,
+        "y" : 493.2269444444447
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 45
+    },
+    {
+      "flightTime" : 0.3833333333333337,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 453.26666666666597,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 753.266666666666,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 289.76666666666654,
+        "x" : 108,
+        "y" : 495.64166666666694
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 46
+    },
+    {
+      "flightTime" : 0.39166666666666705,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 452.0333333333326,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 752.0333333333326,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 277.39999999999986,
+        "x" : 108,
+        "y" : 497.9533333333336
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 47
+    },
+    {
+      "flightTime" : 0.4000000000000004,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 450.7999999999993,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 750.7999999999993,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 487.6333333333333,
+        "x" : 108,
+        "y" : 502.01694444444473
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 48
+    },
+    {
+      "flightTime" : 0.40833333333333377,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 449.5666666666659,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 749.5666666666659,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 475.26666666666665,
+        "x" : 108,
+        "y" : 505.9775000000003
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 49
+    },
+    {
+      "flightTime" : 0.41666666666666713,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 448.3333333333326,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 748.3333333333326,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 462.9,
+        "x" : 108,
+        "y" : 509.8350000000003
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 50
+    },
+    {
+      "flightTime" : 0.4250000000000005,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 447.0999999999992,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 747.0999999999992,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 450.5333333333333,
+        "x" : 108,
+        "y" : 513.5894444444448
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 51
+    },
+    {
+      "flightTime" : 0.43333333333333385,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 445.8666666666659,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 745.8666666666659,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 438.16666666666663,
+        "x" : 108,
+        "y" : 517.2408333333336
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 52
+    },
+    {
+      "flightTime" : 0.4416666666666672,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 444.63333333333253,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 744.6333333333325,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 425.79999999999995,
+        "x" : 108,
+        "y" : 520.7891666666669
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 53
+    },
+    {
+      "flightTime" : 0.45000000000000057,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 443.3999999999992,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 743.3999999999992,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 413.4333333333333,
+        "x" : 108,
+        "y" : 524.2344444444446
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 54
+    },
+    {
+      "flightTime" : 0.4583333333333339,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 442.16666666666583,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 742.1666666666658,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 401.0666666666666,
+        "x" : 108,
+        "y" : 527.5766666666668
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 55
+    },
+    {
+      "flightTime" : 0.4666666666666673,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 440.9333333333325,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 740.9333333333325,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 388.69999999999993,
+        "x" : 108,
+        "y" : 530.8158333333334
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 56
+    },
+    {
+      "flightTime" : 0.47500000000000064,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 439.69999999999914,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 739.6999999999991,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 376.33333333333326,
+        "x" : 108,
+        "y" : 533.9519444444445
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 57
+    },
+    {
+      "flightTime" : 0.483333333333334,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 438.4666666666658,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 738.4666666666658,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 363.9666666666666,
+        "x" : 108,
+        "y" : 536.985
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 58
+    },
+    {
+      "flightTime" : 0.49166666666666736,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 437.23333333333244,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 737.2333333333324,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 539.915
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 59
+    },
+    {
+      "flightTime" : 0.5000000000000007,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 435.9999999999991,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 735.9999999999991,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 339.23333333333323,
+        "x" : 108,
+        "y" : 542.7419444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 60
+    },
+    {
+      "flightTime" : 0.508333333333334,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 434.76666666666574,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 734.7666666666657,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 326.86666666666656,
+        "x" : 108,
+        "y" : 545.4658333333332
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 61
+    },
+    {
+      "flightTime" : 0.5166666666666673,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 433.5333333333324,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 733.5333333333324,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 314.4999999999999,
+        "x" : 108,
+        "y" : 548.0866666666665
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 62
+    },
+    {
+      "flightTime" : 0.5250000000000006,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 432.29999999999905,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 732.299999999999,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 302.1333333333332,
+        "x" : 108,
+        "y" : 550.6044444444442
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 63
+    },
+    {
+      "flightTime" : 0.5333333333333339,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 431.0666666666657,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 731.0666666666657,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 289.76666666666654,
+        "x" : 108,
+        "y" : 553.0191666666664
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 64
+    },
+    {
+      "flightTime" : 0.5416666666666672,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 429.83333333333235,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 729.8333333333323,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 277.39999999999986,
+        "x" : 108,
+        "y" : 555.330833333333
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 65
+    },
+    {
+      "flightTime" : 0.5500000000000005,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 428.599999999999,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 728.599999999999,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 265.0333333333332,
+        "x" : 108,
+        "y" : 557.539444444444
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 66
+    },
+    {
+      "flightTime" : 0.5583333333333338,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 427.36666666666565,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 727.3666666666657,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 252.66666666666652,
+        "x" : 108,
+        "y" : 559.6449999999995
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 67
+    },
+    {
+      "flightTime" : 0.5666666666666671,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 426.1333333333323,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 726.1333333333323,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 240.29999999999984,
+        "x" : 108,
+        "y" : 561.6474999999996
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 68
+    },
+    {
+      "flightTime" : 0.5750000000000004,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 424.89999999999895,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 724.899999999999,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 227.93333333333317,
+        "x" : 108,
+        "y" : 563.5469444444441
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 69
+    },
+    {
+      "flightTime" : 0.5833333333333337,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 423.6666666666656,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 723.6666666666656,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 487.6333333333333,
+        "x" : 108,
+        "y" : 567.6105555555552
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 70
+    },
+    {
+      "flightTime" : 0.591666666666667,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 422.43333333333226,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 722.4333333333323,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 475.26666666666665,
+        "x" : 108,
+        "y" : 571.5711111111107
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 71
+    },
+    {
+      "flightTime" : 0.6000000000000003,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 421.1999999999989,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 721.1999999999989,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 462.9,
+        "x" : 108,
+        "y" : 575.4286111111106
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 72
+    },
+    {
+      "flightTime" : 0.6083333333333336,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 419.96666666666556,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 719.9666666666656,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 450.5333333333333,
+        "x" : 108,
+        "y" : 579.183055555555
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 73
+    },
+    {
+      "flightTime" : 0.6166666666666669,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 418.7333333333322,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 718.7333333333322,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 438.16666666666663,
+        "x" : 108,
+        "y" : 582.8344444444439
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 74
+    },
+    {
+      "flightTime" : 0.6250000000000002,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 417.49999999999886,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 717.4999999999989,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 425.79999999999995,
+        "x" : 108,
+        "y" : 586.3827777777772
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 75
+    },
+    {
+      "flightTime" : 0.6333333333333335,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 416.2666666666655,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 716.2666666666655,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 413.4333333333333,
+        "x" : 108,
+        "y" : 589.8280555555549
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 76
+    },
+    {
+      "flightTime" : 0.6416666666666668,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 415.03333333333217,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 715.0333333333322,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 401.0666666666666,
+        "x" : 108,
+        "y" : 593.1702777777771
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 77
+    },
+    {
+      "flightTime" : 0.6500000000000001,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 413.7999999999988,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 713.7999999999988,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 388.69999999999993,
+        "x" : 108,
+        "y" : 596.4094444444437
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 78
+    },
+    {
+      "flightTime" : 0.6583333333333334,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 412.56666666666547,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 712.5666666666655,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 376.33333333333326,
+        "x" : 108,
+        "y" : 599.5455555555548
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 79
+    },
+    {
+      "flightTime" : 0.6666666666666667,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 411.3333333333321,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 711.3333333333321,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 363.9666666666666,
+        "x" : 108,
+        "y" : 602.5786111111103
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 80
+    },
+    {
+      "flightTime" : 0.675,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 410.0999999999988,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 710.0999999999988,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 605.5086111111102
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 81
+    },
+    {
+      "flightTime" : 0.6833333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 408.8666666666654,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 708.8666666666654,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 339.23333333333323,
+        "x" : 108,
+        "y" : 608.3355555555546
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 82
+    },
+    {
+      "flightTime" : 0.6916666666666667,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 407.6333333333321,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 707.6333333333321,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 326.86666666666656,
+        "x" : 108,
+        "y" : 611.0594444444434
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 83
+    },
+    {
+      "flightTime" : 0.7,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 406.3999999999987,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 706.3999999999987,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 314.4999999999999,
+        "x" : 108,
+        "y" : 613.6802777777767
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 84
+    },
+    {
+      "flightTime" : 0.7083333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 405.1666666666654,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 705.1666666666654,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 302.1333333333332,
+        "x" : 108,
+        "y" : 616.1980555555544
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 85
+    },
+    {
+      "flightTime" : 0.7166666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 403.93333333333203,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 703.933333333332,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 289.76666666666654,
+        "x" : 108,
+        "y" : 618.6127777777766
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 86
+    },
+    {
+      "flightTime" : 0.7249999999999999,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 402.6999999999987,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 702.6999999999987,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 277.39999999999986,
+        "x" : 108,
+        "y" : 620.9244444444432
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 87
+    },
+    {
+      "flightTime" : 0.7333333333333332,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 401.46666666666533,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 701.4666666666653,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 265.0333333333332,
+        "x" : 108,
+        "y" : 623.1330555555543
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 88
+    },
+    {
+      "flightTime" : 0.7416666666666665,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 400.233333333332,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 700.233333333332,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 252.66666666666652,
+        "x" : 108,
+        "y" : 625.2386111111098
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 89
+    },
+    {
+      "flightTime" : 0.7499999999999998,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 398.99999999999864,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 698.9999999999986,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 240.29999999999984,
+        "x" : 108,
+        "y" : 627.2411111111098
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 90
+    },
+    {
+      "flightTime" : 0.7583333333333331,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 397.7666666666653,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 697.7666666666653,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 227.93333333333317,
+        "x" : 108,
+        "y" : 629.1405555555543
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 91
+    },
+    {
+      "flightTime" : 0.7666666666666664,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 396.53333333333194,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 696.5333333333319,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 215.5666666666665,
+        "x" : 108,
+        "y" : 630.9369444444433
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 92
+    },
+    {
+      "flightTime" : 0.7749999999999997,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 395.2999999999986,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 695.2999999999986,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 632.6302777777767
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 93
+    },
+    {
+      "flightTime" : 0.783333333333333,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 394.06666666666524,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 694.0666666666652,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 190.83333333333314,
+        "x" : 108,
+        "y" : 634.2205555555545
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 94
+    },
+    {
+      "flightTime" : 0.7916666666666663,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 392.8333333333319,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 692.8333333333319,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 178.46666666666647,
+        "x" : 108,
+        "y" : 635.7077777777768
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 95
+    },
+    {
+      "flightTime" : 0.7999999999999996,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 391.59999999999854,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 691.5999999999985,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 487.6333333333333,
+        "x" : 108,
+        "y" : 639.7713888888878
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 96
+    },
+    {
+      "flightTime" : 0.8083333333333329,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 390.3666666666652,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 690.3666666666652,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 475.26666666666665,
+        "x" : 108,
+        "y" : 643.7319444444433
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 97
+    },
+    {
+      "flightTime" : 0.8166666666666662,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 389.13333333333185,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 689.1333333333318,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 989.1333333333318,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 462.9,
+        "x" : 108,
+        "y" : 647.5894444444433
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 98
+    },
+    {
+      "flightTime" : 0.8249999999999995,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 387.8999999999985,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 687.8999999999985,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 987.8999999999985,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 450.5333333333333,
+        "x" : 108,
+        "y" : 651.3438888888877
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 99
+    },
+    {
+      "flightTime" : 0.8333333333333328,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 386.66666666666515,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 686.6666666666652,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 986.6666666666652,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 438.16666666666663,
+        "x" : 108,
+        "y" : 654.9952777777766
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 100
+    },
+    {
+      "flightTime" : 0.8416666666666661,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 385.4333333333318,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 685.4333333333318,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 985.4333333333318,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 425.79999999999995,
+        "x" : 108,
+        "y" : 658.5436111111098
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 101
+    },
+    {
+      "flightTime" : 0.8499999999999994,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 384.19999999999845,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 684.1999999999985,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 984.1999999999985,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 413.4333333333333,
+        "x" : 108,
+        "y" : 661.9888888888876
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 102
+    },
+    {
+      "flightTime" : 0.8583333333333327,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 382.9666666666651,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 682.9666666666651,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 982.9666666666651,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 401.0666666666666,
+        "x" : 108,
+        "y" : 665.3311111111097
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 103
+    },
+    {
+      "flightTime" : 0.866666666666666,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 381.73333333333176,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 681.7333333333318,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 981.7333333333318,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 388.69999999999993,
+        "x" : 108,
+        "y" : 668.5702777777764
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 104
+    },
+    {
+      "flightTime" : 0.8749999999999993,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 380.4999999999984,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 680.4999999999984,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 980.4999999999984,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 376.33333333333326,
+        "x" : 108,
+        "y" : 671.7063888888874
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 105
+    },
+    {
+      "flightTime" : 0.8833333333333326,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 379.26666666666506,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 679.2666666666651,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 979.2666666666651,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 363.9666666666666,
+        "x" : 108,
+        "y" : 674.7394444444429
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 106
+    },
+    {
+      "flightTime" : 0.8916666666666659,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 378.0333333333317,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 678.0333333333317,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 978.0333333333317,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 677.6694444444429
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 107
+    },
+    {
+      "flightTime" : 0.8999999999999992,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 376.79999999999836,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 676.7999999999984,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 976.7999999999984,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 339.23333333333323,
+        "x" : 108,
+        "y" : 680.4963888888873
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 108
+    },
+    {
+      "flightTime" : 0.9083333333333325,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 375.566666666665,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 675.566666666665,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 975.566666666665,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 326.86666666666656,
+        "x" : 108,
+        "y" : 683.2202777777761
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 109
+    },
+    {
+      "flightTime" : 0.9166666666666659,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 374.33333333333167,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 674.3333333333317,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 974.3333333333317,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 314.4999999999999,
+        "x" : 108,
+        "y" : 685.8411111111094
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 110
+    },
+    {
+      "flightTime" : 0.9249999999999992,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 373.0999999999983,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 673.0999999999983,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 973.0999999999983,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 302.1333333333332,
+        "x" : 108,
+        "y" : 688.3588888888871
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 111
+    },
+    {
+      "flightTime" : 0.9333333333333325,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 371.86666666666497,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 671.866666666665,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 971.866666666665,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 289.76666666666654,
+        "x" : 108,
+        "y" : 690.7736111111093
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 112
+    },
+    {
+      "flightTime" : 0.9416666666666658,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 370.6333333333316,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 670.6333333333316,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 970.6333333333316,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 277.39999999999986,
+        "x" : 108,
+        "y" : 693.0852777777759
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 113
+    },
+    {
+      "flightTime" : 0.9499999999999991,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 369.3999999999983,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 669.3999999999983,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 969.3999999999983,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 265.0333333333332,
+        "x" : 108,
+        "y" : 695.293888888887
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 114
+    },
+    {
+      "flightTime" : 0.9583333333333324,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 368.1666666666649,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 668.1666666666649,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 968.1666666666649,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 252.66666666666652,
+        "x" : 108,
+        "y" : 697.3994444444425
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 115
+    },
+    {
+      "flightTime" : 0.9666666666666657,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 366.9333333333316,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 666.9333333333316,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 966.9333333333316,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 240.29999999999984,
+        "x" : 108,
+        "y" : 699.4019444444425
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 116
+    },
+    {
+      "flightTime" : 0.974999999999999,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 365.6999999999982,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 665.6999999999982,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 965.6999999999982,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 227.93333333333317,
+        "x" : 108,
+        "y" : 701.301388888887
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 117
+    },
+    {
+      "flightTime" : 0.9833333333333323,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 364.4666666666649,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 664.4666666666649,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 964.4666666666649,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 215.5666666666665,
+        "x" : 108,
+        "y" : 703.097777777776
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 118
+    },
+    {
+      "flightTime" : 0.9916666666666656,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 363.23333333333153,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 663.2333333333315,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 963.2333333333315,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 203.19999999999982,
+        "x" : 108,
+        "y" : 704.7911111111093
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 119
+    },
+    {
+      "flightTime" : 0.9999999999999989,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 361.9999999999982,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 661.9999999999982,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 961.9999999999982,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 487.6333333333333,
+        "x" : 108,
+        "y" : 708.8547222222204
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 120
+    },
+    {
+      "flightTime" : 1.0083333333333322,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 360.76666666666483,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 660.7666666666648,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 960.7666666666648,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 475.26666666666665,
+        "x" : 108,
+        "y" : 712.8152777777759
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 121
+    },
+    {
+      "flightTime" : 1.0166666666666655,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 359.5333333333315,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 659.5333333333315,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 959.5333333333315,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 462.9,
+        "x" : 108,
+        "y" : 716.6727777777759
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 122
+    },
+    {
+      "flightTime" : 1.0249999999999988,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 358.29999999999814,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 658.2999999999981,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 958.2999999999981,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 450.5333333333333,
+        "x" : 108,
+        "y" : 720.4272222222203
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 123
+    },
+    {
+      "flightTime" : 1.033333333333332,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 357.0666666666648,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 657.0666666666648,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 957.0666666666648,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 438.16666666666663,
+        "x" : 108,
+        "y" : 724.0786111111091
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 124
+    },
+    {
+      "flightTime" : 1.0416666666666654,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 355.83333333333144,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 655.8333333333314,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 955.8333333333314,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 425.79999999999995,
+        "x" : 108,
+        "y" : 727.6269444444424
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 125
+    },
+    {
+      "flightTime" : 1.0499999999999987,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 354.5999999999981,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 654.5999999999981,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 954.5999999999981,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 413.4333333333333,
+        "x" : 108,
+        "y" : 731.0722222222201
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 126
+    },
+    {
+      "flightTime" : 1.058333333333332,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 353.36666666666474,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 653.3666666666647,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 953.3666666666647,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 401.0666666666666,
+        "x" : 108,
+        "y" : 734.4144444444423
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 127
+    },
+    {
+      "flightTime" : 1.0666666666666653,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 352.1333333333314,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 652.1333333333314,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 952.1333333333314,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 388.69999999999993,
+        "x" : 108,
+        "y" : 737.653611111109
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 128
+    },
+    {
+      "flightTime" : 1.0749999999999986,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 350.89999999999804,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 650.899999999998,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 950.899999999998,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 376.33333333333326,
+        "x" : 108,
+        "y" : 740.78972222222
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 129
+    },
+    {
+      "flightTime" : 1.083333333333332,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 349.6666666666647,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 649.6666666666647,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 949.6666666666647,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 363.9666666666666,
+        "x" : 108,
+        "y" : 743.8227777777755
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 130
+    },
+    {
+      "flightTime" : 1.0916666666666652,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 348.43333333333135,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 648.4333333333313,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 948.4333333333313,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "playing",
+      "plane" : {
+        "velocityY" : 351.5999999999999,
+        "x" : 108,
+        "y" : 746.7527777777755
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 131
+    },
+    {
+      "flightTime" : 1.0999999999999985,
+      "obstacles" : [
+        {
+          "gapCenterY" : 230.79183203406166,
+          "gapHeight" : 218,
+          "id" : 1,
+          "left" : 347.199999999998,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 457.3132962468603,
+          "gapHeight" : 218,
+          "id" : 2,
+          "left" : 647.199999999998,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        },
+        {
+          "gapCenterY" : 423.608227462997,
+          "gapHeight" : 218,
+          "id" : 3,
+          "left" : 947.199999999998,
+          "spacingFromPrevious" : 300,
+          "width" : 70
+        }
+      ],
+      "phase" : "dead",
+      "plane" : {
+        "velocityY" : 339.23333333333323,
+        "x" : 108,
+        "y" : 749.5797222222199
+      },
+      "ramp" : {
+        "gapHeight" : 218,
+        "scrollSpeed" : 148,
+        "stepIndex" : 0
+      },
+      "score" : 0,
+      "scrollSpeed" : 148,
+      "spawnGapHeight" : 218,
+      "step" : 132
+    }
+  ],
+  "tapSteps" : [
+    12,
+    30,
+    48,
+    70,
+    96,
+    120
+  ],
+  "timestep" : 0.008333333333333333,
+  "tolerance" : {
+    "gap" : 1e-06,
+    "position" : 1e-06,
+    "scroll" : 1e-06,
+    "spacing" : 1e-06,
+    "time" : 1e-09,
+    "velocity" : 1e-06
+  }
+}
