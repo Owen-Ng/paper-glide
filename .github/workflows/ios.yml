@@ -314,3 +314,48 @@ jobs:
           fi
           git commit -m "Add simulator screenshots for ${sha} [skip ci]"
           git push origin "HEAD:${{ github.head_ref }}"
+
+  release-build:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          set -euo pipefail
+          if [ -d /Applications/Xcode_26.6.app ]; then
+            sudo xcode-select -s /Applications/Xcode_26.6.app
+          elif [ -d /Applications/Xcode_26.5.app ]; then
+            sudo xcode-select -s /Applications/Xcode_26.5.app
+          else
+            sudo xcode-select -s /Applications/Xcode.app
+          fi
+          xcodebuild -version
+
+      - name: Build the Release configuration
+        run: |
+          set -euo pipefail
+          xcodebuild build \
+            -project App/PaperGlide.xcodeproj \
+            -scheme PaperGlide \
+            -configuration Release \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath DerivedDataRelease \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            'CODE_SIGN_IDENTITY=-'
+
+      - name: Check the Release binary for test hooks
+        run: |
+          set -euo pipefail
+          app=$(find DerivedDataRelease/Build/Products -name 'PaperGlide.app' -type d | head -n 1)
+          if [ -z "$app" ]; then
+            echo "Release PaperGlide.app was not produced."
+            exit 1
+          fi
+          chmod +x scripts/check-release-binary.sh
+          scripts/check-release-binary.sh "$app"

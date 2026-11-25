@@ -12,6 +12,10 @@ let package = Package(
     ],
     targets: [
         .target(name: "PaperGlideCore"),
+        .executableTarget(
+            name: "GenerateGoldenFixtures",
+            dependencies: ["PaperGlideCore"]
+        ),
         .testTarget(
             name: "PaperGlideCoreTests",
             dependencies: ["PaperGlideCore"]

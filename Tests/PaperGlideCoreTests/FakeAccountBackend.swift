@@ -27,6 +27,8 @@ final class FakeAccountBackend: AccountBackend {
     var claimedNames: [String] = []
     var seenAPIKeys: [String] = []
     var failNextSignIn = false
+    var failDelete = false
+    var deleteCalls = 0
     private var minted = 0
 
     func signInAnonymously() async throws -> StoredSession { try signInNow() }
@@ -40,6 +42,9 @@ final class FakeAccountBackend: AccountBackend {
     }
     func leaderboard(_ period: BoardPeriod, accessToken: String) async throws -> LeaderboardPage {
         try boardNow(period, accessToken: accessToken)
+    }
+    func deleteMyData(accessToken: String) async throws {
+        try deleteNow(accessToken)
     }
 
     func signInNow() throws -> StoredSession {
@@ -113,6 +118,16 @@ final class FakeAccountBackend: AccountBackend {
         users[userID]?.submitDay = today
         users[userID]?.submitCount = count + 1
         return .stored
+    }
+
+    func deleteNow(_ accessToken: String) throws {
+        deleteCalls += 1
+        if failDelete { throw AccountTransportError.badResponse }
+        let userID = try user(for: accessToken).id
+        users[userID] = nil
+        runs.removeAll { $0.userID == userID }
+        accessTokens = accessTokens.filter { $0.value != userID }
+        refreshTokens = refreshTokens.filter { $0.value != userID }
     }
 
     func boardNow(_ period: BoardPeriod, accessToken: String) throws -> LeaderboardPage {

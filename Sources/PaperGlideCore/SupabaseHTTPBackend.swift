@@ -66,7 +66,8 @@ public final class SupabaseHTTPBackend: AccountBackend {
                 "run_id": run.id,
                 "score": run.score,
                 "duration_seconds": run.durationSeconds,
-                "played_at": iso8601(run.playedAt)
+                "played_at": iso8601(run.playedAt),
+                "platform": ClientPlatform.current
             ]
         )
         let json = try jsonObject(data)
@@ -94,6 +95,12 @@ public final class SupabaseHTTPBackend: AccountBackend {
         let entries = (json["entries"] as? [Any] ?? []).compactMap(entry(from:))
         let you = entry(from: json["you"])
         return LeaderboardPage(entries: entries, you: you, fetchedAt: fetchedAt)
+    }
+
+    public func deleteMyData(accessToken: String) async throws {
+        let data = try await send(path: "/rest/v1/rpc/delete_my_data", token: accessToken, body: [:])
+        let json = try jsonObject(data)
+        guard truth(json["ok"]) else { throw AccountTransportError.badResponse }
     }
 
     private func send(path: String, token: String?, body: [String: Any], allowEmpty: Bool = false) async throws -> Data {

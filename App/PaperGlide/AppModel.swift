@@ -52,8 +52,22 @@ final class AppModel: ObservableObject {
         #endif
     }
 
+    func resetToFreshInstall() {
+        storage.saveBestScore(0)
+        storage.saveCoachCompleted(false)
+        bestScore = 0
+        isNewBest = false
+        showCoach = true
+        score = 0
+    }
+
     func startRun() {
-        session.reset(seed: LaunchOptions.seed ?? randomSeed())
+        #if DEBUG
+        let seed = LaunchOptions.seed ?? randomSeed()
+        #else
+        let seed = randomSeed()
+        #endif
+        session.reset(seed: seed)
         score = 0
         bestScore = session.snapshot.bestScore
         isNewBest = false
@@ -80,6 +94,7 @@ final class AppModel: ObservableObject {
 
     /// Test hook. The first coach tap ends the run at a chosen score. Physics does not run.
     func recordScriptedGlideTap() {
+        #if DEBUG
         let coachWasShowing = session.snapshot.showCoach
         PlayClicks.recordFlap()
         session.tap()
@@ -87,17 +102,22 @@ final class AppModel: ObservableObject {
             session.endRun(withScore: score)
         }
         consume(session.snapshot)
+        #endif
     }
 
     /// One real flap, then `guidedStride` seconds of the real simulation.
     func guidedTap() {
+        #if DEBUG
         PlayClicks.recordFlap()
         advanceGuidedStride(tap: true)
+        #endif
     }
 
     /// `guidedStride` seconds of the real simulation with no flap, so gravity can pull the plane down.
     func guidedCoast() {
+        #if DEBUG
         advanceGuidedStride(tap: false)
+        #endif
     }
 
     func consume(_ snapshot: GameSnapshot) {
@@ -113,9 +133,11 @@ final class AppModel: ObservableObject {
     }
 
     private func advanceGuidedStride(tap: Bool) {
+        #if DEBUG
         guard let stride = LaunchOptions.guidedStride else { return }
         GlidePilot.advance(session, stride: stride, tap: tap)
         consume(session.snapshot)
+        #endif
     }
 
     private func refreshFlightReadout(_ snapshot: GameSnapshot) {

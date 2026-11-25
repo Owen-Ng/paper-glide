@@ -8,6 +8,7 @@ struct PlayView: View {
         ZStack {
             GameCanvas(scene: model.scene)
                 .ignoresSafeArea()
+            #if DEBUG
             if model.screen == .playing,
                LaunchOptions.scriptedEndScore != nil || LaunchOptions.guidedStride != nil {
                 Color.clear
@@ -23,6 +24,7 @@ struct PlayView: View {
                         }
                     }
             }
+            #endif
             if model.screen == .playing {
                 scoreStack
             }
@@ -44,6 +46,7 @@ struct PlayView: View {
                 )
         }
         .overlay(alignment: .bottomTrailing) {
+            #if DEBUG
             if model.screen == .playing, LaunchOptions.guidedStride != nil {
                 Button(action: model.guidedCoast) {
                     Color.clear.frame(width: 44, height: 44)
@@ -52,6 +55,7 @@ struct PlayView: View {
                 .accessibilityIdentifier("coastButton")
                 .padding(8)
             }
+            #endif
         }
         .background(Color(uiColor: AppTheme.skyBackground))
     }

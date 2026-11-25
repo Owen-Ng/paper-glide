@@ -21,7 +21,9 @@ import {
   retentionNote,
   serializeControls,
   torontoDay,
-  weekStart
+  weekStart,
+  platformFilter,
+  withPlatform
 } from "../logic.js";
 
 test("sign-in and dashboard copy match the spec", () => {
@@ -148,6 +150,42 @@ test("crash-free, retention, reports, and the local fixture gate", () => {
   assert.deepEqual(sorted.map((row) => row.control), ["play", "report", "other"]);
   assert.equal(crashChartEmpty([{ count: 0, sessions: 0, crash_free: null }]), true);
   assert.equal(crashChartEmpty([{ count: 0, sessions: 4, crash_free: 100 }]), false);
+});
+
+test("platform filter defaults to all and round-trips ios and android", () => {
+  const today = "2026-07-15";
+  const parsed = parseControls("", today);
+  assert.equal(parsed.platform, "all");
+  assert.equal(parsed.canonical, "range=7d&group=day");
+  assert.equal(platformFilter("all"), null);
+  assert.equal(platformFilter("web"), null);
+  assert.deepEqual(withPlatform({ start_day: parsed.start, end_day: parsed.end }, "all"), {
+    start_day: "2026-07-09",
+    end_day: "2026-07-15"
+  });
+
+  const ios = parseControls("?range=30d&group=week&platform=ios", today);
+  assert.equal(ios.platform, "ios");
+  assert.equal(ios.canonical, "range=30d&group=week&platform=ios");
+  assert.equal(platformFilter("ios"), "ios");
+  assert.equal(withPlatform({ start_day: ios.start, end_day: ios.end, group_by: "week" }, "ios").platform_filter, "ios");
+
+  const android = parseControls("?platform=android", today);
+  assert.equal(android.platform, "android");
+  assert.equal(android.canonical, "range=7d&group=day&platform=android");
+  assert.equal(platformFilter("android"), "android");
+  assert.equal(parseControls("?platform=web", today).platform, "all");
+  assert.deepEqual(COPY.platforms.map(([, label]) => label), ["All", "iOS", "Android"]);
+  assert.equal(COPY.platformReports, "player reports and crash details include every platform.");
+
+  const kept = dashboardURL({
+    pathname: "/",
+    search: "?range=7d&group=day&platform=android",
+    hash: "",
+    today
+  });
+  assert.ok(kept.includes("platform=android"));
+  assert.ok(kept.includes("range=7d"));
 });
 
 test("a magic-link hash survives the boot url rewrite", () => {

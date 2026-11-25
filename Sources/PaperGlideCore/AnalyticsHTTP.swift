@@ -62,7 +62,8 @@ public final class SupabaseAnalyticsTransport: AnalyticsTransport {
         var body: [String: Any] = [
             "id": event.id,
             "kind": event.kind.rawValue,
-            "occurred_at": iso8601(event.occurredAt)
+            "occurred_at": iso8601(event.occurredAt),
+            "platform": ClientPlatform.current
         ]
         if let sessionID = event.sessionID { body["session_id"] = sessionID }
         if let page = event.page { body["page"] = page }

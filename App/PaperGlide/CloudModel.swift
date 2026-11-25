@@ -156,6 +156,38 @@ final class CloudModel: ObservableObject {
         busy = false
     }
 
+    /// Confirmed live. Nothing is queued, and no analytics event is recorded.
+    func deleteMyData() async -> DeleteMyDataResult {
+        #if DEBUG
+        if let stub = LaunchOptions.deleteStub {
+            try? await Task.sleep(nanoseconds: 1_200_000_000)
+            switch stub {
+            case "success":
+                await analytics.client.holdSends()
+                analytics.client.discardLocalQueue()
+                snapshot = sync.wipeLocalAccount()
+                return .deleted
+            case "failure":
+                return .failed
+            default:
+                return .offline
+            }
+        }
+        #endif
+        let attempt = snapshot.online && snapshot.configured
+        if attempt {
+            await analytics.client.holdSends()
+        }
+        let (result, next) = await sync.deleteMyData()
+        if result == .deleted {
+            analytics.client.discardLocalQueue()
+        } else if attempt {
+            analytics.client.resumeSends()
+        }
+        snapshot = next
+        return result
+    }
+
     func refreshSelected() async {
         guard snapshot.online else { return }
         busy = true
@@ -204,6 +236,9 @@ final class IdleAccountBackend: AccountBackend {
         throw AccountTransportError.unreachable
     }
     func leaderboard(_ period: BoardPeriod, accessToken: String) async throws -> LeaderboardPage {
+        throw AccountTransportError.unreachable
+    }
+    func deleteMyData(accessToken: String) async throws {
         throw AccountTransportError.unreachable
     }
 }

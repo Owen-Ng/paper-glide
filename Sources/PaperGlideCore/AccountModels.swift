@@ -58,6 +58,12 @@ public enum AccountTransportError: Error, Equatable {
     case badResponse
 }
 
+public enum DeleteMyDataResult: Equatable {
+    case deleted
+    case offline
+    case failed
+}
+
 public protocol AccountBackend: AnyObject {
     func signInAnonymously() async throws -> StoredSession
     func refresh(refreshToken: String) async throws -> StoredSession
@@ -65,6 +71,8 @@ public protocol AccountBackend: AnyObject {
     func claimUsername(_ name: String, accessToken: String) async throws -> UsernameClaim
     func submitRun(_ run: StoredRun, accessToken: String) async throws -> SubmitAck
     func leaderboard(_ period: BoardPeriod, accessToken: String) async throws -> LeaderboardPage
+    /// Deletes the signed-in account's server rows. The token's user is the only target.
+    func deleteMyData(accessToken: String) async throws
 }
 
 public protocol SessionStore: AnyObject {

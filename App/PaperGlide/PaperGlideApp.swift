@@ -10,6 +10,11 @@ struct PaperGlideApp: App {
             KeychainSessionStore().clear()
         }
         _cloud = StateObject(wrappedValue: CloudModel())
+        #if DEBUG
+        if let preset = LaunchOptions.presetBest {
+            UserDefaults.standard.set(preset, forKey: UserDefaultsGameStorage.bestScoreKey)
+        }
+        #endif
     }
 
     var body: some Scene {
