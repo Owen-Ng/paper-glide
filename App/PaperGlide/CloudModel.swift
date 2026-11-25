@@ -24,6 +24,11 @@ final class CloudModel: ObservableObject {
             UserDefaultsGameStorage.clearPersistedProgress()
             sessions.clear()
         }
+        #if DEBUG
+        if let preset = LaunchOptions.presetBest {
+            UserDefaults.standard.set(preset, forKey: UserDefaultsGameStorage.bestScoreKey)
+        }
+        #endif
         let backend: AccountBackend
         if config.isConfigured, let url = config.url {
             backend = SupabaseHTTPBackend(baseURL: url, anonKey: config.anonKey)
@@ -160,7 +165,7 @@ final class CloudModel: ObservableObject {
     func deleteMyData() async -> DeleteMyDataResult {
         #if DEBUG
         if let stub = LaunchOptions.deleteStub {
-            try? await Task.sleep(nanoseconds: 1_200_000_000)
+            try? await Task.sleep(nanoseconds: 4_000_000_000)
             switch stub {
             case "success":
                 await analytics.client.holdSends()

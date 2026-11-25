@@ -67,15 +67,9 @@ struct StartView: View {
                             .font(.system(.body, design: .rounded))
                             .accessibilityIdentifier("leaderboardButton")
                             .controlFrame("leaderboard")
-                            ViewThatFits(in: .horizontal) {
-                                HStack(spacing: 16) {
-                                    reportButton
-                                    deleteLink
-                                }
-                                VStack(spacing: 10) {
-                                    reportButton
-                                    deleteLink
-                                }
+                            HStack(alignment: .center, spacing: 14) {
+                                reportButton
+                                deleteLink
                             }
                         }
                         .padding(.horizontal, 48)

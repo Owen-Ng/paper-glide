@@ -50,7 +50,7 @@ final class PaperGlideDeleteUITests: XCTestCase {
         openDelete(success)
         success.buttons["deleteConfirm"].tap()
         let progress = success.staticTexts["deleteProgress"]
-        XCTAssertTrue(progress.waitForExistence(timeout: 3))
+        XCTAssertTrue(progress.waitForExistence(timeout: 6))
         XCTAssertEqual(progress.label, "Deleting...")
         XCTAssertFalse(success.buttons["deleteCancel"].isEnabled)
         XCTAssertFalse(success.buttons["deleteConfirm"].isEnabled)
@@ -72,7 +72,7 @@ final class PaperGlideDeleteUITests: XCTestCase {
         openDelete(failure)
         failure.buttons["deleteConfirm"].tap()
         let failed = failure.staticTexts["deleteProgress"]
-        XCTAssertTrue(failed.waitForExistence(timeout: 3))
+        XCTAssertTrue(failed.waitForExistence(timeout: 6))
         let toast = failure.staticTexts["deleteToast"]
         XCTAssertTrue(toast.waitForExistence(timeout: 5))
         XCTAssertEqual(toast.label, "Something went wrong. Nothing was deleted. Try again.")

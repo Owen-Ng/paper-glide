@@ -26,6 +26,11 @@ final class AppModel: ObservableObject {
     var onRunFinished: ((Int, Double, Bool) -> Void)?
 
     init(storage: GameStorage) {
+        #if DEBUG
+        if let preset = LaunchOptions.presetBest {
+            storage.saveBestScore(preset)
+        }
+        #endif
         self.storage = storage
         let session = GameSession(config: .standard, storage: storage, seed: 1)
         self.session = session
