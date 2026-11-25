@@ -136,7 +136,7 @@ class SupabaseAccountBackend(
 
     override suspend fun deleteMyData(accessToken: String): Boolean {
         val json = rpc("delete_my_data", buildJsonObject {}, accessToken)
-        return json.bool("ok") == true
+        return json.bool("ok") == true && json.string("result") == "deleted"
     }
 
     private suspend fun rpc(name: String, body: JsonObject, accessToken: String): JsonObject {

@@ -6,7 +6,7 @@ Kotlin port of the iOS game. `android/core` is the rules (the same fixed step as
 - Portrait, edge-to-edge, predictive back
 - Anonymous Supabase auth. The anon key is read from `android/secrets.properties` (gitignored; see `secrets.properties.example`). A `service_role` value is treated as unconfigured. The session lives in keystore-backed encrypted prefs, which Auto Backup and device transfer exclude, so a reinstall is a new account.
 - Account deletion URL (the form page comes later): `https://paperglide.app/delete`
-- `platform=android` is sent on `submit_run` and on analytics events. The SQL is `supabase/migrations/20261125193000_android_platform_and_delete.sql`. Do not apply it to the hosted project from here.
+- `platform=android` is sent on `submit_run` and on each analytics event (`item.platform`). Delete my data calls `delete_my_data()` with no arguments. Both match [PR #8](https://github.com/Owen-Ng/paper-glide/pull/8) (`supabase/migrations/20261125190000_delete_and_platform.sql`). This branch does not add a second migration. Live calls work only after that migration is applied. Do not apply it to the hosted project from here.
 
 ```sh
 cd android

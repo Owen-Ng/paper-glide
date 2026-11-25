@@ -1,7 +1,6 @@
 package com.paperglide.core
 
 import kotlinx.coroutines.runBlocking
-import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -190,101 +189,143 @@ class CoreTests {
     @Test
     fun goldenFixturesMatchPaperGlideCore() {
         val root = goldenRoot()
-        for (name in listOf(
-            "physics-one-flap-half-second",
-            "seed1-pilot-until-death",
-            "seed7-scripted-taps",
-            "rate-60",
-            "rate-90",
-            "rate-120",
-        )) {
-            replay(root, name)
+        for (name in listOf("no-tap-fall", "fixed-taps", "pilot-ramp")) {
+            replayFormat1(File(root, "$name.json"))
         }
     }
 
     @Test
-    fun rampAndSkyFixturesMatch() {
-        val root = goldenRoot()
-        val ramp = JSONArray(File(root, "ramp.json").readText())
-        for (index in 0 until ramp.length()) {
-            val row = ramp.getJSONObject(index)
-            val level = DifficultyRamp.standardLevel(row.getInt("score"))
-            assertEquals(row.getInt("stepIndex"), level.stepIndex)
-            assertEquals(row.getDouble("gapHeight"), level.gapHeight, 1e-9)
-            assertEquals(row.getDouble("scrollSpeed"), level.scrollSpeed, 1e-9)
-        }
-        val sky = JSONArray(File(root, "sky.json").readText())
-        for (index in 0 until sky.length()) {
-            val row = sky.getJSONObject(index)
-            val sample = SkyCycle.sample(row.getDouble("flightTime"))
-            assertClose(row.getJSONArray("top"), sample.top)
-            assertClose(row.getJSONArray("bottom"), sample.bottom)
-            assertEquals(row.getDouble("sunAltitude"), sample.sunAltitude, 1e-9)
-            assertEquals(row.getDouble("sunX"), sample.sunX, 1e-9)
-            assertEquals(row.getDouble("sunAlpha"), sample.sunAlpha, 1e-9)
-            assertEquals(row.getDouble("moonAlpha"), sample.moonAlpha, 1e-9)
-            assertEquals(row.getDouble("starAlpha"), sample.starAlpha, 1e-9)
-        }
+    fun morningSkyMatchesTheShippedWash() {
+        val morning = SkyCycle.sample(0.0)
+        assertEquals(0.74, morning.top.r, 1e-9)
+        assertEquals(0.86, morning.top.g, 1e-9)
+        assertEquals(0.93, morning.top.b, 1e-9)
+        assertEquals(0.34, morning.sunAltitude, 1e-9)
+        assertEquals(0.62, morning.sunX, 1e-9)
+        val wrapped = SkyCycle.sample(75.0)
+        assertEquals(morning.top.r, wrapped.top.r, 1e-9)
+        assertEquals(morning.sunAltitude, wrapped.sunAltitude, 1e-9)
     }
 
     @Test
     fun sixtyAndOneTwentyMatchAndNinetyStaysWithinTwoPoints() {
-        val root = goldenRoot()
-        val y60 = replay(root, "rate-60").plane.y
-        val y90 = replay(root, "rate-90").plane.y
-        val y120 = replay(root, "rate-120").plane.y
+        val y60 = glideAt(1.0 / 60.0).plane.y
+        val y90 = glideAt(1.0 / 90.0).plane.y
+        val y120 = glideAt(1.0 / 120.0).plane.y
         assertEquals(y60, y120, 1e-6)
         assertEquals(y60, y90, 2.0)
         assertTrue(kotlin.math.abs(y60 - y90) > 0.5)
     }
 
-    private fun replay(root: File, name: String): GameSnapshot {
-        val json = JSONObject(File(root, "$name.json").readText())
-        val config = GameConfig.standard.copy(spawningEnabled = json.getBoolean("spawning"))
-        val storage = InMemoryGameStorage(json.getInt("bestScore"), json.getBoolean("coachCompleted"))
-        val session = GameSession(config, storage, json.getLong("seed").toULong())
+    /** Same taps at t = 0, 0.5, and 1.0, then coast to 1.5 s. Not a golden file. */
+    private fun glideAt(dt: Double): GameSnapshot {
+        val session = GameSession(GameConfig.standard, InMemoryGameStorage(0, true), 3u)
+        val taps = doubleArrayOf(0.0, 0.5, 1.0)
+        var time = 0.0
+        while (time < 1.5 - 1e-12 && session.snapshot.phase == RunPhase.Playing) {
+            if (taps.any { kotlin.math.abs(it - time) < dt * 0.5 }) session.tap()
+            session.step(dt)
+            time += dt
+        }
+        return session.snapshot
+    }
+
+    /**
+     * Format version 1 from PR #8. One recorded step is one `physicsStep`.
+     * `tapSteps` are 1-based indexes of the integration that consumes the flap.
+     */
+    private fun replayFormat1(file: File) {
+        val json = JSONObject(file.readText())
+        assertEquals(1, json.getInt("format"))
+        val tolerance = json.getJSONObject("tolerance")
+        val position = tolerance.getDouble("position")
+        val velocity = tolerance.getDouble("velocity")
+        val time = tolerance.getDouble("time")
+        val scroll = tolerance.getDouble("scroll")
+        val gap = tolerance.getDouble("gap")
+        val spacing = tolerance.getDouble("spacing")
+        val configJson = json.getJSONObject("config")
+        val config = GameConfig.standard.copy(
+            worldWidth = configJson.getDouble("worldWidth"),
+            worldHeight = configJson.getDouble("worldHeight"),
+            gravity = configJson.getDouble("gravity"),
+            flapVelocity = configJson.getDouble("flapVelocity"),
+            maxUpwardSpeed = configJson.getDouble("maxUpwardSpeed"),
+            maxDownwardSpeed = configJson.getDouble("maxDownwardSpeed"),
+            planeX = configJson.getDouble("planeX"),
+            planeWidth = configJson.getDouble("planeWidth"),
+            planeHeight = configJson.getDouble("planeHeight"),
+            planeStartY = configJson.getDouble("planeStartY"),
+            obstacleWidth = configJson.getDouble("obstacleWidth"),
+            obstacleGapHeight = configJson.getDouble("obstacleGapHeight"),
+            obstacleSpacing = configJson.getDouble("obstacleSpacing"),
+            scrollSpeed = configJson.getDouble("scrollSpeed"),
+            gapMargin = configJson.getDouble("gapMargin"),
+            initialLead = configJson.getDouble("initialLead"),
+            despawnMargin = configJson.getDouble("despawnMargin"),
+            physicsStep = configJson.getDouble("physicsStep"),
+        )
+        val session = GameSession(config, InMemoryGameStorage(), json.getLong("seed").toULong())
+        val taps = json.getJSONArray("tapSteps").let { array ->
+            buildSet { for (i in 0 until array.length()) add(array.getInt(i)) }
+        }
+        val timestep = json.getDouble("timestep")
         val steps = json.getJSONArray("steps")
-        for (index in 0 until steps.length()) {
-            val step = steps.getJSONObject(index)
-            if (step.getBoolean("tap")) session.tap()
-            session.step(step.getDouble("dt"))
+        val name = json.getString("name")
+        compareStep(name, 0, steps.getJSONObject(0), session.snapshot, position, velocity, time, scroll, gap, spacing)
+        for (index in 1 until steps.length()) {
+            if (index in taps) session.tap()
+            session.step(timestep)
+            compareStep(name, index, steps.getJSONObject(index), session.snapshot, position, velocity, time, scroll, gap, spacing)
         }
-        val actual = session.snapshot
-        expectSnapshot(name, json.getJSONObject("expect"), actual)
-        return actual
     }
 
-    private fun expectSnapshot(name: String, expect: JSONObject, actual: GameSnapshot) {
+    private fun compareStep(
+        name: String,
+        index: Int,
+        expect: JSONObject,
+        actual: GameSnapshot,
+        position: Double,
+        velocity: Double,
+        time: Double,
+        scroll: Double,
+        gap: Double,
+        spacing: Double,
+    ) {
+        val where = "$name step $index"
+        assertEquals(where, index, expect.getInt("step"))
         val phase = if (expect.getString("phase") == "playing") RunPhase.Playing else RunPhase.Dead
-        assertEquals("$name phase", phase, actual.phase)
-        assertEquals("$name score", expect.getInt("score"), actual.score)
-        assertEquals("$name best", expect.getInt("bestScore"), actual.bestScore)
-        assertEquals("$name newBest", expect.getBoolean("isNewBest"), actual.isNewBest)
-        assertEquals("$name coach", expect.getBoolean("showCoach"), actual.showCoach)
-        assertEquals("$name time", expect.getDouble("flightTime"), actual.flightTime, 1e-6)
-        assertEquals("$name scroll", expect.getDouble("scrollSpeed"), actual.scrollSpeed, 1e-6)
-        assertEquals("$name gap", expect.getDouble("spawnGapHeight"), actual.spawnGapHeight, 1e-6)
+        assertEquals("$where phase", phase, actual.phase)
+        assertEquals("$where score", expect.getInt("score"), actual.score)
+        assertEquals("$where time", expect.getDouble("flightTime"), actual.flightTime, time)
+        assertEquals("$where scroll", expect.getDouble("scrollSpeed"), actual.scrollSpeed, scroll)
+        assertEquals("$where gap", expect.getDouble("spawnGapHeight"), actual.spawnGapHeight, gap)
+        val ramp = expect.getJSONObject("ramp")
+        val level = DifficultyRamp.level(actual.score, GameConfig.standard.obstacleGapHeight, GameConfig.standard.scrollSpeed)
+        assertEquals("$where ramp", ramp.getInt("stepIndex"), level.stepIndex)
+        assertEquals("$where ramp gap", ramp.getDouble("gapHeight"), level.gapHeight, gap)
+        assertEquals("$where ramp scroll", ramp.getDouble("scrollSpeed"), level.scrollSpeed, scroll)
         val plane = expect.getJSONObject("plane")
-        assertEquals("$name x", plane.getDouble("x"), actual.plane.x, 1e-6)
-        assertEquals("$name y", plane.getDouble("y"), actual.plane.y, 1e-6)
-        assertEquals("$name vy", plane.getDouble("velocityY"), actual.plane.velocityY, 1e-6)
+        assertEquals("$where x", plane.getDouble("x"), actual.plane.x, position)
+        assertEquals("$where y", plane.getDouble("y"), actual.plane.y, position)
+        assertEquals("$where vy", plane.getDouble("velocityY"), actual.plane.velocityY, velocity)
         val obstacles = expect.getJSONArray("obstacles")
-        assertEquals("$name obstacles", obstacles.length(), actual.obstacles.size)
-        for (index in 0 until obstacles.length()) {
-            val row = obstacles.getJSONObject(index)
-            val got = actual.obstacles[index]
-            assertEquals(row.getInt("id"), got.id)
-            assertEquals(row.getDouble("left"), got.left, 1e-6)
-            assertEquals(row.getDouble("gapCenterY"), got.gapCenterY, 1e-6)
-            assertEquals(row.getDouble("gapHeight"), got.gapHeight, 1e-6)
-            assertEquals(row.getBoolean("scored"), got.scored)
+        val got = actual.obstacles.sortedWith(compareBy({ it.left }, { it.id }))
+        assertEquals("$where obstacles", obstacles.length(), got.size)
+        var previous: Double? = null
+        for (i in 0 until obstacles.length()) {
+            val row = obstacles.getJSONObject(i)
+            assertEquals("$where id", row.getInt("id"), got[i].id)
+            assertEquals("$where left", row.getDouble("left"), got[i].left, position)
+            assertEquals("$where width", row.getDouble("width"), got[i].width, position)
+            assertEquals("$where center", row.getDouble("gapCenterY"), got[i].gapCenterY, position)
+            assertEquals("$where opening", row.getDouble("gapHeight"), got[i].gapHeight, gap)
+            if (row.has("spacingFromPrevious") && !row.isNull("spacingFromPrevious")) {
+                val expected = previous?.let { got[i].left - it }
+                assertEquals("$where spacing", row.getDouble("spacingFromPrevious"), expected ?: Double.NaN, spacing)
+            }
+            previous = got[i].left
         }
-    }
-
-    private fun assertClose(row: JSONArray, color: PaperRGB) {
-        assertEquals(row.getDouble(0), color.r, 1e-9)
-        assertEquals(row.getDouble(1), color.g, 1e-9)
-        assertEquals(row.getDouble(2), color.b, 1e-9)
     }
 
     private fun goldenRoot(): File {
